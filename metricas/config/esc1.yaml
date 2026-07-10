@@ -22,10 +22,3 @@ router:
   wifi_iface: phy1-ap0  # AP 2.4 GHz (OpenWrt moderno: phyN-apM, no wlanN)
   lan_iface: br-lan     # interfaz hacia el Pi
   interval_s: 5.0
-
-load_test:
-  # Mide la capacidad de servir HTTP del dashboard de Esc1 (GET a la raíz).
-  target: http://192.168.1.10:1881/
-  ramp_concurrency: [10, 25, 50, 100, 200]
-  hold_s_per_step: 60
-  request_timeout_s: 5.0

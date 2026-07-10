@@ -19,13 +19,3 @@ router:
   wifi_iface: phy1-ap0  # AP 2.4 GHz (OpenWrt moderno)
   lan_iface: br-lan
   interval_s: 5.0
-
-load_test:
-  # Mide la capacidad de servir HTTP del dashboard (GET a la raíz). NO se apunta a
-  # POST /api/reserve a propósito: ese endpoint espera 10 s y dispara envío de correo
-  # por SMTP, así que un load test mandaría cientos de correos reales
-  # y mediría el delay artificial, no la capacidad del servidor.
-  target: http://192.168.1.10:1882/
-  ramp_concurrency: [10, 25, 50, 100, 200]
-  hold_s_per_step: 60
-  request_timeout_s: 5.0

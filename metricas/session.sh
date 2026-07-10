@@ -2,7 +2,7 @@
 # Orchestrator for a metrics session. CORRE EN EL PI, no en la laptop.
 #
 # Todos los colectores (recursos del Pi, router, eventos docker, salud del
-# target, despliegue, tablas de dominio) se ejecutan EN EL PI. La laptop solo
+# target, tablas de dominio) se ejecutan EN EL PI. La laptop solo
 # dispara este script por SSH (ver gateway/session.ps1) y descarga los CSV.
 #
 # Usage (en el Pi):
@@ -241,24 +241,6 @@ cmd_log() {
     echo "[log] $event ${notes:+\"$notes\"}"
 }
 
-cmd_deploy() {
-    # Mide el tiempo de despliegue (§4.4): levanta el escenario en frío y cronometra
-    # hasta el primer HTTP 200. Requiere una sesión activa (corre `start` primero,
-    # con el escenario aún abajo para que resources.csv capture el arranque).
-    read_state
-    echo "[deploy] midiendo despliegue de $SCENARIO en ${PI_HOST}"
-    PI_PASS="${PI_PASS:-}" python3 "$HERE/collectors/measure_deploy.py" \
-        --scenario "$SCENARIO" \
-        --output-dir "$SDIR" \
-        --pi-host "$PI_HOST" --pi-user "$PI_USER" || \
-        echo "[deploy] la medición falló (ver salida arriba)"
-    # Deja una marca en events.csv con el resultado.
-    if [ -f "$SDIR/deploy.csv" ]; then
-        local last; last=$(tail -1 "$SDIR/deploy.csv")
-        cmd_log deploy_measured "$last"
-    fi
-}
-
 cmd_status() {
     if [ ! -f "$STATE_FILE" ]; then echo "no active session"; return; fi
     read_state
@@ -274,7 +256,7 @@ cmd_status() {
         echo "router collector PID (local): $router_pid (NOT running)"
     fi
     echo
-    for f in resources.csv router.csv events.csv deploy.csv backend_latency.csv survey.csv loadtest.csv \
+    for f in resources.csv router.csv events.csv backend_latency.csv survey.csv \
              auditoria_usuarios.csv email_capturas.csv email_envios.csv email_clicks.csv router_devices.csv router_resources.csv \
              esc3_stats_snapshot.csv target_health.csv docker_events.csv dns_queries.csv; do
         local p="$SDIR/$f"
@@ -356,7 +338,7 @@ cmd_end() {
 cmd_status_after() {
     local d="$1"
     echo
-    for f in resources.csv router.csv events.csv deploy.csv backend_latency.csv survey.csv loadtest.csv \
+    for f in resources.csv router.csv events.csv backend_latency.csv survey.csv \
              auditoria_usuarios.csv email_capturas.csv email_envios.csv email_clicks.csv router_devices.csv router_resources.csv \
              esc3_stats_snapshot.csv target_health.csv docker_events.csv dns_queries.csv; do
         local p="$d/$f"
@@ -366,9 +348,8 @@ cmd_status_after() {
 
 case "${1:-}" in
     start)   shift; cmd_start "$@" ;;
-    deploy)  cmd_deploy ;;
     log)     shift; cmd_log "$@" ;;
     status)  cmd_status ;;
     end)     cmd_end ;;
-    *) echo "usage: $0 {start <scenario>|deploy|log <event> [notes]|status|end}"; exit 2 ;;
+    *) echo "usage: $0 {start <scenario>|log <event> [notes]|status|end}"; exit 2 ;;
 esac

@@ -89,15 +89,10 @@ metricas/
 │   ├── collect_router.py      # tráfico, equipos y recursos del router
 │   ├── target_health_probe.py # disponibilidad del servidor víctima (Esc3)
 │   ├── docker_events_collector.py
-│   ├── fetch_export_state.py  # tablas de cada escenario
-│   ├── measure_deploy.py      # auxiliar, fuera del flujo estándar
-│   ├── loadgen.py             # auxiliar de laboratorio, fuera del flujo estándar
-│   └── presentation_watcher.py
+│   └── fetch_export_state.py  # tablas de cada escenario
 ├── survey/
 │   ├── survey_template.json   # encuesta (editable sin tocar código)
 │   └── form.html
-├── templates/
-│   └── eisvogel.latex
 ├── config/{esc1,esc2,esc3}.yaml
 └── sessions/                  # salidas por sesión (no versionadas)
 ```
