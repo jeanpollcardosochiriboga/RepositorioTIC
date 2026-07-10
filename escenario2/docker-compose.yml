@@ -1,0 +1,18 @@
+services:
+  jp-esc2-nodered:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jp-esc2-nodered
+    restart: "no"
+    env_file:
+      - .env
+    environment:
+      FLOWS: /data/flows.json
+      NODE_RED_ENABLE_PROJECTS: "false"
+    ports:
+      - "1882:1880"
+    volumes:
+      - ./:/data
+    cpus: 0.80
+    mem_limit: 512m

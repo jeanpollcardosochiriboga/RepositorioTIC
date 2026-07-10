@@ -1,0 +1,8 @@
+{
+  "name": "tesis-escenario3-dos",
+  "version": "1.0.0",
+  "description": "Simulador interactivo de ataque DoS - prototipo de ciberseguridad",
+  "dependencies": {
+    "node-red-dashboard": "^3.6.0"
+  }
+}

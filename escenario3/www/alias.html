@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPN — Elige tu alias</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .alias-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 24px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .alias-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+    .alias-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .alias-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .alias-input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 18px;
+      color: var(--text);
+      text-align: center;
+      letter-spacing: 1px;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .alias-input:focus { border-color: var(--red-bright); }
+    .alias-hint {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 8px;
+      margin-bottom: 22px;
+    }
+    .btn-continue {
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-continue:hover { background: #991111; }
+    .btn-continue:active { transform: scale(0.98); }
+    .btn-continue:disabled {
+      background: #444;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="alias-card">
+    <div class="alias-icon">📱</div>
+    <div class="alias-title">Elige tu alias</div>
+    <div class="alias-sub">Aparecerá en la pantalla del ataque cuando dispares</div>
+
+    <input
+      type="text"
+      class="alias-input"
+      id="aliasInput"
+      maxlength="12"
+      placeholder="ej. Juan, M0vil42"
+      autocomplete="off"
+      autocapitalize="none"
+      spellcheck="false"
+    >
+    <div class="alias-hint">Hasta 12 caracteres · letras, números y _</div>
+
+    <button class="btn-continue" id="btnContinue" onclick="continuar()" disabled>
+      CONTINUAR →
+    </button>
+  </div>
+
+  <footer>Escuela Politécnica Nacional · Tesis 2026</footer>
+
+  <script>
+    if (sessionStorage.getItem('dos_consent') !== '1') {
+      window.location.replace('/consent.html');
+    }
+    if (sessionStorage.getItem('dos_alias')) {
+      window.location.replace('/');
+    }
+
+    var input = document.getElementById('aliasInput');
+    var btn = document.getElementById('btnContinue');
+
+    function sanitize(v) {
+      return v.replace(/[^A-Za-z0-9_]/g, '').slice(0, 12);
+    }
+
+    input.addEventListener('input', function() {
+      var clean = sanitize(input.value);
+      if (clean !== input.value) input.value = clean;
+      btn.disabled = clean.length < 2;
+    });
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !btn.disabled) continuar();
+    });
+
+    function continuar() {
+      var alias = sanitize(input.value);
+      if (alias.length < 2) return;
+      sessionStorage.setItem('dos_alias', alias);
+      window.location.href = '/';
+    }
+
+    setTimeout(function() { input.focus(); }, 100);
+  </script>
+</body>
+</html>

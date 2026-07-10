@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alerta de Seguridad</title>
+  <link rel="stylesheet" href="educativoStyles.css">
+</head>
+<body>
+
+  <!-- ===== SECCIÓN 1: IMPACTO ===== -->
+  <section class="s-impacto">
+    <div class="icono">⚠️</div>
+    <h1>Fuiste víctima<br>de <span>phishing</span></h1>
+    <p class="subtitulo">
+      Este fue un ejercicio controlado de ingeniería social.<br>
+      Nadie abusó de tus datos — pero en la vida real, sí podrían haberlo hecho.
+    </p>
+    <div class="scroll-hint">Sigue leyendo</div>
+  </section>
+
+  <!-- ===== SECCIÓN 2: DATOS CAPTURADOS ===== -->
+  <section class="s-datos">
+    <h2 class="fade-up">Esto capturamos de ti</h2>
+    <p class="intro fade-up">En menos de 2 minutos, sin que lo notaras:</p>
+
+    <div class="dato-card fade-up">
+      <span class="emoji">👤</span>
+      <div class="info">
+        <div class="label">Nombre</div>
+        <div class="valor" id="nombreCapturado">—</div>
+      </div>
+    </div>
+
+    <div class="dato-card fade-up">
+      <span class="emoji">✉️</span>
+      <div class="info">
+        <div class="label">Correo electrónico</div>
+        <div class="valor" id="emailCapturado">—</div>
+      </div>
+    </div>
+
+    <div class="dato-card fade-up">
+      <span class="emoji">🎬</span>
+      <div class="info">
+        <div class="label">Película, horario y asientos</div>
+        <div class="valor">Registrados en nuestra base de datos</div>
+      </div>
+    </div>
+
+    <div class="dato-card fade-up">
+      <span class="emoji">📱</span>
+      <div class="info">
+        <div class="label">Tu dispositivo</div>
+        <div class="valor" id="dispositivoCapturado">—</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECCIÓN 3: SEÑALES QUE IGNORASTE ===== -->
+  <section class="s-senales">
+    <h2 class="fade-up">3 señales que ignoraste</h2>
+    <p class="intro fade-up">Estaban ahí desde el principio.</p>
+
+    <div class="senal-item fade-up">
+      <div class="num">1</div>
+      <div class="contenido">
+        <strong>URL no oficial</strong>
+        <span>La URL real es <code class="url-real">multicines.com.ec</code> — este sitio usaba <code class="url-fake">mu1ticines</code> (la "l" reemplazada por el número "1").</span>
+      </div>
+    </div>
+
+    <div class="senal-item fade-up">
+      <div class="num">2</div>
+      <div class="contenido">
+        <strong>Oferta gratuita sin razón</strong>
+        <span>"Entradas digitales gratis" sin que hayas comprado nada previamente.</span>
+      </div>
+    </div>
+
+    <div class="senal-item fade-up">
+      <div class="num">3</div>
+      <div class="contenido">
+        <strong>Te pidieron tu correo sin contexto</strong>
+        <span>Ningún sistema legítimo te pide el email sin un registro previo.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECCIÓN 4: REGLAS DE ORO ===== -->
+  <section class="s-reglas">
+    <h2 class="fade-up">3 reglas de oro</h2>
+    <p class="intro fade-up">Para no caer la próxima vez — y habrá una próxima vez.</p>
+
+    <div class="regla-item fade-up">
+      <span class="check">✦</span>
+      <div class="contenido">
+        <strong>Verifica el remitente y la URL</strong>
+        <span>Un carácter diferente en el dominio ya es phishing.</span>
+      </div>
+    </div>
+
+    <div class="regla-item fade-up">
+      <span class="check">✦</span>
+      <div class="contenido">
+        <strong>Lo gratis tiene un precio</strong>
+        <span>Si no pagaste con dinero, pagaste con tus datos.</span>
+      </div>
+    </div>
+
+    <div class="regla-item fade-up">
+      <span class="check">✦</span>
+      <div class="contenido">
+        <strong>Activa la verificación en 2 pasos</strong>
+        <span>Aunque te roben la contraseña, el 2FA bloquea el acceso.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECCIÓN 5: FOOTER TESIS ===== -->
+  <footer class="s-footer">
+    <div class="escenario">Escenario 2</div>
+    <div class="titulo-escenario">Ingeniería Social y<br>Phishing de Doble Etapa</div>
+    <div class="autor">Jean Poll Cardoso Chiriboga</div>
+    <div class="institucion">Escuela Politécnica Nacional &middot; 2026</div>
+  </footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('ref');
+    const nombreRef = params.get('nombre');
+    if (ref) {
+      document.getElementById('emailCapturado').textContent = decodeURIComponent(ref);
+    }
+    if (nombreRef) {
+      document.getElementById('nombreCapturado').textContent = decodeURIComponent(nombreRef);
+    }
+
+    // Detectar tipo de dispositivo
+    const ua = navigator.userAgent;
+    let dispositivo = 'Navegador desconocido';
+    if (/iPhone/i.test(ua))        dispositivo = 'iPhone (iOS)';
+    else if (/iPad/i.test(ua))     dispositivo = 'iPad (iOS)';
+    else if (/Android/i.test(ua))  dispositivo = 'Android';
+    else if (/Windows/i.test(ua))  dispositivo = 'Windows';
+    else if (/Mac/i.test(ua))      dispositivo = 'Mac';
+    document.getElementById('dispositivoCapturado').textContent = dispositivo;
+
+    // Animación fade-up al hacer scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

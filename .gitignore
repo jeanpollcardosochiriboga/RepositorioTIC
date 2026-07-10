@@ -1,0 +1,34 @@
+# Secretos: nunca versionar los .env reales (sí los .env.example)
+.env
+**/.env
+
+# Llaves SSH de la consola del operador
+**/data/ssh/
+id_ed25519
+id_ed25519.pub
+known_hosts
+
+# Estado de runtime de Node-RED
+**/.config.users.json
+**/.config.runtime.json
+**/.config.nodes.json
+**/flows_cred.json
+
+# Dependencias y entornos regenerables
+node_modules/
+**/node_modules/
+venv/
+.venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# Salidas y respaldos
+metrics_out/
+**/metrics_out/
+sessions/
+resource_log.csv
+*.bak
+*.bak.*
+*.backup
+*.orig

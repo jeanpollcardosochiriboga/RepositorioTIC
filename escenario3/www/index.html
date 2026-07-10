@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DoS Demo — Lanzar Ataque</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="attack-card" id="attackCard">
+    <p class="brand">EPN · Ciberseguridad</p>
+    <p class="target-label">Objetivo: <span>Sistema CONAFIPS</span></p>
+    <p class="alias-tag">Atacando como: <span id="aliasTag">—</span></p>
+
+    <!-- Indicador de estado del servidor -->
+    <div class="server-bar" id="serverBar">
+      <span class="srv-dot ok" id="srvDot"></span>
+      <span class="srv-text" id="srvText">Servidor respondiendo</span>
+      <span class="srv-rt" id="srvRt"></span>
+    </div>
+
+    <!-- Botón principal -->
+    <button class="btn-attack" id="btnAttack" onclick="lanzar()">
+      <span class="btn-icon" id="btnIcon">⚡</span>
+      <span class="label">Lanzar<br>Ataque</span>
+    </button>
+
+    <!-- Feedback inmediato -->
+    <div class="feedback hidden" id="feedback">¡DISPARADO!</div>
+
+    <!-- Log de petición (aparece tras cada press) -->
+    <div class="req-log hidden" id="reqLog">
+      <span class="req-arrow">→</span>
+      <span id="reqLogText">POST /reservar…</span>
+    </div>
+
+    <!-- Estadísticas personales -->
+    <div class="my-stats">
+      <div class="my-stat">
+        <span class="my-val" id="myHits">0</span>
+        <span class="my-lbl">mis ataques</span>
+      </div>
+      <div class="my-stat">
+        <span class="my-val" id="myRt">—</span>
+        <span class="my-lbl">última resp.</span>
+      </div>
+    </div>
+
+    <!-- Contador global -->
+    <div class="counter-row">
+      <span>👥</span>
+      <span class="counter-value" id="count">0</span>
+      <span>atacando ahora</span>
+    </div>
+
+    <div class="status-row">
+      <span class="status-dot"></span>Conectado al orquestador
+    </div>
+  </div>
+
+  <!-- Overlay cuando el servidor cae -->
+  <div class="overlay hidden" id="downOverlay">
+    <div class="overlay-icon">💥</div>
+    <div class="overlay-title">¡SERVIDOR CAÍDO!</div>
+    <div class="overlay-sub">Tu ataque contribuyó al colapso</div>
+    <div class="overlay-hits">Enviaste <span id="overlayHits">0</span> ataques</div>
+  </div>
+
+  <footer>Escuela Politécnica Nacional · Tesis 2026</footer>
+
+  <script>
+    if (sessionStorage.getItem('dos_consent') !== '1') {
+      window.location.replace('/consent.html');
+    }
+    var ALIAS = sessionStorage.getItem('dos_alias');
+    if (!ALIAS) window.location.replace('/alias.html');
+    document.getElementById('aliasTag').textContent = ALIAS || '—';
+
+    var pressing  = false;
+    var myHits    = 0;
+    var lastRt    = 0;
+    var serverDown = false;
+    var wasDown   = false;
+
+    var FEEDBACK_MSGS = [
+      '¡DISPARADO!', '¡IMPACTO!', '¡PETICIÓN ENVIADA!',
+      '¡SOBRECARGA!', '¡SERVIDOR BAJO PRESIÓN!', '¡SISTEMA CRÍTICO!'
+    ];
+
+    function lanzar() {
+      if (pressing) return;
+      pressing = true;
+      myHits++;
+
+      var btn    = document.getElementById('btnAttack');
+      var fb     = document.getElementById('feedback');
+      var log    = document.getElementById('reqLog');
+      var logTxt = document.getElementById('reqLogText');
+      var hitsEl = document.getElementById('myHits');
+
+      hitsEl.textContent = myHits;
+      btn.classList.add('fired');
+
+      var msgIdx = Math.min(myHits - 1, FEEDBACK_MSGS.length - 1);
+      fb.textContent = FEEDBACK_MSGS[msgIdx];
+      fb.classList.remove('hidden');
+
+      logTxt.textContent = 'POST /reservar → ' + (serverDown ? 'sin respuesta' : 'esperando…');
+      log.classList.remove('hidden');
+
+      fetch('/api/attack/press', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ alias: ALIAS })
+      })
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          document.getElementById('count').textContent = d.count || 0;
+          var rtDisplay = serverDown ? '—' : (lastRt > 9000 ? '>9s' : lastRt + 'ms');
+          document.getElementById('myRt').textContent = rtDisplay;
+          logTxt.textContent = serverDown
+            ? 'POST /reservar → ✗ TIMEOUT'
+            : 'POST /reservar → ' + (lastRt > 0 ? lastRt + 'ms' : 'ok');
+          setTimeout(function() { log.classList.add('hidden'); }, 2500);
+        })
+        .catch(function() {
+          logTxt.textContent = 'POST /reservar → ✗ error';
+          setTimeout(function() { log.classList.add('hidden'); }, 2000);
+        });
+
+      setTimeout(function() {
+        btn.classList.remove('fired');
+        fb.classList.add('hidden');
+        pressing = false;
+      }, 700);
+    }
+
+    function applyServerState(health, rt, protection) {
+      lastRt = rt || 0;
+      var dot  = document.getElementById('srvDot');
+      var txt  = document.getElementById('srvText');
+      var rtEl = document.getElementById('srvRt');
+      var card = document.getElementById('attackCard');
+      var btn  = document.getElementById('btnAttack');
+
+      dot.className = 'srv-dot';
+      card.className = 'attack-card';
+      document.body.classList.remove('body-down');
+
+      if (protection) {
+        dot.classList.add('blue');
+        txt.textContent = 'Servidor protegido — bloqueado';
+        rtEl.textContent = '';
+        card.classList.add('state-protected');
+        btn.disabled = true;
+        btn.querySelector('.label').textContent = 'Bloqueado\npor proxy';
+      } else if (health === 'down') {
+        serverDown = true;
+        dot.classList.add('red');
+        txt.textContent = '¡SERVIDOR CAÍDO!';
+        rtEl.textContent = 'TIMEOUT';
+        card.classList.add('state-down');
+        document.body.classList.add('body-down');
+        btn.querySelector('.label').textContent = 'Sin\nrespuesta';
+        if (!wasDown) {
+          wasDown = true;
+          document.getElementById('overlayHits').textContent = myHits;
+          document.getElementById('downOverlay').classList.remove('hidden');
+          setTimeout(function() {
+            document.getElementById('downOverlay').classList.add('hidden');
+          }, 4000);
+        }
+      } else if (health === 'slow') {
+        serverDown = false; wasDown = false;
+        dot.classList.add('yellow');
+        txt.textContent = 'Servidor bajo presión';
+        rtEl.textContent = rt > 0 ? rt + 'ms' : '';
+        card.classList.add('state-slow');
+        btn.disabled = false;
+        btn.querySelector('.label').textContent = 'Lanzar\nAtaque';
+      } else {
+        serverDown = false; wasDown = false;
+        dot.classList.add('ok');
+        txt.textContent = 'Servidor respondiendo';
+        rtEl.textContent = rt > 0 ? rt + 'ms' : '';
+        btn.disabled = false;
+        btn.querySelector('.label').textContent = 'Lanzar\nAtaque';
+      }
+    }
+
+    function refreshStatus() {
+      fetch('/api/attack/status')
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          if (d.count !== undefined) document.getElementById('count').textContent = d.count;
+          applyServerState(d.health || 'ok', d.rt || 0, d.protection || false);
+        })
+        .catch(function() {});
+    }
+
+    setInterval(refreshStatus, 2000);
+    refreshStatus();
+  </script>
+</body>
+</html>

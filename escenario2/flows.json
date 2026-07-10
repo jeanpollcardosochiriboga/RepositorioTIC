@@ -1,0 +1,849 @@
+[
+    {
+        "id": "tab-esc2",
+        "type": "tab",
+        "label": "Escenario 2 - Mu1ticines",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "ui-base-esc2",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "value": "#0094CE",
+                    "type": "derived"
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "type": "derived"
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "type": "derived"
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "type": "derived"
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "type": "derived"
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "type": "derived"
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "type": "derived"
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "type": "derived"
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "type": "derived"
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "type": "derived"
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Mu1ticines Monitor",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "ui-tab-qr",
+        "type": "ui_tab",
+        "name": "QR Acceso",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "ui-tab-live",
+        "type": "ui_tab",
+        "name": "Monitor en Vivo",
+        "icon": "fa-eye",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "ui-tab-stats",
+        "type": "ui_tab",
+        "name": "Estadísticas",
+        "icon": "fa-bar-chart",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "ui-tab-clicks",
+        "type": "ui_tab",
+        "name": "Clics en Email",
+        "icon": "fa-envelope",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "ui-grp-qr",
+        "type": "ui_group",
+        "name": "Acceso Mu1ticines",
+        "tab": "ui-tab-qr",
+        "order": 1,
+        "disp": false,
+        "width": "20",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ui-grp-live",
+        "type": "ui_group",
+        "name": "Capturas en Tiempo Real",
+        "tab": "ui-tab-live",
+        "order": 1,
+        "disp": false,
+        "width": "20",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ui-grp-stats",
+        "type": "ui_group",
+        "name": "Resumen",
+        "tab": "ui-tab-stats",
+        "order": 1,
+        "disp": false,
+        "width": "20",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ui-grp-clicks",
+        "type": "ui_group",
+        "name": "Alumnos que hicieron clic",
+        "tab": "ui-tab-clicks",
+        "order": 1,
+        "disp": false,
+        "width": "20",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "http-in-reserve",
+        "type": "http in",
+        "z": "tab-esc2",
+        "name": "POST /api/reserve (recibir reserva)",
+        "url": "/api/reserve",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 160,
+        "wires": [
+            [
+                "func-split"
+            ]
+        ]
+    },
+    {
+        "id": "func-split",
+        "type": "function",
+        "z": "tab-esc2",
+        "name": "Repartir la reserva (correo, respuesta, panel)",
+        "func": "const emailData = {\n    to: msg.payload.email,\n    nombre: msg.payload.nombre,\n    sector: msg.payload.sector,\n    movie: msg.payload.movie,\n    timeSlot: msg.payload.timeSlot,\n    seats: (msg.payload.seats || []).join(', ')\n};\nconst emailMsg = {\n    payload: Buffer.from(JSON.stringify(emailData)).toString('base64'),\n    email: emailData.to,\n    movie: emailData.movie\n};\nconst responseMsg = { payload: { status: 'ok' }, res: msg.res };\nconst dashMsg = { payload: {\n    email: msg.payload.email,\n    movie: msg.payload.movie,\n    timeSlot: msg.payload.timeSlot,\n    seats: (msg.payload.seats || []).join(', '),\n    timestamp: new Date().toISOString()\n}};\nreturn [emailMsg, responseMsg, dashMsg];\n",
+        "outputs": 3,
+        "x": 490,
+        "y": 160,
+        "wires": [
+            [
+                "delay-10s"
+            ],
+            [
+                "http-res-reserve"
+            ],
+            [
+                "func-update-dashboard"
+            ]
+        ]
+    },
+    {
+        "id": "delay-10s",
+        "type": "delay",
+        "z": "tab-esc2",
+        "name": "Esperar 10 s (simular procesamiento)",
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 850,
+        "y": 80,
+        "wires": [
+            [
+                "exec-send-email"
+            ]
+        ]
+    },
+    {
+        "id": "exec-send-email",
+        "type": "exec",
+        "z": "tab-esc2",
+        "command": "python3 /data/scripts/send_email.py",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "30",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Enviar correo (Python)",
+        "x": 1160,
+        "y": 100,
+        "wires": [
+            [
+                "debug-stdout"
+            ],
+            [
+                "debug-stderr"
+            ],
+            [
+                "func-register-send"
+            ]
+        ]
+    },
+    {
+        "id": "debug-stdout",
+        "type": "debug",
+        "z": "tab-esc2",
+        "name": "Salida (stdout)",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1360,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "debug-stderr",
+        "type": "debug",
+        "z": "tab-esc2",
+        "name": "Error (stderr)",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1370,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "http-res-reserve",
+        "type": "http response",
+        "z": "tab-esc2",
+        "name": "Responder OK (200)",
+        "statusCode": "200",
+        "headers": {},
+        "x": 860,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "http-in-tickets",
+        "type": "http in",
+        "z": "tab-esc2",
+        "name": "GET /tickets (registrar clic y redirigir)",
+        "url": "/tickets",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 440,
+        "wires": [
+            [
+                "func-log-click"
+            ]
+        ]
+    },
+    {
+        "id": "func-log-click",
+        "type": "function",
+        "z": "tab-esc2",
+        "name": "Registrar clic y redirigir",
+        "func": "const ref = msg.req.query.ref || '';\nconst nombre = msg.req.query.nombre || '';\nnode.log('Clic en enlace - email: ' + ref);\nconst httpMsg = { statusCode: 302, headers: { 'Location': '/educativo.html?ref=' + encodeURIComponent(ref) + '&nombre=' + encodeURIComponent(nombre) }, payload: '', res: msg.res };\nconst dashMsg = { payload: { email: ref, timestamp: new Date().toISOString() } };\nreturn [httpMsg, dashMsg];",
+        "outputs": 2,
+        "x": 400,
+        "y": 440,
+        "wires": [
+            [
+                "http-res-tickets"
+            ],
+            [
+                "func-update-clicks"
+            ]
+        ]
+    },
+    {
+        "id": "http-res-tickets",
+        "type": "http response",
+        "z": "tab-esc2",
+        "name": "Redirigir a la página educativa",
+        "statusCode": "",
+        "headers": {},
+        "x": 660,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "func-update-dashboard",
+        "type": "function",
+        "z": "tab-esc2",
+        "name": "Actualizar panel (reserva)",
+        "func": "var reservations = flow.get('reservations') || [];\nreservations.unshift({\n    email: msg.payload.email,\n    movie: msg.payload.movie,\n    timeSlot: msg.payload.timeSlot,\n    seats: msg.payload.seats,\n    ts: Date.now() / 1000,\n    hora: new Date().toLocaleTimeString('es-EC', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Guayaquil' })\n});\nif (reservations.length > 50) reservations.pop();\nflow.set('reservations', reservations);\nreturn {};   // dispara \"Refrescar panel\"\n",
+        "outputs": 1,
+        "x": 750,
+        "y": 240,
+        "wires": [
+            [
+                "func-refresh-panel"
+            ]
+        ]
+    },
+    {
+        "id": "func-update-clicks",
+        "type": "function",
+        "z": "tab-esc2",
+        "name": "Actualizar panel (clic)",
+        "func": "var ref = msg.payload.email || '';\nvar clicks = flow.get('clicks') || [];\nvar already = clicks.some(function (c) { return c.emailFull === ref; });\nif (!already && ref) {\n    clicks.unshift({\n        email: ref,\n        emailFull: ref,\n        ts: Date.now() / 1000,\n        hora: new Date().toLocaleTimeString('es-EC', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Guayaquil' }),\n        timestamp: msg.payload.timestamp\n    });\n    if (clicks.length > 50) clicks.pop();\n    flow.set('clicks', clicks);\n}\nreturn {};   // dispara \"Refrescar panel\"\n",
+        "outputs": 1,
+        "x": 660,
+        "y": 480,
+        "wires": [
+            [
+                "func-refresh-panel"
+            ]
+        ]
+    },
+    {
+        "id": "inject-qr-startup",
+        "type": "inject",
+        "z": "tab-esc2",
+        "name": "Al iniciar: enlace de acceso (QR)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "$env('BASE_URL') & '/consent.html'",
+        "payloadType": "jsonata",
+        "x": 200,
+        "y": 960,
+        "wires": [
+            [
+                "ui-tmpl-qr"
+            ]
+        ]
+    },
+    {
+        "id": "ui-tmpl-qr",
+        "type": "ui_template",
+        "z": "tab-esc2",
+        "group": "ui-grp-qr",
+        "name": "QR de acceso (Mu1ticines)",
+        "order": 1,
+        "width": "20",
+        "height": "20",
+        "format": "<script src=\"/qrcode.min.js\"></script>\n\n<div class=\"qr-cinema-container\">\n    <div class=\"qr-header\">\n        <div class=\"qr-icon-wrap\">\n            <!-- Icono de cine / película -->\n            <svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" stroke=\"white\" stroke-width=\"2\" fill=\"none\">\n                <rect x=\"2\" y=\"7\" width=\"20\" height=\"15\" rx=\"2\"></rect>\n                <path d=\"M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2\"></path>\n                <line x1=\"12\" y1=\"12\" x2=\"12\" y2=\"16\"></line>\n                <line x1=\"10\" y1=\"14\" x2=\"14\" y2=\"14\"></line>\n            </svg>\n        </div>\n        <h2>ACCESO MU1TICINES</h2>\n        <p>Escanea para acceder al portal de reservas de entradas</p>\n    </div>\n\n    <div class=\"qr-frame\">\n        <div id=\"pc-qr-target\"></div>\n        <div ng-if=\"!msg.payload\" class=\"qr-placeholder\">GENERANDO ACCESO...</div>\n    </div>\n\n    <div class=\"qr-footer\">\n        <span class=\"url-text\">HOST: {{msg.payload}}</span><br>\n        <span class=\"step-text\">PASO 01 // PORTAL DE RESERVAS MU1TICINES</span>\n    </div>\n</div>\n\n<style>\n    :host { background: transparent !important; display: block; width: 100%; }\n\n    .qr-cinema-container {\n        display: flex; flex-direction: column; align-items: center;\n        justify-content: center; background: transparent; border: none;\n        box-shadow: none; padding: 40px 0; min-height: 65vh;\n        font-family: 'Segoe UI', sans-serif;\n    }\n    .qr-header { text-align: center; margin-bottom: 40px; }\n    .qr-icon-wrap {\n        background: #0ea5e9; width: 65px; height: 65px; border-radius: 50%;\n        display: flex; align-items: center; justify-content: center;\n        margin: 0 auto 20px; box-shadow: 0 8px 20px rgba(14,165,233,0.3);\n    }\n    .qr-header h2 {\n        color: #0c4a6e; font-weight: 900; font-size: 2.2rem;\n        letter-spacing: 2px; margin: 0;\n    }\n    .qr-header p { color: #64748b; font-size: 1.1rem; margin-top: 10px; }\n    .qr-frame {\n        background: #ffffff; padding: 30px; border-radius: 15px;\n        border: 1px solid rgba(0,0,0,0.03);\n        box-shadow: 0 10px 30px rgba(0,0,0,0.03);\n    }\n    #pc-qr-target img {\n        width: 450px !important; height: 450px !important;\n        border: 10px solid white; border-radius: 5px;\n    }\n    .qr-placeholder {\n        width: 450px; height: 450px; display: flex; align-items: center;\n        justify-content: center; color: #cbd5e1; font-weight: bold;\n        letter-spacing: 2px; font-size: 1.5rem; animation: pulse-qr 1.5s infinite;\n    }\n    .qr-footer { margin-top: 40px; text-align: center; font-family: monospace; line-height: 1.8; }\n    .url-text  { color: #0ea5e9; font-weight: bold; font-size: 1.0rem; }\n    .step-text { color: #94a3b8; font-size: 0.95rem; font-weight: bold; }\n    @keyframes pulse-qr { 0%,100%{opacity:.5} 50%{opacity:1} }\n</style>\n\n<script>\n(function(scope){\n    scope.$watch('msg', function(msg){\n        if(msg && msg.payload){\n            var c = document.getElementById('pc-qr-target');\n            if(!c) return;\n            c.innerHTML = '';\n            new QRCode(c, {\n                text: msg.payload, width: 450, height: 450,\n                colorDark: '#0c4a6e', colorLight: '#ffffff',\n                correctLevel: QRCode.CorrectLevel.H\n            });\n        }\n    });\n})(scope);\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 540,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ui-tmpl-live",
+        "type": "ui_template",
+        "z": "tab-esc2",
+        "group": "ui-grp-live",
+        "name": "Monitor en Vivo",
+        "order": 1,
+        "width": "20",
+        "height": "20",
+        "format": "<style>\n    :host { background: transparent !important; }\n\n    .lv-counter {\n        background: #ffffff; border-radius: 12px; padding: 28px;\n        text-align: center; margin-bottom: 20px;\n        box-shadow: 0 5px 25px rgba(0,0,0,0.05);\n        border: 1px solid rgba(0,0,0,0.05);\n        border-top: 4px solid #0ea5e9;\n    }\n    .lv-num { color: #0ea5e9; font-size: 4rem; font-weight: 800; line-height: 1; font-family: monospace; }\n    .lv-lbl { color: #64748b; font-size: 1rem; font-weight: 700; letter-spacing: 2px; margin-top: 8px; }\n\n    .lv-card {\n        background: #ffffff; border-radius: 8px; padding: 14px 18px;\n        margin-bottom: 10px; border-left: 4px solid #0ea5e9;\n        box-shadow: 0 2px 8px rgba(0,0,0,0.04);\n        cursor: pointer; transition: background 0.2s;\n    }\n    .lv-card:hover { background: #fff0f0; }\n    .lv-card-new { animation: lvSlide 0.4s ease; }\n    @keyframes lvSlide { from{opacity:0;transform:translateX(-16px)} to{opacity:1;transform:translateX(0)} }\n\n    .lv-email { font-family: monospace; color: #0c4a6e; font-weight: 700; font-size: 1.3em; }\n    .lv-meta  { color: #64748b; font-size: 1em; margin-top: 5px; }\n    .lv-badge {\n        background: rgba(14,165,233,0.1); color: #0284c7;\n        border-radius: 4px; padding: 2px 8px;\n        font-size: 0.9em; font-weight: 700; margin-right: 6px;\n        font-family: monospace;\n    }\n    .lv-empty { text-align: center; color: #cbd5e1; padding: 40px; font-size: 1.1em; }\n    .lv-del-btn {\n        margin-top: 16px; width: 100%; padding: 12px;\n        background: #fee2e2; color: #dc2626; border: 2px solid #fca5a5; border-radius: 8px;\n        font-weight: 700; font-size: 1em; cursor: pointer; letter-spacing: 1px;\n        transition: background 0.2s; font-family: monospace;\n    }\n    .lv-del-btn:hover { background: #fca5a5; }\n    .lv-hint { text-align:center; color:#94a3b8; font-size:0.82em; margin-top:6px; }\n</style>\n\n<div style=\"padding:4px;\">\n    <div class=\"lv-counter\">\n        <div class=\"lv-num\" id=\"lv-count\">0</div>\n        <div class=\"lv-lbl\">ESTUDIANTES CAPTURADOS</div>\n    </div>\n    <div id=\"lv-cards\"></div>\n    <div id=\"lv-empty\" class=\"lv-empty\">Esperando reservas&hellip;</div>\n    <button class=\"lv-del-btn\" id=\"lv-del-all\">⊘ ELIMINAR TODOS LOS DATOS</button>\n    <div class=\"lv-hint\">Clic en una tarjeta para eliminar ese registro</div>\n</div>\n\n<script>\n(function(scope){\n    var _lvKey=''; var _lvPrev=[];\n    scope.$watch('msg', function(msg){\n        if(!msg||!msg.payload) return;\n        var d=msg.payload;\n        var cnt=document.getElementById('lv-count');\n        var cards=document.getElementById('lv-cards');\n        var empty=document.getElementById('lv-empty');\n        if(cnt) cnt.textContent = d.total||0;\n        var rows=(d.rows||[]).slice(0,6);\n        var newKey=rows.map(function(r){return r.email+'|'+r.hora;}).join(';;');\n        if(newKey===_lvKey) return;\n        var oldEmails=_lvPrev.slice();\n        _lvKey=newKey;\n        _lvPrev=rows.map(function(r){return r.email;});\n        if(rows.length>0){\n            if(empty) empty.style.display='none';\n            if(cards){\n                var h='';\n                rows.forEach(function(r,i){\n                    var isNew=oldEmails.indexOf(r.email)===-1;\n                    h+='<div class=\"lv-card'+(isNew?' lv-card-new':'')+'\" onclick=\"lvDel('+i+')\">';\n                    h+='<div class=\"lv-email\">'+r.email+'</div>';\n                    h+='<div class=\"lv-meta\">';\n                    h+='<span class=\"lv-badge\">'+r.movie+'</span>';\n                    h+='<span class=\"lv-badge\">'+r.timeSlot+'</span>';\n                    h+='<span class=\"lv-badge\">'+r.seats+'</span>';\n                    h+='<span style=\"color:#94a3b8;font-family:monospace;font-size:0.85em;\">'+r.hora+'</span>';\n                    h+='</div></div>';\n                });\n                cards.innerHTML=h;\n            }\n        } else {\n            if(empty) empty.style.display='block';\n            if(cards) cards.innerHTML='';\n        }\n    });\n\n    window.lvDel = function(idx){\n        fetch('/api/delete-reservation',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'delete-one',index:idx})});\n    };\n\n    var delBtn = document.getElementById('lv-del-all');\n    if(delBtn) delBtn.addEventListener('click', function(){\n        fetch('/api/delete-reservation',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'delete-all'})});\n    });\n})(scope);\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1220,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ui-tmpl-stats",
+        "type": "ui_template",
+        "z": "tab-esc2",
+        "group": "ui-grp-stats",
+        "name": "Estadísticas",
+        "order": 1,
+        "width": "20",
+        "height": "20",
+        "format": "<style>\n    :host { background: transparent !important; }\n\n    .st-row { display: flex; gap: 14px; margin-bottom: 20px; }\n    .st-card {\n        background: #ffffff; border-radius: 12px; padding: 24px 18px;\n        text-align: center; flex: 1; min-width: 0;\n        box-shadow: 0 5px 25px rgba(0,0,0,0.05);\n        border: 1px solid rgba(0,0,0,0.05);\n    }\n    .st-num { font-size: 3rem; font-weight: 800; line-height: 1.1; font-family: monospace; }\n    .st-lbl { font-size: 0.78em; color: #94a3b8; margin-top: 6px; font-weight: 600; letter-spacing: 1px; }\n\n    .st-chart-wrap {\n        background: #ffffff; border-radius: 12px; padding: 20px;\n        box-shadow: 0 5px 25px rgba(0,0,0,0.05);\n        border: 1px solid rgba(0,0,0,0.05);\n    }\n    .st-chart-title { font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 0.9em; letter-spacing: 1px; }\n\n    .br-row { display: flex; align-items: center; margin-bottom: 10px; }\n    .br-lbl { width: 140px; font-size: 0.82em; color: #475569; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }\n    .br-track { flex: 1; background: #f1f5f9; border-radius: 4px; height: 26px; overflow: hidden; margin-left: 10px; }\n    .br-fill  {\n        height: 100%; border-radius: 4px; background: #0ea5e9;\n        display: flex; align-items: center; padding-left: 8px;\n        color: #ffffff; font-size: 0.8em; font-weight: 700;\n        transition: width 0.6s ease;\n    }\n    .br-empty { text-align: center; color: #cbd5e1; padding: 20px; font-size: 0.9em; }\n</style>\n\n<div style=\"padding:4px;\">\n    <div class=\"st-row\">\n        <div class=\"st-card\" style=\"border-top:4px solid #0ea5e9;\">\n            <div class=\"st-num\" id=\"st-tot\" style=\"color:#0ea5e9;\">0</div>\n            <div class=\"st-lbl\">EMAILS CAPTURADOS</div>\n        </div>\n        <div class=\"st-card\" style=\"border-top:4px solid #f97316;\">\n            <div class=\"st-num\" id=\"st-clk\" style=\"color:#f97316;\">0</div>\n            <div class=\"st-lbl\">CLICS EN ENLACE</div>\n        </div>\n        <div class=\"st-card\" style=\"border-top:4px solid #ef4444;\">\n            <div class=\"st-num\" id=\"st-rate\" style=\"color:#ef4444;\">0%</div>\n            <div class=\"st-lbl\">TASA DE ÉXITO</div>\n        </div>\n    </div>\n    <div class=\"st-chart-wrap\">\n        <div class=\"st-chart-title\">// RESERVAS POR PELÍCULA</div>\n        <div id=\"st-bars\"><div class=\"br-empty\">Sin datos aún</div></div>\n    </div>\n</div>\n\n<script>\n(function(scope){\n    scope.$watch('msg', function(msg){\n        if(!msg||!msg.payload) return;\n        var d=msg.payload;\n        var $=function(id){return document.getElementById(id);};\n        if($('st-tot'))  $('st-tot').textContent  = d.total||0;\n        if($('st-clk'))  $('st-clk').textContent  = d.clicks||0;\n        if($('st-rate')) $('st-rate').textContent = (d.rate||0)+'%';\n        var barsEl = $('st-bars');\n        if(barsEl && d.movieCounts){\n            var entries = Object.entries(d.movieCounts);\n            if(!entries.length){ barsEl.innerHTML='<div class=\"br-empty\">Sin datos aún</div>'; return; }\n            var max = Math.max.apply(null, entries.map(function(e){return e[1];}));\n            var h='';\n            entries.sort(function(a,b){return b[1]-a[1];}).forEach(function(e){\n                var pct = max>0 ? Math.round(e[1]/max*100) : 0;\n                h+='<div class=\"br-row\">';\n                h+='<div class=\"br-lbl\" title=\"'+e[0]+'\">'+e[0]+'</div>';\n                h+='<div class=\"br-track\"><div class=\"br-fill\" style=\"width:'+pct+'%\">'+e[1]+'</div></div>';\n                h+='</div>';\n            });\n            barsEl.innerHTML=h;\n        }\n    });\n})(scope);\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1250,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ui-tmpl-clicks",
+        "type": "ui_template",
+        "z": "tab-esc2",
+        "group": "ui-grp-clicks",
+        "name": "Clics en Correo",
+        "order": 1,
+        "width": "20",
+        "height": "20",
+        "format": "<style>\n    :host { background: transparent !important; }\n\n    .ck-counter {\n        background: #ffffff; border-radius: 12px; padding: 28px;\n        text-align: center; margin-bottom: 20px;\n        box-shadow: 0 5px 25px rgba(0,0,0,0.05);\n        border: 1px solid rgba(0,0,0,0.05);\n        border-top: 4px solid #f97316;\n    }\n    .ck-num { color: #f97316; font-size: 4rem; font-weight: 800; line-height: 1; font-family: monospace; }\n    .ck-lbl { color: #64748b; font-size: 1rem; font-weight: 700; letter-spacing: 2px; margin-top: 8px; }\n\n    .ck-table-wrap {\n        background: #ffffff; border-radius: 12px; overflow: hidden;\n        box-shadow: 0 5px 25px rgba(0,0,0,0.05);\n        border: 1px solid rgba(0,0,0,0.05);\n    }\n    .ck-thead {\n        background: #f8fafc; padding: 11px 18px;\n        display: flex; justify-content: space-between;\n        border-bottom: 2px solid #e2e8f0;\n    }\n    .ck-thead span { color: #64748b; font-weight: 700; font-size: 0.78em; letter-spacing: 2px; font-family: monospace; }\n    .ck-row { display: flex; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid #f1f5f9; align-items: center; cursor: pointer; transition: background 0.2s; }\n    .ck-row:last-child { border-bottom: none; }\n    .ck-row:hover { background: #fff0f0; }\n    .ck-email { font-family: monospace; color: #0c4a6e; font-weight: 600; font-size: 1.1em; }\n    .ck-time  { color: #94a3b8; font-size: 0.95em; font-family: monospace; }\n    .ck-empty { text-align: center; color: #cbd5e1; padding: 36px; font-size: 0.95em; }\n\n    .ck-note {\n        margin-top: 14px; background: #fff7ed; border-radius: 8px;\n        padding: 12px 16px; color: #9a3412; font-size: 0.82em;\n        border: 1px solid #fed7aa; font-family: monospace;\n    }\n    .ck-del-btn {\n        margin-top: 16px; width: 100%; padding: 12px;\n        background: #fee2e2; color: #dc2626; border: 2px solid #fca5a5; border-radius: 8px;\n        font-weight: 700; font-size: 1em; cursor: pointer; letter-spacing: 1px;\n        transition: background 0.2s; font-family: monospace;\n    }\n    .ck-del-btn:hover { background: #fca5a5; }\n</style>\n\n<div style=\"padding:4px;\">\n    <div class=\"ck-counter\">\n        <div class=\"ck-num\" id=\"ck-count\">0</div>\n        <div class=\"ck-lbl\">CLICS EN ENLACE DE EMAIL</div>\n    </div>\n    <div class=\"ck-table-wrap\">\n        <div class=\"ck-thead\">\n            <span>EMAIL</span>\n            <span>HORA</span>\n        </div>\n        <div id=\"ck-list\"></div>\n        <div id=\"ck-empty\" class=\"ck-empty\">Ningún estudiante ha hecho clic aún</div>\n    </div>\n    <div class=\"ck-note\">\n        // Estos estudiantes abrieron el correo y dieron clic en el enlace de confirmación de entradas.\n    </div>\n    <button class=\"ck-del-btn\" id=\"ck-del-all\">⊘ ELIMINAR TODOS LOS REGISTROS</button>\n    <div style=\"text-align:center;color:#94a3b8;font-size:0.85em;margin-top:6px;\">Clic en una fila para eliminar ese registro</div>\n</div>\n\n<script>\n(function(scope){\n    scope.$watch('msg', function(msg){\n        if(!msg||!msg.payload) return;\n        var d=msg.payload;\n        var cnt  = document.getElementById('ck-count');\n        var list = document.getElementById('ck-list');\n        var empty= document.getElementById('ck-empty');\n        if(cnt) cnt.textContent = d.total||0;\n        if(d.rows && d.rows.length>0){\n            if(empty) empty.style.display='none';\n            if(list){\n                var h='';\n                d.rows.forEach(function(r,i){\n                    h+='<div class=\"ck-row\" onclick=\"ckDel('+i+')\">';\n                    h+='<span class=\"ck-email\">'+r.email+'</span>';\n                    h+='<span class=\"ck-time\">'+r.hora+'</span>';\n                    h+='</div>';\n                });\n                list.innerHTML=h;\n            }\n        } else {\n            if(empty) empty.style.display='block';\n            if(list) list.innerHTML='';\n        }\n    });\n\n    window.ckDel = function(idx){\n        fetch('/api/delete-click',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'delete-one',index:idx})});\n    };\n\n    var ckDelBtn = document.getElementById('ck-del-all');\n    if(ckDelBtn) ckDelBtn.addEventListener('click', function(){\n        fetch('/api/delete-click',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'delete-all'})});\n    });\n})(scope);\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1260,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ui-tmpl-shell",
+        "type": "ui_template",
+        "z": "tab-esc2",
+        "group": "",
+        "name": "Diseño visual del panel",
+        "order": 0,
+        "width": "0",
+        "height": "0",
+        "format": "<script>\n  (function() {\n    if (document.getElementById('demo-global-shell')) return;\n\n    var shell = document.createElement('div');\n    shell.id = 'demo-global-shell';\n\n    shell.innerHTML = `\n        <style>\n            :root {\n                --h: 70px; --s: 260px; --f: 40px;\n                --tech-blue: #0ea5e9; --tech-blue-dark: #0284c7;\n                --text-main: #1e293b; --text-muted: #64748b;\n            }\n            body, html { background-color: #f8fafc !important; margin: 0; }\n            md-toolbar.nr-dashboard-toolbar { display: none !important; }\n            md-sidenav, md-backdrop { display: none !important; }\n            md-content.md-default-theme, md-content { background-color: transparent !important; }\n            .nr-dashboard-view {\n                padding-top: 90px !important; margin-left: 270px !important;\n                width: calc(100vw - 280px) !important; padding-right: 20px !important;\n                padding-bottom: 60px !important; box-sizing: border-box !important;\n            }\n            .demo-shell-wrap { position:fixed; inset:0; z-index:5; font-family:'Segoe UI',sans-serif; pointer-events:none; }\n            .demo-shell-wrap * { pointer-events: auto; }\n            .demo-head {\n                height: var(--h);\n                background: linear-gradient(90deg, #ffffff 0%, #f1f5f9 100%);\n                border-bottom: 2px solid var(--tech-blue);\n                box-shadow: 0 4px 15px rgba(0,0,0,0.05);\n                display: flex; align-items: center; justify-content: space-between;\n                padding: 0 24px; color: var(--text-main);\n            }\n            .brand-title { font-weight: 800; font-size: 1.1rem; letter-spacing: 2px; }\n            .brand-title span { color: var(--tech-blue); }\n            .status-badge {\n                display: flex; align-items: center; gap: 8px;\n                font-family: monospace; font-size: 0.9rem;\n                background: rgba(14,165,233,0.1); padding: 5px 12px;\n                border-radius: 4px; color: var(--tech-blue-dark); font-weight: 600;\n            }\n            .dot { width:8px; height:8px; background-color:var(--tech-blue); border-radius:50%; animation:pulse 2s infinite; }\n            .demo-side {\n                position: fixed; top: calc(var(--h) + 15px); left: 15px;\n                bottom: calc(var(--f) + 15px); width: calc(var(--s) - 30px);\n                background: transparent !important; border: none !important;\n                box-shadow: none !important;\n                border-right: 2px dashed rgba(0,0,0,0.06) !important;\n                padding: 20px 12px; display: flex; flex-direction: column; gap: 10px;\n            }\n            .demo-side a { text-decoration: none; }\n            .demo-item {\n                color: var(--text-muted); padding: 12px 15px; font-size: 0.95rem;\n                font-weight: 600; cursor: pointer; transition: all 0.3s ease;\n                position: relative;\n                clip-path: polygon(0 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%);\n            }\n            .demo-item::before {\n                content:''; position:absolute; left:0; top:0; bottom:0; width:4px;\n                background:#cbd5e1; transition:all 0.3s ease;\n            }\n            .demo-item:hover, .demo-item.active {\n                background: rgba(14,165,233,0.08); color: var(--tech-blue-dark); transform: translateX(5px);\n            }\n            .demo-item:hover::before, .demo-item.active::before { background: var(--tech-blue); }\n            .demo-item span { font-family:monospace; opacity:0.6; margin-right:8px; color:var(--tech-blue); }\n            .demo-foot {\n                position:fixed; left:0; right:0; bottom:0; height:var(--f);\n                background:#ffffff; border-top:1px solid rgba(0,0,0,0.08);\n                display:flex; align-items:center; justify-content:center;\n                font-family:monospace; font-size:13px; font-weight:600; color:var(--text-muted);\n            }\n            .terminal-cursor {\n                display:inline-block; width:8px; height:15px;\n                background-color:var(--tech-blue); margin-left:5px;\n                animation:blink 1s step-end infinite;\n            }\n            @keyframes pulse { 0%,100%{transform:scale(.95);opacity:.8} 50%{transform:scale(1.2);opacity:1;box-shadow:0 0 12px rgba(14,165,233,.6)} }\n            @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }\n            .nr-dashboard-cardpanel {\n                background:#ffffff !important; border-radius:12px !important;\n                box-shadow:0 5px 25px rgba(0,0,0,.05) !important;\n                border:1px solid rgba(0,0,0,.05) !important; padding:20px !important;\n            }\n            .nr-dashboard-cardpanel md-card {\n                background:transparent !important; box-shadow:none !important;\n                border:none !important; margin:0 !important; padding:0 !important;\n            }\n        </style>\n\n        <div class=\"demo-shell-wrap\">\n          <div class=\"demo-head\">\n            <div class=\"brand-title\">DEMO-KIT <span>//</span> CIBERSEGURIDAD <span>_</span> ESCENARIO 2</div>\n            <div class=\"status-badge\"><div class=\"dot\"></div> DEMO EN VIVO</div>\n          </div>\n          <div class=\"demo-side\">\n            <a href=\"#!/0\"><div class=\"demo-item active\" id=\"btn-0\"><span>01_</span> QR Acceso</div></a>\n            <a href=\"#!/1\"><div class=\"demo-item\" id=\"btn-1\"><span>02_</span> Monitor en Vivo</div></a>\n            <a href=\"#!/2\"><div class=\"demo-item\" id=\"btn-2\"><span>03_</span> Estadísticas</div></a>\n            <a href=\"#!/3\"><div class=\"demo-item\" id=\"btn-3\"><span>04_</span> Clics en Email</div></a>\n          </div>\n          <div class=\"demo-foot\">\n            > MU1TICINES@PHISHING_EDU :~ ESC2_ <span class=\"terminal-cursor\"></span>\n          </div>\n        </div>\n    `;\n\n    document.body.appendChild(shell);\n\n    function updateActiveMenu() {\n        var hash = window.location.hash;\n        ['btn-0','btn-1','btn-2','btn-3'].forEach(function(id){\n            var el = document.getElementById(id);\n            if(el) el.classList.remove('active');\n        });\n        var idx = hash.match(/\\/([0-9]+)/);\n        var n = idx ? parseInt(idx[1]) : 0;\n        var btn = document.getElementById('btn-'+n);\n        if(btn) btn.classList.add('active');\n        else { var b0=document.getElementById('btn-0'); if(b0) b0.classList.add('active'); }\n    }\n\n    window.addEventListener('hashchange', updateActiveMenu);\n    updateActiveMenu();\n  })();\n</script>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": false,
+        "templateScope": "global",
+        "className": "",
+        "x": 190,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "func-del-reservation",
+        "type": "function",
+        "z": "tab-esc2",
+        "name": "Eliminar reserva",
+        "func": "var action = msg.payload.action;\nvar reservations = flow.get('reservations') || [];\nif (action === 'delete-all') {\n    reservations = [];\n    flow.set('reservations', reservations);\n} else if (action === 'delete-one') {\n    reservations.splice(msg.payload.index, 1);\n    flow.set('reservations', reservations);\n}\nvar httpRes = { payload: { status: 'ok' }, res: msg.res };\nreturn [httpRes, {}];   // salida 2 dispara \"Refrescar panel\"\n",
+        "outputs": 2,
+        "x": 480,
+        "y": 660,
+        "wires": [
+            [
+                "http-res-del-reservation"
+            ],
+            [
+                "func-refresh-panel"
+            ]
+        ]
+    },
+    {
+        "id": "func-del-click",
+        "type": "function",
+        "z": "tab-esc2",
+        "name": "Eliminar clic",
+        "func": "var action = msg.payload.action;\nvar clicks = flow.get('clicks') || [];\nif (action === 'delete-all') {\n    clicks = [];\n    flow.set('clicks', clicks);\n} else if (action === 'delete-one') {\n    clicks.splice(msg.payload.index, 1);\n    flow.set('clicks', clicks);\n}\nvar httpRes = { payload: { status: 'ok' }, res: msg.res };\nreturn [httpRes, {}];   // salida 2 dispara \"Refrescar panel\"\n",
+        "outputs": 2,
+        "x": 480,
+        "y": 740,
+        "wires": [
+            [
+                "http-res-del-click"
+            ],
+            [
+                "func-refresh-panel"
+            ]
+        ]
+    },
+    {
+        "id": "http-in-del-reservation",
+        "type": "http in",
+        "z": "tab-esc2",
+        "name": "POST /api/delete-reservation (borrar reserva)",
+        "url": "/api/delete-reservation",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 660,
+        "wires": [
+            [
+                "func-del-reservation"
+            ]
+        ]
+    },
+    {
+        "id": "http-res-del-reservation",
+        "type": "http response",
+        "z": "tab-esc2",
+        "name": "Responder OK (200)",
+        "statusCode": "200",
+        "headers": {},
+        "x": 940,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "http-in-del-click",
+        "type": "http in",
+        "z": "tab-esc2",
+        "name": "POST /api/delete-click (borrar clic)",
+        "url": "/api/delete-click",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 740,
+        "wires": [
+            [
+                "func-del-click"
+            ]
+        ]
+    },
+    {
+        "id": "http-res-del-click",
+        "type": "http response",
+        "z": "tab-esc2",
+        "name": "Responder OK (200)",
+        "statusCode": "200",
+        "headers": {},
+        "x": 940,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "inject-refresh-startup",
+        "type": "inject",
+        "z": "tab-esc2",
+        "name": "Al iniciar: refrescar cartelera",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 15,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 180,
+        "y": 1120,
+        "wires": [
+            [
+                "exec-refresh-movies"
+            ]
+        ]
+    },
+    {
+        "id": "inject-refresh-cron",
+        "type": "inject",
+        "z": "tab-esc2",
+        "name": "Cada día 06:00: refrescar cartelera",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 06 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 190,
+        "y": 1180,
+        "wires": [
+            [
+                "exec-refresh-movies"
+            ]
+        ]
+    },
+    {
+        "id": "exec-refresh-movies",
+        "type": "exec",
+        "z": "tab-esc2",
+        "command": "python3 /data/scripts/refresh_movies.py",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "60",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Refrescar movies.json (TMDB)",
+        "x": 530,
+        "y": 1140,
+        "wires": [
+            [
+                "debug-refresh-movies"
+            ],
+            [
+                "debug-refresh-movies"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "debug-refresh-movies",
+        "type": "debug",
+        "z": "tab-esc2",
+        "name": "Registro refresco TMDB",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "exportstate_e2_in",
+        "type": "http in",
+        "z": "tab-esc2",
+        "name": "GET /api/export_state (entregar estado)",
+        "url": "/api/export_state",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 1320,
+        "wires": [
+            [
+                "exportstate_e2_fn"
+            ]
+        ]
+    },
+    {
+        "id": "exportstate_e2_fn",
+        "type": "function",
+        "z": "tab-esc2",
+        "name": "Construir estado de exportación",
+        "func": "const reservations = flow.get('reservations') || [];\nconst clicks = flow.get('clicks') || [];\n// Split reservations into capturas (email submitted) and envios (email actually sent).\nconst capturas = reservations.map(r => ({ ts: r.ts, email: r.email, source: r.source || 'web' }));\nconst envios = reservations.filter(r => r.sent).map(r => ({ ts: r.sentTs || r.ts, email: r.email, status: r.sentStatus || 'ok' }));\nmsg.payload = { ts: Date.now()/1000, scenario: 'esc2', tables: { email_capturas: capturas, email_envios: envios, email_clicks: clicks } };\nmsg.headers = { 'Content-Type': 'application/json' };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 1320,
+        "wires": [
+            [
+                "exportstate_e2_out"
+            ]
+        ]
+    },
+    {
+        "id": "exportstate_e2_out",
+        "type": "http response",
+        "z": "tab-esc2",
+        "name": "Responder OK (200)",
+        "statusCode": "200",
+        "headers": {},
+        "x": 760,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "cmt-esc2-r1",
+        "type": "comment",
+        "z": "tab-esc2",
+        "name": "Captura de reserva y envío de correo.",
+        "info": "Es la parte central del phishing. Cuando alguien\nreserva en el sitio falso Mu1ticines, aquí\nllega su correo y sus datos. El flujo se\ndivide en tres: responde de inmediato al\nsitio (200), registra la \"captura\" en el\npanel en vivo, y tras 10 s envía el correo\nde \"confirmación\" por SMTP (script en\nPython). \"Registrar envío\" marca si el\ncorreo salió bien o falló. Nada ocurre si la\npersona no entrega sus datos en el formulario.",
+        "x": 170,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "cmt-esc2-r2",
+        "type": "comment",
+        "z": "tab-esc2",
+        "name": "Redirección educativa y registro de clic.",
+        "info": "Cuando la persona abre el enlace \"Ver mis\nentradas\" del correo, entra por GET /tickets.\nEl sistema registra el clic (quién picó el\nanzuelo, con su correo y la hora) y enseguida\nlo redirige a la página educativa de\nconcienciación. Aquí termina el engaño y\nempieza la enseñanza: el participante descubre\nque cayó en una simulación de phishing.",
+        "x": 170,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "cmt-esc2-r3",
+        "type": "comment",
+        "z": "tab-esc2",
+        "name": "Panel del operador",
+        "info": "Reúne lo que el operador ve y administra. Los\ntres paneles en vivo: «Monitor en Vivo» con las\ncapturas conforme llegan, «Estadísticas» con el\nresumen del embudo (capturas, clics y tasa de\nclic) y «Clics en Email» con quienes abrieron el\nenlace; un único nodo «Refrescar panel» los\ndibuja a los tres. Incluye también el diseño\nvisual del tablero (cabecera, barra lateral y\nestilos, sin lógica de datos) y los controles de\nborrado, que limpian una entrada o toda la lista\npara dejar el tablero en cero antes de una demo.",
+        "x": 190,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "cmt-esc2-r6",
+        "type": "comment",
+        "z": "tab-esc2",
+        "name": "Código QR de acceso.",
+        "info": "Genera el código QR que el público escanea\ncon el teléfono para abrir el sitio falso\nMu1ticines sin teclear ninguna dirección.\nEl enlace se arma solo a partir de la\ndirección del servidor.",
+        "x": 160,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "cmt-esc2-r7",
+        "type": "comment",
+        "z": "tab-esc2",
+        "name": "Refresco de cartelera (TMDB).",
+        "info": "Mantiene la cartelera realista. Al arrancar y\ncada día a las 06:00 consulta en la API de\nTMDB las películas en cartelera de Ecuador y\narma el archivo movies.json que muestra el\nsitio. Los pósters se descargan a local para\nque se vean aunque no haya internet. Si TMDB\nno responde, conserva la cartelera anterior.",
+        "x": 170,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "cmt-esc2-r8",
+        "type": "comment",
+        "z": "tab-esc2",
+        "name": "Entrega de datos al medidor.",
+        "info": "Endpoint de métricas. /api/export_state\nentrega en JSON el embudo del ataque\n(capturas → envíos → clics) que la recolección de métricas guarda en CSV al cerrar la sesión.\nEs el puente entre el escenario y la medición\nde resultados.",
+        "x": 140,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "func-refresh-panel",
+        "type": "function",
+        "z": "tab-esc2",
+        "name": "Refrescar panel",
+        "func": "// Único punto que dibuja el panel: lee el estado y emite a los 3 templates.\nvar reservations = flow.get('reservations') || [];\nvar clicks = flow.get('clicks') || [];\nvar movieCounts = {};\nreservations.forEach(function (r) { movieCounts[r.movie] = (movieCounts[r.movie] || 0) + 1; });\nvar liveMsg   = { payload: { total: reservations.length, rows: reservations } };\nvar statsMsg  = { payload: {\n    total: reservations.length,\n    clicks: clicks.length,\n    rate: reservations.length > 0 ? Math.round(clicks.length / reservations.length * 100) : 0,\n    movieCounts: movieCounts\n}};\nvar clicksMsg = { payload: { total: clicks.length, rows: clicks } };\nreturn [liveMsg, statsMsg, clicksMsg];\n",
+        "outputs": 3,
+        "x": 1020,
+        "y": 480,
+        "wires": [
+            [
+                "ui-tmpl-live"
+            ],
+            [
+                "ui-tmpl-stats"
+            ],
+            [
+                "ui-tmpl-clicks"
+            ]
+        ]
+    },
+    {
+        "id": "func-register-send",
+        "type": "function",
+        "z": "tab-esc2",
+        "name": "Registrar envío",
+        "func": "// Marca la reserva como enviada según el código de salida de send_email.py.\n// Lo dispara la salida 3 (return code) de \"Enviar email (Python)\".\nvar rc = msg.payload || {};\nvar code = (typeof rc.code !== 'undefined') ? rc.code : (msg.rc ? msg.rc.code : undefined);\nvar ok = (code === 0);\nvar email = msg.email || '';\nvar reservations = flow.get('reservations') || [];\n\nvar idx = -1;\nfor (var i = 0; i < reservations.length; i++) {\n    if (reservations[i].email === email && !reservations[i].sent) { idx = i; break; }\n}\nif (idx === -1 && !email) {          // respaldo: la reserva sin enviar más antigua\n    for (var j = reservations.length - 1; j >= 0; j--) {\n        if (!reservations[j].sent) { idx = j; break; }\n    }\n}\nif (idx !== -1) {\n    if (ok) {\n        reservations[idx].sent = true;\n        reservations[idx].sentTs = Date.now() / 1000;\n        reservations[idx].sentStatus = 'ok';\n    } else {\n        reservations[idx].sentStatus = 'error';\n        node.warn('Envío falló para ' + (email || '(desconocido)') + ' code=' + code);\n    }\n    flow.set('reservations', reservations);\n}\nreturn null;\n",
+        "outputs": 1,
+        "x": 1380,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    }
+]

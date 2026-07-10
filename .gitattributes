@@ -1,0 +1,22 @@
+# Normaliza saltos de línea para que el repositorio funcione al clonarse en la Pi (Linux).
+* text=auto eol=lf
+
+# Scripts y código que corren en Linux: SIEMPRE LF
+*.sh   text eol=lf
+*.py   text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.js   text eol=lf
+*.json text eol=lf
+Dockerfile text eol=lf
+
+# Scripts de PowerShell (gateway Windows): CRLF
+*.ps1  text eol=crlf
+
+# Binarios: no tocar
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.webp binary
+*.ico  binary
+*.min.js binary

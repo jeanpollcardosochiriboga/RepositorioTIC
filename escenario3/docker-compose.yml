@@ -1,0 +1,56 @@
+networks:
+  esc3-net:
+    driver: bridge
+
+services:
+  esc3-nodered:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: esc3-nodered
+    restart: "no"
+    env_file:
+      - .env
+    environment:
+      FLOWS: /data/flows.json
+      NODE_RED_ENABLE_PROJECTS: "false"
+    ports:
+      - "${DASH_PORT:-1883}:1880"
+    volumes:
+      - ./:/data
+    networks:
+      - esc3-net
+
+  esc3-target:
+    build:
+      context: ./target
+      dockerfile: Dockerfile
+    container_name: esc3-target
+    restart: "no"
+    environment:
+      - WORKERS=${TARGET_WORKERS:-1}
+    ports:
+      - "5000:5000"
+    networks:
+      - esc3-net
+
+  esc3-attacker:
+    build:
+      context: ./attacker
+      dockerfile: Dockerfile
+    container_name: esc3-attacker
+    restart: "no"
+    environment:
+      - WORKERS=${WORKERS:-50}
+      - TARGET_URL=${TARGET_URL:-http://esc3-target:5000/reservar}
+    networks:
+      - esc3-net
+
+  esc3-proxy:
+    image: nginx:alpine
+    container_name: esc3-proxy
+    restart: "no"
+    volumes:
+      - ./proxy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - esc3-net

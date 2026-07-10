@@ -1,0 +1,820 @@
+[
+    {
+        "id": "demo_tab",
+        "type": "tab",
+        "label": "Demo (wizard)",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ui_demo",
+        "type": "ui_tab",
+        "name": "Demo",
+        "icon": "play_arrow",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "g_demo_header",
+        "type": "ui_group",
+        "name": "",
+        "tab": "ui_demo",
+        "order": 1,
+        "disp": false,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "g_demo_status",
+        "type": "ui_group",
+        "name": "Estado actual",
+        "tab": "ui_demo",
+        "order": 2,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "g_demo_btns",
+        "type": "ui_group",
+        "name": "1. Escenario",
+        "tab": "ui_demo",
+        "order": 3,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "g_demo_metrics",
+        "type": "ui_group",
+        "name": "2. Metricas",
+        "tab": "ui_demo",
+        "order": 4,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "g_demo_out",
+        "type": "ui_group",
+        "name": "Mensajes",
+        "tab": "ui_demo",
+        "order": 5,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7904153174221833",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "fmt_out",
+        "type": "function",
+        "z": "demo_tab",
+        "name": "mensaje amigable",
+        "func": "const raw = (msg.payload || '').toString();\nlet m;\nif (/No hay escenario activo/.test(raw)) m = '\\u26a0\\ufe0f Primero inicia un escenario.';\nelse if (/Ya estas midiendo/.test(raw)) m = '\\u2139\\ufe0f Ya estabas midiendo ese escenario.';\nelse if (/Hay una medicion activa/.test(raw)) m = '\\u26a0\\ufe0f Termina la medicion anterior primero (TERMINAR).';\nelse if (/No hay ninguna medicion activa/.test(raw)) m = '\\u2139\\ufe0f No habia ninguna medicion activa.';\nelse if (/Ya hay un arranque en curso/.test(raw)) m = '\\u23f3 Procesando, espera unos segundos...';\nelse if (/\\[end\\]|session closed/.test(raw)) m = '\\u2705 Medicion terminada. Datos guardados en el Pi.';\nelse if (/\\[start\\]|session active/.test(raw)) m = '\\u2705 Medicion iniciada.';\nelse m = '\\u2705 Listo.';\nconst ts = new Date().toLocaleTimeString();\nreturn { payload: m + '   (' + ts + ')' };\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1490,
+        "y": 300,
+        "wires": [
+            [
+                "txt_demo_out"
+            ]
+        ]
+    },
+    {
+        "id": "fmt_status",
+        "type": "function",
+        "z": "demo_tab",
+        "name": "tarjeta de estado",
+        "func": "const out = (msg.payload || '').toString();\nif (!/tesis-ops-console|esc[123]-|jp-esc2-/.test(out)) return null;\nlet scn = null;\nif (/(^|\\n)\\s*esc1-/.test(out)) scn = 'esc1';\nelse if (/(^|\\n)\\s*(jp-)?esc2-/.test(out)) scn = 'esc2';\nelse if (/(^|\\n)\\s*esc3-/.test(out)) scn = 'esc3';\nconst map = {\n  esc1: { label: 'ESCENARIO 1  \\u2014  EN VIVO', color: '#0284c7' },\n  esc2: { label: 'ESCENARIO 2  \\u2014  EN VIVO', color: '#0284c7' },\n  esc3: { label: 'ESCENARIO 3  \\u2014  EN VIVO', color: '#0284c7' }\n};\nconst card = scn ? map[scn] : { label: 'TODO APAGADO', color: '#64748b' };\nreturn { payload: card };\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1490,
+        "y": 60,
+        "wires": [
+            [
+                "card_status"
+            ]
+        ]
+    },
+    {
+        "id": "busy_notice",
+        "type": "function",
+        "z": "demo_tab",
+        "name": "busy notice",
+        "func": "return { payload: (msg.payload || '').toString() };\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1510,
+        "y": 760,
+        "wires": [
+            [
+                "txt_demo_out"
+            ]
+        ]
+    },
+    {
+        "id": "clear_busy",
+        "type": "function",
+        "z": "demo_tab",
+        "name": "clear busy",
+        "func": "flow.set('ops_busy', false);\nreturn null;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1490,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "card_status",
+        "type": "ui_template",
+        "z": "demo_tab",
+        "group": "g_demo_status",
+        "name": "tarjeta estado",
+        "order": 1,
+        "width": "12",
+        "height": "3",
+        "format": "<div ng-style=\"{'background': (msg.payload.color || '#607d8b')}\" style=\"border-radius:12px;padding:22px;text-align:center;color:#fff;font-weight:800;font-size:26px;letter-spacing:.5px;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif\">{{msg.payload.label || 'Cargando estado...'}}</div>",
+        "storeOutMessages": false,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1780,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "txt_demo_out",
+        "type": "ui_text",
+        "z": "demo_tab",
+        "group": "g_demo_out",
+        "order": 1,
+        "width": "12",
+        "height": "2",
+        "name": "mensaje",
+        "label": "",
+        "format": "<div style='font-size:16px;padding:6px 2px'>{{msg.payload}}</div>",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1780,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "startup_status",
+        "type": "inject",
+        "z": "demo_tab",
+        "name": "al arrancar",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 470,
+        "y": 200,
+        "wires": [
+            [
+                "btn_demo_status_exec"
+            ]
+        ]
+    },
+    {
+        "id": "btn_demo_e1",
+        "type": "ui_button",
+        "z": "demo_tab",
+        "name": "INICIAR DEMO ESC1",
+        "group": "g_demo_btns",
+        "order": 1,
+        "width": "4",
+        "height": "3",
+        "passthru": false,
+        "label": "INICIAR DEMO ESC1",
+        "tooltip": "",
+        "color": "#fff",
+        "bgcolor": "#0284c7",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "INICIAR DEMO ESC1",
+        "topicType": "str",
+        "x": 220,
+        "y": 760,
+        "wires": [
+            [
+                "btn_demo_e1_gate"
+            ]
+        ]
+    },
+    {
+        "id": "btn_demo_e1_gate",
+        "type": "function",
+        "z": "demo_tab",
+        "name": "gate btn_demo_e1",
+        "func": "if (flow.get('ops_busy')) {\n    return [null, { payload: '\\u23f3 Procesando la accion anterior, espera unos segundos...' }];\n}\nflow.set('ops_busy', true);\nreturn [msg, null];\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 760,
+        "wires": [
+            [
+                "btn_demo_e1_exec"
+            ],
+            [
+                "busy_notice"
+            ]
+        ]
+    },
+    {
+        "id": "btn_demo_e1_exec",
+        "type": "exec",
+        "z": "demo_tab",
+        "command": "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o ConnectTimeout=8 -i /usr/src/node-red/.ssh/id_ed25519 raspberry1@192.168.1.10 \"docker compose -f /home/raspberry1/tesis_escenario2/docker-compose.yml down ; docker compose -f /home/raspberry1/tesis_escenario3/docker-compose.yml down ; docker compose -f /home/raspberry1/tesis_escenario1/docker-compose.yml up -d ; sleep 2; docker ps --format '{{.Names}}'\"",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "30",
+        "winHide": false,
+        "oldrc": false,
+        "name": "INICIAR DEMO ESC1",
+        "x": 840,
+        "y": 720,
+        "wires": [
+            [
+                "fmt_out",
+                "fmt_status"
+            ],
+            [],
+            [
+                "clear_busy"
+            ]
+        ]
+    },
+    {
+        "id": "btn_demo_e2",
+        "type": "ui_button",
+        "z": "demo_tab",
+        "name": "INICIAR DEMO ESC2",
+        "group": "g_demo_btns",
+        "order": 2,
+        "width": "4",
+        "height": "3",
+        "passthru": false,
+        "label": "INICIAR DEMO ESC2",
+        "tooltip": "",
+        "color": "#fff",
+        "bgcolor": "#0284c7",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "INICIAR DEMO ESC2",
+        "topicType": "str",
+        "x": 220,
+        "y": 500,
+        "wires": [
+            [
+                "btn_demo_e2_gate"
+            ]
+        ]
+    },
+    {
+        "id": "btn_demo_e2_gate",
+        "type": "function",
+        "z": "demo_tab",
+        "name": "gate btn_demo_e2",
+        "func": "if (flow.get('ops_busy')) {\n    return [null, { payload: '\\u23f3 Procesando la accion anterior, espera unos segundos...' }];\n}\nflow.set('ops_busy', true);\nreturn [msg, null];\n",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 500,
+        "wires": [
+            [
+                "btn_demo_e2_exec"
+            ],
+            [
+                "busy_notice"
+            ]
+        ]
+    },
+    {
+        "id": "btn_demo_e2_exec",
+        "type": "exec",
+        "z": "demo_tab",
+        "command": "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o ConnectTimeout=8 -i /usr/src/node-red/.ssh/id_ed25519 raspberry1@192.168.1.10 \"docker compose -f /home/raspberry1/tesis_escenario1/docker-compose.yml down ; docker compose -f /home/raspberry1/tesis_escenario3/docker-compose.yml down ; docker compose -f /home/raspberry1/tesis_escenario2/docker-compose.yml up -d ; sleep 2; docker ps --format '{{.Names}}'\"",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "30",
+        "winHide": false,
+        "oldrc": false,
+        "name": "INICIAR DEMO ESC2",
+        "x": 860,
+        "y": 500,
+        "wires": [
+            [
+                "fmt_out",
+                "fmt_status"
+            ],
+            [],
+            [
+                "clear_busy"
+            ]
+        ]
+    },
+    {
+        "id": "btn_demo_e3",
+        "type": "ui_button",
+        "z": "demo_tab",
+        "name": "INICIAR DEMO ESC3",
+        "group": "g_demo_btns",
+        "order": 3,
+        "width": "4",
+        "height": "3",
+        "passthru": false,
+        "label": "INICIAR DEMO ESC3",
+        "tooltip": "",
+        "color": "#fff",
+        "bgcolor": "#0284c7",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "INICIAR DEMO ESC3",
+        "topicType": "str",
+        "x": 220,
+        "y": 620,
+        "wires": [
+            [
+                "btn_demo_e3_gate"
+            ]
+        ]
+    },
+    {
+        "id": "btn_demo_e3_gate",
+        "type": "function",
+        "z": "demo_tab",
+        "name": "gate btn_demo_e3",
+        "func": "if (flow.get('ops_busy')) {\n    return [null, { payload: '\\u23f3 Procesando la accion anterior, espera unos segundos...' }];\n}\nflow.set('ops_busy', true);\nreturn [msg, null];\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 620,
+        "wires": [
+            [
+                "btn_demo_e3_exec"
+            ],
+            [
+                "busy_notice"
+            ]
+        ]
+    },
+    {
+        "id": "btn_demo_e3_exec",
+        "type": "exec",
+        "z": "demo_tab",
+        "command": "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o ConnectTimeout=8 -i /usr/src/node-red/.ssh/id_ed25519 raspberry1@192.168.1.10 \"docker compose -f /home/raspberry1/tesis_escenario1/docker-compose.yml down ; docker compose -f /home/raspberry1/tesis_escenario2/docker-compose.yml down ; docker compose -f /home/raspberry1/tesis_escenario3/docker-compose.yml up -d ; sleep 2; docker ps --format '{{.Names}}'\"",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "30",
+        "winHide": false,
+        "oldrc": false,
+        "name": "INICIAR DEMO ESC3",
+        "x": 840,
+        "y": 600,
+        "wires": [
+            [
+                "fmt_out",
+                "fmt_status"
+            ],
+            [],
+            [
+                "clear_busy"
+            ]
+        ]
+    },
+    {
+        "id": "btn_demo_panic",
+        "type": "ui_button",
+        "z": "demo_tab",
+        "name": "PANIC: APAGAR TODO",
+        "group": "g_demo_btns",
+        "order": 4,
+        "width": "12",
+        "height": "2",
+        "passthru": false,
+        "label": "PANIC: APAGAR TODO",
+        "tooltip": "",
+        "color": "#fff",
+        "bgcolor": "#dc2626",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "PANIC: APAGAR TODO",
+        "topicType": "str",
+        "x": 210,
+        "y": 60,
+        "wires": [
+            [
+                "btn_demo_panic_exec"
+            ]
+        ]
+    },
+    {
+        "id": "btn_demo_panic_exec",
+        "type": "exec",
+        "z": "demo_tab",
+        "command": "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o ConnectTimeout=8 -i /usr/src/node-red/.ssh/id_ed25519 raspberry1@192.168.1.10 \"docker compose -f /home/raspberry1/tesis_escenario1/docker-compose.yml down ; docker compose -f /home/raspberry1/tesis_escenario2/docker-compose.yml down ; docker compose -f /home/raspberry1/tesis_escenario3/docker-compose.yml down ; docker ps --format '{{.Names}}'\"",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "30",
+        "winHide": false,
+        "oldrc": false,
+        "name": "PANIC: APAGAR TODO",
+        "x": 630,
+        "y": 60,
+        "wires": [
+            [
+                "fmt_out",
+                "fmt_status"
+            ],
+            [],
+            [
+                "clear_busy"
+            ]
+        ]
+    },
+    {
+        "id": "btn_demo_status",
+        "type": "ui_button",
+        "z": "demo_tab",
+        "name": "Refrescar estado",
+        "group": "g_demo_btns",
+        "order": 5,
+        "width": "12",
+        "height": "1",
+        "passthru": false,
+        "label": "Refrescar estado",
+        "tooltip": "",
+        "color": "#fff",
+        "bgcolor": "#64748b",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "Refrescar estado",
+        "topicType": "str",
+        "x": 190,
+        "y": 140,
+        "wires": [
+            [
+                "btn_demo_status_gate"
+            ]
+        ]
+    },
+    {
+        "id": "btn_demo_status_gate",
+        "type": "function",
+        "z": "demo_tab",
+        "name": "gate btn_demo_status",
+        "func": "if (flow.get('ops_busy')) {\n    return [null, { payload: '\\u23f3 Procesando la accion anterior, espera unos segundos...' }];\n}\nflow.set('ops_busy', true);\nreturn [msg, null];\n",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 140,
+        "wires": [
+            [
+                "btn_demo_status_exec"
+            ],
+            [
+                "busy_notice"
+            ]
+        ]
+    },
+    {
+        "id": "btn_demo_status_exec",
+        "type": "exec",
+        "z": "demo_tab",
+        "command": "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o ConnectTimeout=8 -i /usr/src/node-red/.ssh/id_ed25519 raspberry1@192.168.1.10 \"docker ps --format '{{.Names}}: {{.Status}}'\"",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "30",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Refrescar estado",
+        "x": 790,
+        "y": 180,
+        "wires": [
+            [
+                "fmt_out",
+                "fmt_status"
+            ],
+            [],
+            [
+                "clear_busy"
+            ]
+        ]
+    },
+    {
+        "id": "btn_met_start",
+        "type": "ui_button",
+        "z": "demo_tab",
+        "name": "INICIAR METRICAS",
+        "group": "g_demo_metrics",
+        "order": 1,
+        "width": "6",
+        "height": "2",
+        "passthru": false,
+        "label": "INICIAR METRICAS",
+        "tooltip": "",
+        "color": "#fff",
+        "bgcolor": "#059669",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "INICIAR METRICAS",
+        "topicType": "str",
+        "x": 200,
+        "y": 280,
+        "wires": [
+            [
+                "btn_met_start_gate"
+            ]
+        ]
+    },
+    {
+        "id": "btn_met_start_gate",
+        "type": "function",
+        "z": "demo_tab",
+        "name": "gate btn_met_start",
+        "func": "if (flow.get('ops_busy')) {\n    return [null, { payload: '\\u23f3 Procesando la accion anterior, espera unos segundos...' }];\n}\nflow.set('ops_busy', true);\nreturn [msg, null];\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 280,
+        "wires": [
+            [
+                "btn_met_start_exec"
+            ],
+            [
+                "busy_notice"
+            ]
+        ]
+    },
+    {
+        "id": "btn_met_start_exec",
+        "type": "exec",
+        "z": "demo_tab",
+        "command": "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o ConnectTimeout=8 -i /usr/src/node-red/.ssh/id_ed25519 raspberry1@192.168.1.10 \"scn=\\$(docker ps --format '{{.Names}}' | grep -oE 'esc[123]' | head -1); if [ -n \\\"\\$scn\\\" ]; then cd /home/raspberry1/tesis_metrics_repo && ./session.sh start \\\"\\$scn\\\"; else echo 'No hay escenario activo: inicia una demo primero.'; fi\"",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "180",
+        "winHide": false,
+        "oldrc": false,
+        "name": "INICIAR METRICAS",
+        "x": 820,
+        "y": 280,
+        "wires": [
+            [
+                "fmt_out",
+                "fmt_status"
+            ],
+            [],
+            [
+                "clear_busy"
+            ]
+        ]
+    },
+    {
+        "id": "btn_met_end",
+        "type": "ui_button",
+        "z": "demo_tab",
+        "name": "TERMINAR METRICAS",
+        "group": "g_demo_metrics",
+        "order": 2,
+        "width": "6",
+        "height": "2",
+        "passthru": false,
+        "label": "TERMINAR METRICAS",
+        "tooltip": "",
+        "color": "#fff",
+        "bgcolor": "#dc2626",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "TERMINAR METRICAS",
+        "topicType": "str",
+        "x": 230,
+        "y": 400,
+        "wires": [
+            [
+                "btn_met_end_gate"
+            ]
+        ]
+    },
+    {
+        "id": "btn_met_end_gate",
+        "type": "function",
+        "z": "demo_tab",
+        "name": "gate btn_met_end",
+        "func": "if (flow.get('ops_busy')) {\n    return [null, { payload: '\\u23f3 Procesando la accion anterior, espera unos segundos...' }];\n}\nflow.set('ops_busy', true);\nreturn [msg, null];\n",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 400,
+        "wires": [
+            [
+                "btn_met_end_exec"
+            ],
+            [
+                "busy_notice"
+            ]
+        ]
+    },
+    {
+        "id": "btn_met_end_exec",
+        "type": "exec",
+        "z": "demo_tab",
+        "command": "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o ConnectTimeout=8 -i /usr/src/node-red/.ssh/id_ed25519 raspberry1@192.168.1.10 \"cd /home/raspberry1/tesis_metrics_repo && ./session.sh end\"",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "180",
+        "winHide": false,
+        "oldrc": false,
+        "name": "TERMINAR METRICAS",
+        "x": 850,
+        "y": 400,
+        "wires": [
+            [
+                "fmt_out",
+                "fmt_status"
+            ],
+            [],
+            [
+                "clear_busy"
+            ]
+        ]
+    }
+]

@@ -1,0 +1,1291 @@
+[
+    {
+        "id": "esc3-tab",
+        "type": "tab",
+        "label": "Escenario 3 — DoS",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "esc3-ui-base",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "value": "#0094CE",
+                    "type": "color",
+                    "label": "Base Color",
+                    "description": ""
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "type": "color",
+                    "label": "Title Bar",
+                    "description": ""
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "type": "color",
+                    "label": "Page Background",
+                    "description": ""
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "type": "color",
+                    "label": "Sidebar Background",
+                    "description": ""
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "type": "color",
+                    "label": "Widget text",
+                    "description": ""
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "type": "color",
+                    "label": "Group Border",
+                    "description": ""
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "type": "color",
+                    "label": "Group Background",
+                    "description": ""
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "type": "color",
+                    "label": "Widget Text",
+                    "description": ""
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "type": "color",
+                    "label": "Widget Color",
+                    "description": ""
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "type": "color",
+                    "label": "Widget Border",
+                    "description": ""
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "DoS en Vivo — Escenario 3",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "esc3-tab-qr",
+        "type": "ui_tab",
+        "name": "Código QR",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "esc3-tab-live",
+        "type": "ui_tab",
+        "name": "Ataque en Vivo",
+        "icon": "flash_on",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "esc3-grp-qr",
+        "type": "ui_group",
+        "name": "Acceso Móvil",
+        "tab": "esc3-tab-qr",
+        "order": 1,
+        "disp": false,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "esc3-grp-viz",
+        "type": "ui_group",
+        "name": "Visualización",
+        "tab": "esc3-tab-live",
+        "order": 1,
+        "disp": false,
+        "width": "18",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ea5605702f580d76",
+        "type": "ui_spacer",
+        "z": "esc3-tab",
+        "name": "spacer",
+        "group": "",
+        "order": 6,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "esc3-tab-survey",
+        "type": "ui_tab",
+        "name": "Encuesta",
+        "icon": "fa-clipboard-list",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "esc3-grp-survey",
+        "type": "ui_group",
+        "name": "Encuesta",
+        "tab": "esc3-tab-survey",
+        "order": 1,
+        "disp": false,
+        "width": 12,
+        "collapse": false
+    },
+    {
+        "id": "esc3-global-shell",
+        "type": "ui_template",
+        "z": "esc3-tab",
+        "group": "",
+        "name": "Diseño visual del panel",
+        "order": 0,
+        "width": "0",
+        "height": "0",
+        "format": "<script>\n(function() {\n  if (document.getElementById('demo-global-shell')) return;\n  var shell = document.createElement('div');\n  shell.id = 'demo-global-shell';\n  shell.innerHTML = `\n    <style>\n      :root {\n        --h: 70px; --s: 260px; --f: 40px;\n        --tech-blue: #0ea5e9; --tech-blue-dark: #0284c7;\n        --text-main: #1e293b; --text-muted: #64748b;\n      }\n      body, html { background-color: #f8fafc !important; margin: 0; }\n      md-toolbar.nr-dashboard-toolbar { display: none !important; }\n      md-sidenav, md-backdrop { display: none !important; }\n      md-content.md-default-theme, md-content { background-color: transparent !important; }\n      .nr-dashboard-view {\n        padding-top: 90px !important;\n        margin-left: 270px !important;\n        width: calc(100vw - 280px) !important;\n        padding-right: 20px !important;\n        padding-bottom: 60px !important;\n        box-sizing: border-box !important;\n      }\n      .demo-shell-wrap {\n        position: fixed; inset: 0; z-index: 5;\n        font-family: 'Segoe UI', sans-serif; pointer-events: none;\n      }\n      .demo-shell-wrap * { pointer-events: auto; }\n      .demo-head {\n        height: var(--h);\n        background: linear-gradient(90deg, #ffffff 0%, #f1f5f9 100%);\n        border-bottom: 2px solid var(--tech-blue);\n        box-shadow: 0 4px 15px rgba(0,0,0,0.05);\n        display: flex; align-items: center; justify-content: space-between;\n        padding: 0 24px; color: var(--text-main);\n      }\n      .brand-title { font-weight: 800; font-size: 1.1rem; letter-spacing: 2px; }\n      .brand-title span { color: var(--tech-blue); }\n      .status-badge {\n        display: flex; align-items: center; gap: 8px;\n        font-family: monospace; font-size: 0.9rem;\n        background: rgba(14,165,233,0.1); padding: 5px 12px;\n        border-radius: 4px; color: var(--tech-blue-dark); font-weight: 600;\n      }\n      .dot {\n        width: 8px; height: 8px; background-color: var(--tech-blue);\n        border-radius: 50%; animation: pulse 2s infinite;\n      }\n      .demo-side {\n        position: fixed; top: calc(var(--h) + 15px); left: 15px;\n        bottom: calc(var(--f) + 15px); width: calc(var(--s) - 30px);\n        background: transparent !important; border: none !important;\n        box-shadow: none !important;\n        border-right: 2px dashed rgba(0,0,0,0.06) !important;\n        padding: 20px 12px; display: flex; flex-direction: column; gap: 10px;\n      }\n      .demo-side a { text-decoration: none; }\n      .demo-item {\n        color: var(--text-muted); padding: 12px 15px;\n        font-size: 0.95rem; font-weight: 600; cursor: pointer;\n        transition: all 0.3s ease; position: relative;\n        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);\n      }\n      .demo-item::before {\n        content: ''; position: absolute; left: 0; top: 0; bottom: 0;\n        width: 4px; background: #cbd5e1; transition: all 0.3s ease;\n      }\n      .demo-item:hover, .demo-item.active {\n        background: rgba(14,165,233,0.08); color: var(--tech-blue-dark);\n        transform: translateX(5px);\n      }\n      .demo-item:hover::before, .demo-item.active::before { background: var(--tech-blue); }\n      .demo-item span { font-family: monospace; opacity: 0.6; margin-right: 8px; color: var(--tech-blue); }\n      .demo-foot {\n        position: fixed; left: 0; right: 0; bottom: 0; height: var(--f);\n        background: #ffffff; border-top: 1px solid rgba(0,0,0,0.08);\n        display: flex; align-items: center; justify-content: center;\n        font-family: monospace; font-size: 13px; font-weight: 600; color: var(--text-muted);\n      }\n      .terminal-cursor {\n        display: inline-block; width: 8px; height: 15px;\n        background-color: var(--tech-blue); margin-left: 5px;\n        animation: blink 1s step-end infinite;\n      }\n      @keyframes pulse {\n        0%, 100% { transform: scale(0.95); opacity: 0.8; }\n        50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 12px rgba(14,165,233,0.6); }\n      }\n      @keyframes blink {\n        0%, 100% { opacity: 1; } 50% { opacity: 0; }\n      }\n      .nr-dashboard-cardpanel {\n        background: #ffffff !important; border-radius: 12px !important;\n        box-shadow: 0 5px 25px rgba(0,0,0,0.05) !important;\n        border: 1px solid rgba(0,0,0,0.05) !important; padding: 20px !important;\n      }\n      .nr-dashboard-cardpanel md-card {\n        background: transparent !important; box-shadow: none !important;\n        border: none !important; margin: 0 !important; padding: 0 !important;\n      }\n      .nr-dashboard-cardpanel .md-button {\n        height: auto !important; min-height: 45px !important;\n        white-space: normal !important; line-height: 1.2 !important;\n        padding: 10px 15px !important; border-radius: 6px !important;\n        margin-bottom: 8px !important; width: 100% !important;\n        font-weight: 600 !important; text-transform: none !important;\n      }\n    </style>\n\n    <div class=\"demo-shell-wrap\">\n      <div class=\"demo-head\">\n        <div class=\"brand-title\">DEMO-KIT <span>//</span> CIBERSEGURIDAD <span>_</span> ESCENARIO 3</div>\n        <div class=\"status-badge\"><div class=\"dot\"></div> VISTA DEMO</div>\n      </div>\n      <div class=\"demo-side\">\n        <a href=\"#!/0\"><div class=\"demo-item active\" id=\"btn-0\"><span>01_</span> Código QR</div></a>\n        <a href=\"#!/1\"><div class=\"demo-item\" id=\"btn-1\"><span>02_</span> Ataque en Vivo</div></a>\n        <a href=\"#!/2\"><div class=\"demo-item\" id=\"btn-2\"><span>03_</span> Encuesta</div></a>\n      </div>\n      <div class=\"demo-foot\">\n        &gt; ROOT@ESC3-DoS :~ COLAPSO_ <span class=\"terminal-cursor\"></span>\n      </div>\n    </div>\n  `;\n  document.body.appendChild(shell);\n\n  function updateActiveMenu() {\n    var hash = window.location.hash;\n    var buttons = document.querySelectorAll('.demo-item');\n    buttons.forEach(function(btn) { btn.classList.remove('active'); });\n    if (hash.includes('/1'))      document.getElementById('btn-1').classList.add('active');\n    else if (hash.includes('/2')) document.getElementById('btn-2').classList.add('active');\n    else                          document.getElementById('btn-0').classList.add('active');\n  }\n  window.addEventListener('hashchange', updateActiveMenu);\n  updateActiveMenu();\n})();\n</script>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": false,
+        "templateScope": "global",
+        "className": "",
+        "x": 1130,
+        "y": 1360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "esc3-inject-ip",
+        "type": "inject",
+        "z": "esc3-tab",
+        "name": "Al iniciar: preparar códigos QR",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 1.5,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 100,
+        "wires": [
+            [
+                "esc3-exec-ip"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-exec-ip",
+        "type": "exec",
+        "z": "esc3-tab",
+        "command": "hostname -I | awk '{print $1}'",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "0",
+        "winHide": true,
+        "oldrc": false,
+        "name": "Obtener IP del servidor (hostname -I)",
+        "x": 510,
+        "y": 100,
+        "wires": [
+            [
+                "esc3-fn-qr-url"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "esc3-fn-qr-url",
+        "type": "function",
+        "z": "esc3-tab",
+        "name": "Crear enlace y QR de acceso",
+        "func": "var ip = (msg.payload || '').trim();\nvar port = env.get('DASH_PORT') || '1883';\nif (!ip) ip = env.get('DASH_IP') || 'localhost';\nvar url = 'http://' + ip + ':' + port;\nflow.set('dashUrl', url);\nmsg.payload = url;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 100,
+        "wires": [
+            [
+                "esc3-tmpl-qr",
+                "esc3-fn-qr-survey-url"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-tmpl-qr",
+        "type": "ui_template",
+        "z": "esc3-tab",
+        "group": "esc3-grp-qr",
+        "name": "QR de acceso",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<script src=\"/qrcode.qrcodejs.min.js\"></script>\n\n<div class=\"qr-dos-container\">\n  <div class=\"qr-header\">\n    <div class=\"qr-icon-wrap\">\n      <svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" stroke=\"white\" stroke-width=\"2\" fill=\"none\">\n        <rect x=\"5\" y=\"2\" width=\"14\" height=\"20\" rx=\"2\" ry=\"2\"></rect>\n        <line x1=\"12\" y1=\"18\" x2=\"12\" y2=\"18\"></line>\n      </svg>\n    </div>\n    <h2>ÚNETE AL ATAQUE</h2>\n    <p>Escanea con tu celular para participar en la demostración DoS</p>\n  </div>\n\n  <div class=\"qr-frame\">\n    <div id=\"dos-qr-target\"></div>\n    <div ng-if=\"!msg.payload\" class=\"qr-placeholder\">\n      GENERANDO ACCESO...\n    </div>\n  </div>\n\n  <div class=\"qr-footer\">\n    <span class=\"url-text\">URL: {{msg.payload}}</span><br>\n    <span class=\"step-text\">PASO 01 // PÁGINA DE ATAQUE DoS</span>\n  </div>\n</div>\n\n<style>\n  :host { background: transparent !important; display: block; width: 100%; }\n\n  .qr-dos-container {\n    display: flex; flex-direction: column; align-items: center;\n    justify-content: center; background: transparent;\n    border: none; box-shadow: none; padding: 40px 0;\n    min-height: 65vh; font-family: 'Segoe UI', sans-serif;\n  }\n\n  .qr-header { text-align: center; margin-bottom: 40px; }\n\n  .qr-icon-wrap {\n    background: #cc2222;\n    width: 65px; height: 65px; border-radius: 50%;\n    display: flex; align-items: center; justify-content: center;\n    margin: 0 auto 20px;\n    box-shadow: 0 8px 20px rgba(204, 34, 34, 0.3);\n  }\n\n  .qr-header h2 {\n    color: #7f1d1d; font-weight: 900;\n    font-size: 2.2rem; letter-spacing: 2px; margin: 0;\n  }\n\n  .qr-header p { color: #64748b; font-size: 1.1rem; margin-top: 10px; }\n\n  .qr-frame {\n    background: #ffffff; padding: 30px; border-radius: 15px;\n    border: 1px solid rgba(0,0,0,0.03);\n    box-shadow: 0 10px 30px rgba(0,0,0,0.03);\n  }\n\n  #dos-qr-target img {\n    width: 450px !important; height: 450px !important;\n    border: 10px solid white; border-radius: 5px;\n  }\n\n  .qr-placeholder {\n    width: 450px; height: 450px;\n    display: flex; align-items: center; justify-content: center;\n    color: #cbd5e1; font-weight: bold;\n    letter-spacing: 2px; font-size: 1.5rem;\n    animation: pulse-qr 1.5s infinite;\n  }\n\n  .qr-footer { margin-top: 40px; text-align: center; font-family: monospace; line-height: 1.8; }\n  .url-text  { color: #0ea5e9; font-weight: bold; font-size: 1.0rem; }\n  .step-text { color: #94a3b8; font-size: 0.95rem; font-weight: bold; }\n\n  @keyframes pulse-qr {\n    0%, 100% { opacity: 0.5; } 50% { opacity: 1; }\n  }\n</style>\n\n<script>\n  (function(scope) {\n    scope.$watch('msg', function(msg) {\n      if (msg && msg.payload) {\n        var container = document.getElementById(\"dos-qr-target\");\n        if (!container) return;\n        container.innerHTML = \"\";\n        new QRCode(container, {\n          text: msg.payload,\n          width: 450, height: 450,\n          colorDark: \"#7f1d1d\",\n          colorLight: \"#ffffff\",\n          correctLevel: QRCode.CorrectLevel.H\n        });\n      }\n    });\n  })(scope);\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1140,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "esc3-http-press-in",
+        "type": "http in",
+        "z": "esc3-tab",
+        "name": "POST /api/attack/press (recibir pulsación)",
+        "url": "/api/attack/press",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 280,
+        "wires": [
+            [
+                "esc3-fn-press"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-fn-press",
+        "type": "function",
+        "z": "esc3-tab",
+        "name": "Contar pulsaciones del público",
+        "func": "var alias = 'Anon';\nvar ip = '';\ntry {\n  if (msg.payload && typeof msg.payload === 'object' && msg.payload.alias) {\n    alias = String(msg.payload.alias).replace(/[^A-Za-z0-9_]/g,'').slice(0,12) || 'Anon';\n  }\n  if (msg.req) {\n    ip = (msg.req.headers && msg.req.headers['x-forwarded-for']) || msg.req.ip || '';\n    ip = String(ip).split(',')[0].trim();\n  }\n} catch(e) {}\n\nvar key = (ip || 'noip') + '|' + alias;\nvar devices = flow.get('devices') || {};\nvar d = devices[key] || { alias: alias, ip: ip, count: 0, firstSeen: Date.now() };\nd.count += 1;\nd.lastSeen = Date.now();\ndevices[key] = d;\nflow.set('devices', devices);\n\nvar count = (flow.get('pressCount') || 0) + 1;\nflow.set('pressCount', count);\nflow.set('lastPressAt', Date.now());\n\n// msg original mantiene req/res para http response\nmsg.payload = { count: count, alias: alias, type: 'press' };\nvar msgViz  = { payload: { type: 'press', count: count, alias: alias } };\nvar msgUi   = { payload: count.toString(), topic: 'Participantes' };\nreturn [msg, msgViz, msgUi];\n",
+        "outputs": 3,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 300,
+        "wires": [
+            [
+                "esc3-http-press-out"
+            ],
+            [
+                "esc3-lo-press"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "esc3-http-press-out",
+        "type": "http response",
+        "z": "esc3-tab",
+        "name": "Responder OK (200)",
+        "statusCode": "200",
+        "headers": {},
+        "x": 840,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "esc3-http-status-in",
+        "type": "http in",
+        "z": "esc3-tab",
+        "name": "GET /api/attack/status (estado para el móvil)",
+        "url": "/api/attack/status",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 1420,
+        "wires": [
+            [
+                "esc3-fn-status-resp"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-fn-status-resp",
+        "type": "function",
+        "z": "esc3-tab",
+        "name": "Armar estado del ataque",
+        "func": "msg.payload = {\n  count: flow.get('pressCount') || 0,\n  health: flow.get('targetStatus') || 'ok',\n  rt: flow.get('targetRt') || 0,\n  protection: flow.get('protection') || false\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 1420,
+        "wires": [
+            [
+                "esc3-http-status-out"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-http-status-out",
+        "type": "http response",
+        "z": "esc3-tab",
+        "name": "Responder OK (200)",
+        "statusCode": "200",
+        "headers": {},
+        "x": 800,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "esc3-http-api-start-in",
+        "type": "http in",
+        "z": "esc3-tab",
+        "name": "POST /api/attack/start (iniciar ataque)",
+        "url": "/api/attack/start",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 480,
+        "wires": [
+            [
+                "esc3-fn-api-start"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-fn-api-start",
+        "type": "function",
+        "z": "esc3-tab",
+        "name": "Marcar ataque iniciado",
+        "func": "flow.set('attacking', true);\nflow.set('protection', false);\nflow.set('attackStart', Date.now());\nflow.set('peakRps', 0);\nflow.set('currentRps', 0);\nmsg.payload = {};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 480,
+        "wires": [
+            [
+                "esc3-http-rq-start"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-http-rq-start",
+        "type": "http request",
+        "z": "esc3-tab",
+        "name": "Ordenar inicio al atacante (/start)",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://esc3-attacker:5001/start",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 790,
+        "y": 480,
+        "wires": [
+            [
+                "esc3-http-api-start-out"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-http-api-start-out",
+        "type": "http response",
+        "z": "esc3-tab",
+        "name": "Responder OK (200)",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1080,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "esc3-http-api-stop-in",
+        "type": "http in",
+        "z": "esc3-tab",
+        "name": "POST /api/attack/stop (detener ataque)",
+        "url": "/api/attack/stop",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 550,
+        "wires": [
+            [
+                "esc3-fn-api-stop"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-fn-api-stop",
+        "type": "function",
+        "z": "esc3-tab",
+        "name": "Marcar ataque detenido",
+        "func": "// Detener: apaga el flood y deja TODOS los contadores en cero.\nflow.set('attacking', false);\nflow.set('protection', false);\nflow.set('pressCount', 0);\nflow.set('devices', {});\nflow.set('peakRps', 0);\nflow.set('currentRps', 0);\nflow.set('phase', 'ok');\nflow.set('phaseEnteredAt', Date.now());\nflow.set('recoverTicks', 0);\nflow.set('lastProbeRt', null);\nflow.set('targetStatus', 'ok');\nflow.set('targetRt', 0);\nvar stopMsg  = { payload: {} };\nvar resetViz = { payload: { type: 'reset' } };\nreturn [stopMsg, resetViz];",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 560,
+        "wires": [
+            [
+                "esc3-http-rq-stop"
+            ],
+            [
+                "esc3-lo-prestop"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-http-rq-stop",
+        "type": "http request",
+        "z": "esc3-tab",
+        "name": "Ordenar paro al atacante (/stop)",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://esc3-attacker:5001/stop",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 830,
+        "y": 570,
+        "wires": [
+            [
+                "esc3-http-api-stop-out"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-http-api-stop-out",
+        "type": "http response",
+        "z": "esc3-tab",
+        "name": "Responder OK (200)",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1100,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "esc3-http-api-protect-in",
+        "type": "http in",
+        "z": "esc3-tab",
+        "name": "POST /api/protect (activar protección)",
+        "url": "/api/protect",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 740,
+        "wires": [
+            [
+                "esc3-fn-api-protect"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-fn-api-protect",
+        "type": "function",
+        "z": "esc3-tab",
+        "name": "Activar protección (redirigir al proxy)",
+        "func": "flow.set('protection', true);\nmsg.payload = { url: 'http://esc3-proxy:8080/reservar' };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 740,
+        "wires": [
+            [
+                "esc3-http-rq-protect"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-http-rq-protect",
+        "type": "http request",
+        "z": "esc3-tab",
+        "name": "Redirigir atacante al proxy (/target)",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://esc3-attacker:5001/target",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 880,
+        "y": 740,
+        "wires": [
+            [
+                "esc3-http-api-protect-out"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-http-api-protect-out",
+        "type": "http response",
+        "z": "esc3-tab",
+        "name": "Responder OK (200)",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1160,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "esc3-inject-health",
+        "type": "inject",
+        "z": "esc3-tab",
+        "name": "Cada 0,5 s: sondear salud",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "0.5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 2,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 880,
+        "wires": [
+            [
+                "esc3-fn-pre-health"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-fn-pre-health",
+        "type": "function",
+        "z": "esc3-tab",
+        "name": "Anotar hora de la consulta",
+        "func": "// __HTIMEOUT__\nmsg.requestTimeout = 2500;\nmsg._t0 = Date.now();\nmsg.payload = {};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 880,
+        "wires": [
+            [
+                "esc3-http-rq-health"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-http-rq-health",
+        "type": "http request",
+        "z": "esc3-tab",
+        "name": "Consultar salud del objetivo (/health)",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://esc3-target:5000/health",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 790,
+        "y": 840,
+        "wires": [
+            [
+                "esc3-fn-health"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-fn-health",
+        "type": "function",
+        "z": "esc3-tab",
+        "name": "Medir tiempo de respuesta",
+        "func": "// __PHASEMODE__ : la fase la decide esc3-fn-phase; aqui solo medimos rt\nvar rt = Date.now() - (msg._t0 || Date.now());\nflow.set('lastProbeRt', rt);\nreturn [null, { payload: rt > 9999 ? 9999 : rt, topic: 'rt' }, null];\n",
+        "outputs": 3,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1120,
+        "y": 840,
+        "wires": [
+            [],
+            [],
+            [
+                "esc3-lo-salud"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-inject-metrics",
+        "type": "inject",
+        "z": "esc3-tab",
+        "name": "Cada 0,5 s: pedir métricas",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "0.5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 3,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 1360,
+        "wires": [
+            [
+                "esc3-http-rq-metrics"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-http-rq-metrics",
+        "type": "http request",
+        "z": "esc3-tab",
+        "name": "Consultar métricas del atacante (/metrics)",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://esc3-attacker:5001/metrics",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 500,
+        "y": 1360,
+        "wires": [
+            [
+                "esc3-fn-metrics"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-fn-metrics",
+        "type": "function",
+        "z": "esc3-tab",
+        "name": "Leer métricas del ataque",
+        "func": "if (!msg.payload || msg.statusCode !== 200) return null;\nvar d = msg.payload;\nvar running = !!d.running;\nvar rps = running ? (d.rps || 0) : 0;\nflow.set('currentRps', rps);\nvar peak = flow.get('peakRps') || 0;\nif (rps > peak) flow.set('peakRps', rps);\nvar protection = flow.get('protection') || false;\nvar msg1 = { payload: Math.round(rps), topic: 'gauge' };\nvar msg2 = { payload: Math.round(rps), topic: 'rps' };\nvar msg3 = { payload: { type: 'metrics', running: running, rps: rps, avgRt: d.avg_response_ms, protection: protection } };\nreturn [msg1, msg2, msg3];",
+        "outputs": 3,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 1360,
+        "wires": [
+            [],
+            [],
+            [
+                "esc3-tmpl-viz"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-tmpl-viz",
+        "type": "ui_template",
+        "z": "esc3-tab",
+        "group": "esc3-grp-viz",
+        "name": "Visualización del ataque (panel)",
+        "order": 2,
+        "width": "18",
+        "height": "14",
+        "format": "<style>\n.dv-root {\n  --dv-blue: #0ea5e9;\n  --dv-blue-dark: #0284c7;\n  --dv-red: #cc2222;\n  --dv-red-dark: #7f1d1d;\n  --dv-green: #22c55e;\n  --dv-green-dark: #16a34a;\n  --dv-yellow: #eab308;\n  --dv-text: #1e293b;\n  --dv-muted: #64748b;\n  --dv-border: #e2e8f0;\n  --dv-soft: #f8fafc;\n  font-family: 'Segoe UI', Roboto, sans-serif;\n  color: var(--dv-text);\n}\n\n/* === Header — mismo estilo que QR page === */\n.dv-header {\n  background: #ffffff;\n  border: 1px solid rgba(0,0,0,0.03);\n  border-radius: 15px;\n  padding: 24px 24px 20px;\n  box-shadow: 0 10px 30px rgba(0,0,0,0.03);\n  margin-bottom: 12px;\n}\n.dv-hdr-top {\n  display: flex;\n  align-items: center;\n  gap: 20px;\n  margin-bottom: 18px;\n}\n.dv-hdr-icon-wrap {\n  background: #cc2222;\n  width: 65px; height: 65px; min-width: 65px;\n  border-radius: 50%;\n  display: flex; align-items: center; justify-content: center;\n  font-size: 30px;\n  box-shadow: 0 8px 20px rgba(204, 34, 34, 0.3);\n}\n.dv-hdr-info { flex: 1; }\n.dv-hdr-title {\n  font-size: 2.0rem; font-weight: 900; color: #7f1d1d;\n  letter-spacing: 2px; margin: 0;\n}\n.dv-hdr-desc { color: #64748b; font-size: 1.0rem; margin-top: 6px; }\n.dv-hdr-bottom {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 16px;\n  flex-wrap: wrap;\n}\n.dv-hdr-pills { display: flex; gap: 10px; flex-wrap: wrap; }\n.dv-hdr-pill {\n  display: flex; align-items: center; gap: 8px;\n  background: var(--dv-soft);\n  border: 1px solid var(--dv-border);\n  border-radius: 20px; padding: 6px 16px;\n  font-size: 13px; font-weight: 700; color: var(--dv-text); white-space: nowrap;\n}\n.dv-hdr-pill span { font-size: 11px; color: #94a3b8; font-weight: 400; }\n.dv-hdr-btns { display: flex; gap: 8px; flex-wrap: wrap; }\n.btn-launch {\n  background: #cc2222;\n  color: #fff; border: none; border-radius: 10px;\n  padding: 11px 22px; font-size: 14px; font-weight: 700;\n  cursor: pointer; letter-spacing: 0.5px;\n  box-shadow: 0 8px 20px rgba(204, 34, 34, 0.3);\n  transition: background 0.2s, transform 0.1s;\n}\n.btn-launch:hover { background: #991111; }\n.btn-launch:active { transform: scale(0.98); }\n.btn-stop {\n  background: #374151; color: #fff; border: none; border-radius: 10px;\n  padding: 11px 22px; font-size: 14px; font-weight: 700;\n  cursor: pointer; letter-spacing: 0.5px;\n  transition: background 0.2s, transform 0.1s;\n}\n.btn-stop:hover { background: #1f2937; }\n.btn-stop:active { transform: scale(0.98); }\n.btn-protect {\n  background: #0ea5e9;\n  color: #fff; border: none; border-radius: 10px;\n  padding: 11px 22px; font-size: 14px; font-weight: 700;\n  cursor: pointer; letter-spacing: 0.5px;\n  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);\n  transition: background 0.2s, transform 0.1s;\n}\n.btn-protect:hover { background: #0284c7; }\n.btn-protect:active { transform: scale(0.98); }\n\n/* === Banner === */\n.dv-banner {\n  height: 72px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 26px;\n  font-weight: 800;\n  letter-spacing: 1.2px;\n  text-transform: uppercase;\n  text-shadow: 0 1px 2px rgba(0,0,0,0.15);\n  border-radius: 15px;\n  margin-bottom: 14px;\n  transition: background 0.4s ease, color 0.4s ease;\n  border: 1px solid transparent;\n}\n.dv-banner.b-ok        { background: linear-gradient(90deg, #22c55e, #16a34a); color: #fff; }\n.dv-banner.b-down      { background: linear-gradient(90deg, #cc2222, #7f1d1d); color: #fff; animation: bn-pulse 0.9s ease-in-out infinite; }\n.dv-banner.b-slow      { background: linear-gradient(90deg, #eab308, #ca8a04); color: #111; animation: bn-pulse 1.4s ease-in-out infinite; }\n      .dv-banner.b-protected { background: linear-gradient(90deg, #0ea5e9, #0284c7); color: #fff; }\n.dv-banner.b-recovered { background: linear-gradient(90deg, #4ade80, #16a34a); color: #fff; animation: bn-flash 0.7s ease-in-out 4; }\n@keyframes bn-pulse { 0%,100%{filter:brightness(1);} 50%{filter:brightness(1.35);} }\n@keyframes bn-flash { 0%,100%{filter:brightness(1);} 50%{filter:brightness(1.5);} }\n\n/* === Layout === */\n.dv-body {\n  display: grid;\n  grid-template-columns: 260px 1fr;\n  gap: 14px;\n}\n\n/* === Atacantes === */\n.dv-attackers {\n  background: #fff;\n  border: 1px solid rgba(0,0,0,0.03);\n  border-radius: 15px;\n  padding: 14px;\n  max-height: 340px;\n  overflow-y: auto;\n  box-shadow: 0 10px 30px rgba(0,0,0,0.03);\n}\n.dv-attackers h3 {\n  font-size: 11px;\n  letter-spacing: 1.5px;\n  color: var(--dv-muted);\n  text-transform: uppercase;\n  margin-bottom: 12px;\n  padding-bottom: 8px;\n  border-bottom: 1px solid var(--dv-border);\n  display: flex; align-items: center; gap: 6px;\n  font-weight: 700;\n}\n.dv-attackers h3 .dot {\n  width: 8px; height: 8px; border-radius: 50%;\n  background: var(--dv-blue);\n  animation: dot-pulse 1.6s infinite;\n}\n@keyframes dot-pulse {\n  0%,100% { opacity: 1; transform: scale(1); }\n  50%     { opacity: 0.5; transform: scale(1.3); }\n}\n.dv-attackers .empty {\n  font-size: 12px;\n  color: var(--dv-muted);\n  font-style: italic;\n  padding: 22px 4px;\n  text-align: center;\n  line-height: 1.5;\n}\n.atk-card {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  padding: 9px 10px;\n  margin-bottom: 6px;\n  background: var(--dv-soft);\n  border-radius: 10px;\n  border-left: 3px solid var(--dv-border);\n  transition: border-color 0.3s, background 0.3s, transform 0.2s;\n}\n.atk-card.active {\n  border-left-color: var(--dv-blue);\n  background: rgba(14,165,233,0.06);\n}\n.atk-card.firing {\n  border-left-color: var(--dv-red);\n  background: rgba(204,34,34,0.08);\n  transform: translateX(2px);\n}\n.atk-icon { font-size: 22px; }\n.atk-name {\n  flex: 1;\n  font-weight: 700;\n  font-size: 13px;\n  color: var(--dv-text);\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.atk-count {\n  font-size: 11px;\n  color: var(--dv-muted);\n  font-family: 'Consolas', monospace;\n  background: #fff;\n  border: 1px solid var(--dv-border);\n  padding: 2px 7px;\n  border-radius: 10px;\n  font-weight: 700;\n}\n.atk-card.firing .atk-count { color: var(--dv-red); border-color: var(--dv-red); }\n\n/* === Arena === */\n.dv-arena {\n  display: flex;\n  flex-direction: column;\n  gap: 12px;\n}\n.dv-stats {\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  gap: 10px;\n}\n.dv-stat {\n  background: #fff;\n  border: 1px solid rgba(0,0,0,0.03);\n  border-radius: 15px;\n  padding: 10px 14px;\n  box-shadow: 0 10px 30px rgba(0,0,0,0.03);\n}\n.dv-stat .lbl {\n  font-size: 10px;\n  color: var(--dv-muted);\n  letter-spacing: 1.2px;\n  text-transform: uppercase;\n  font-weight: 700;\n}\n.dv-stat .val {\n  font-size: 24px;\n  font-weight: 800;\n  font-family: 'Consolas', monospace;\n  color: var(--dv-text);\n  margin-top: 2px;\n}\n.dv-stat.ok   .val { color: var(--dv-green-dark); }\n.dv-stat.warn .val { color: #ca8a04; }\n.dv-stat.bad  .val { color: var(--dv-red-dark); }\n\n/* === Combat === */\n.dv-combat {\n  position: relative;\n  height: 230px;\n  background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);\n  border: 1px solid rgba(0,0,0,0.03);\n  border-radius: 15px;\n  overflow: hidden;\n  box-shadow: 0 10px 30px rgba(0,0,0,0.03);\n}\n.dv-combat::before {\n  content: '';\n  position: absolute; inset: 0;\n  background-image:\n    linear-gradient(rgba(14,165,233,0.05) 1px, transparent 1px),\n    linear-gradient(90deg, rgba(14,165,233,0.05) 1px, transparent 1px);\n  background-size: 28px 28px;\n  pointer-events: none;\n}\n.dv-actor {\n  position: absolute;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 6px;\n  z-index: 2;\n}\n.dv-actor .ico {\n  font-size: 42px;\n  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));\n  transition: transform 0.3s, filter 0.3s;\n  line-height: 1;\n}\n.dv-actor .lbl {\n  font-size: 10px;\n  font-weight: 800;\n  letter-spacing: 1.2px;\n  text-transform: uppercase;\n  color: var(--dv-text);\n  background: #fff;\n  border: 1px solid var(--dv-border);\n  padding: 3px 9px;\n  border-radius: 4px;\n  white-space: nowrap;\n}\n.dv-actor.phones { left: 5%; top: 50%; transform: translateY(-50%); }\n.dv-actor.phones .stack {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 4px;\n  font-size: 0;\n}\n.dv-actor.phones .ico { font-size: 30px; }\n.dv-actor.shield { left: 50%; top: 50%; transform: translate(-50%, -50%); display: none; }\n.dv-actor.shield.on { display: flex; animation: shield-pop 0.5s ease-out; }\n.dv-actor.shield .ico { font-size: 60px; color: var(--dv-blue); }\n@keyframes shield-pop {\n  0%   { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }\n  60%  { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }\n  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }\n}\n.dv-actor.target { right: 5%; top: 50%; transform: translateY(-50%); }\n.dv-actor.target .ico { transition: filter 0.4s, transform 0.4s; }\n.dv-actor.target.down .ico {\n  filter: drop-shadow(0 0 14px #cc2222) hue-rotate(-30deg) saturate(2);\n  animation: tgt-shake 0.4s ease-in-out infinite;\n}\n.dv-actor.target.slow .ico { filter: drop-shadow(0 0 10px var(--dv-yellow)); }\n.dv-actor.target.ok   .ico { filter: drop-shadow(0 0 8px var(--dv-green)); }\n@keyframes tgt-shake {\n  0%, 100% { transform: translate(0,0); }\n  25%  { transform: translate(-2px, -1px); }\n  50%  { transform: translate(2px, 1px); }\n  75%  { transform: translate(-1px, 2px); }\n}\n.bullet {\n  position: absolute;\n  width: 20px; height: 20px;\n  background: radial-gradient(circle, #ff6666 0%, #cc2222 55%, transparent 100%);\n  border-radius: 50%;\n  pointer-events: none;\n  z-index: 1;\n  box-shadow: 0 0 14px 5px rgba(204,34,34,0.55);\n}\n.bullet.blocked {\n  background: radial-gradient(circle, #7dd3fc 0%, var(--dv-blue) 55%, transparent 100%);\n  box-shadow: 0 0 14px 5px rgba(14,165,233,0.55);\n}\n</style>\n\n<div class=\"dv-root\" id=\"dv-root\">\n\n  <div class=\"dv-header\">\n    <div class=\"dv-hdr-top\">\n      <div class=\"dv-hdr-icon-wrap\">⚡</div>\n      <div class=\"dv-hdr-info\">\n        <h2 class=\"dv-hdr-title\">ATAQUE EN VIVO</h2>\n        <p class=\"dv-hdr-desc\">Monitoreo en tiempo real del ataque DoS — estado del servidor y visualización</p>\n      </div>\n    </div>\n    <div class=\"dv-hdr-bottom\">\n      <div class=\"dv-hdr-pills\">\n        <div class=\"dv-hdr-pill\"><span>Servidor</span><strong id=\"dv-hdr-status\">🟢 ONLINE</strong></div>\n        <div class=\"dv-hdr-pill\"><span>Participantes</span><strong id=\"dv-hdr-part\">0</strong></div>\n      </div>\n      <div class=\"dv-hdr-btns\">\n        <button id=\"btn-launch\"  class=\"btn-launch\">⚡ LANZAR</button>\n        <button id=\"btn-stop\"    class=\"btn-stop\">⏹ DETENER</button>\n        <button id=\"btn-protect\" class=\"btn-protect\">🛡 PROTEGER</button>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"dv-banner b-ok\" id=\"dv-banner\">🟢 SISTEMA OPERATIVO</div>\n\n  <div class=\"dv-body\">\n    <aside class=\"dv-attackers\">\n      <h3><span class=\"dot\"></span> Atacantes en vivo</h3>\n      <div id=\"dv-atk-list\">\n        <div class=\"empty\">Aún nadie ha disparado.<br>Esperando participantes…</div>\n      </div>\n    </aside>\n\n    <section class=\"dv-arena\">\n      <div class=\"dv-stats\">\n        <div class=\"dv-stat\" id=\"st-rps\"><div class=\"lbl\">RPS actual</div><div class=\"val\">0</div></div>\n        <div class=\"dv-stat\" id=\"st-rt\"><div class=\"lbl\">Tiempo respuesta</div><div class=\"val\">— ms</div></div>\n        <div class=\"dv-stat\" id=\"st-part\"><div class=\"lbl\">Participantes</div><div class=\"val\">0</div></div>\n        <div class=\"dv-stat ok\" id=\"st-status\"><div class=\"lbl\">Estado</div><div class=\"val\">OK</div></div>\n      </div>\n\n      <div class=\"dv-combat\" id=\"dv-combat\">\n        <div class=\"dv-actor phones\">\n          <div class=\"stack\">\n            <div class=\"ico\">📱</div><div class=\"ico\">📱</div>\n            <div class=\"ico\">📱</div><div class=\"ico\">📱</div>\n          </div>\n          <div class=\"lbl\">Público</div>\n        </div>\n        <div class=\"dv-actor shield\" id=\"dv-shield\">\n          <div class=\"ico\">🛡</div>\n          <div class=\"lbl\">Proxy 1 r/s</div>\n        </div>\n        <div class=\"dv-actor target ok\" id=\"dv-target\">\n          <div class=\"ico\">🖥</div>\n          <div class=\"lbl\">CONAFIPS</div>\n        </div>\n      </div>\n    </section>\n  </div>\n</div>\n\n<script>\n(function(scope){\n  var st = {\n    health: 'ok', rt: 0, rps: 0, running: false, protection: false,\n    devices: [], pressCount: 0, lastBannerState: 'ok', recoveredAt: 0, downLocked: false, protectStartedAt: 0\n  };\n\n  var dvBanner    = document.getElementById('dv-banner');\n  var dvShield    = document.getElementById('dv-shield');\n  var dvTarget    = document.getElementById('dv-target');\n  var dvList      = document.getElementById('dv-atk-list');\n  var dvCombat    = document.getElementById('dv-combat');\n  var stRps       = document.querySelector('#st-rps .val');\n  var stRt        = document.querySelector('#st-rt .val');\n  var stPart      = document.querySelector('#st-part .val');\n  var stStatus    = document.querySelector('#st-status .val');\n  var stStatBox   = document.getElementById('st-status');\n  var dvHdrStatus = document.getElementById('dv-hdr-status');\n  var dvHdrPart   = document.getElementById('dv-hdr-part');\n\n  document.getElementById('btn-launch').addEventListener('click', function() {\n    fetch('/api/attack/start', {method:'POST', headers:{'Content-Type':'application/json'}, body:'{}'}).catch(function(){});\n  });\n  document.getElementById('btn-stop').addEventListener('click', function() {\n    fetch('/api/attack/stop', {method:'POST', headers:{'Content-Type':'application/json'}, body:'{}'}).catch(function(){});\n  });\n  document.getElementById('btn-protect').addEventListener('click', function() {\n    fetch('/api/protect', {method:'POST', headers:{'Content-Type':'application/json'}, body:'{}'}).catch(function(){});\n  });\n  function setBanner(state, text) {\n    dvBanner.className = 'dv-banner b-' + state;\n    dvBanner.textContent = text;\n    st.lastBannerState = state;\n  }\n  function refreshBanner() {\n    if (!st.running) st.downLocked = false;\n    if (st.protection) {\n      st.downLocked = false;\n      if (st.protectStartedAt && (Date.now() - st.protectStartedAt) >= 60000) { setBanner('recovered', '✅ SISTEMA RESTABLECIDO'); } else { setBanner('protected', '🛡 PROTECCIÓN ACTIVA · RATE LIMIT 1 REQ/S'); }\n    } else if (st.downLocked) {\n      setBanner('down', '🔴 SISTEMA CAÍDO POR ATAQUE DOS');\n    } else if (st.health === 'down') {\n      st.downLocked = true;\n      setBanner('down', '🔴 SISTEMA CAÍDO POR ATAQUE DOS');\n    } else if (st.health === 'slow') {\n      setBanner('slow', '🟡 SISTEMA DEGRADADO · BAJO PRESIÓN');\n    } else if ((Date.now() - st.recoveredAt) < 4000) {\n      setBanner('recovered', '✅ SISTEMA RESTABLECIDO');\n    } else {\n      setBanner('ok', '🟢 SISTEMA OPERATIVO');\n    }\n  }\n  function refreshTarget() {\n    dvTarget.classList.remove('ok','slow','down');\n    dvTarget.classList.add(st.health);\n  }\n  function refreshShield() {\n    if (st.protection) dvShield.classList.add('on');\n    else dvShield.classList.remove('on');\n  }\n  function refreshStats() {\n    stRps.textContent = Math.round(st.rps);\n    stRt.textContent = (st.rt > 9999 ? '>9999' : Math.round(st.rt)) + ' ms';\n    stPart.textContent = st.pressCount;\n    stStatBox.classList.remove('ok','warn','bad');\n    if (st.health === 'down')      { stStatus.textContent = 'CAÍDO'; stStatBox.classList.add('bad'); }\n    else if (st.health === 'slow') { stStatus.textContent = 'LENTO'; stStatBox.classList.add('warn'); }\n    else                            { stStatus.textContent = 'OK';    stStatBox.classList.add('ok'); }\n    if (dvHdrStatus) {\n      dvHdrStatus.textContent = st.health === 'down' ? '🔴 CAÍDO' : st.health === 'slow' ? '🟡 LENTO' : '🟢 ONLINE';\n    }\n    if (dvHdrPart) dvHdrPart.textContent = st.pressCount;\n  }\n  function escapeHtml(s) {\n    return String(s).replace(/[&<>\"']/g, function(c) {\n      return ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'})[c];\n    });\n  }\n  function renderDevices() {\n    if (!st.devices || st.devices.length === 0) {\n      dvList.innerHTML = '<div class=\"empty\">Aún nadie ha disparado.<br>Esperando participantes…</div>';\n      return;\n    }\n    var now = Date.now();\n    var html = '';\n    for (var i = 0; i < st.devices.length; i++) {\n      var d = st.devices[i];\n      var firing = (now - d.lastSeen) < 2500;\n      var active = (now - d.lastSeen) < 30000;\n      html += '<div class=\"atk-card ' + (firing ? 'firing ' : '') + (active ? 'active' : '') + '\">'\n            + '<div class=\"atk-icon\">📱</div>'\n            + '<div class=\"atk-name\">' + escapeHtml(d.alias || 'Anon') + '</div>'\n            + '<div class=\"atk-count\">×' + d.count + '</div>'\n            + '</div>';\n    }\n    dvList.innerHTML = html;\n  }\n\n  var bulletTimer = null;\n  function bulletLoop() {\n    if (!st.running) return;\n    var rate = Math.min(30, Math.max(6, Math.round(st.rps / 4)));\n    var interval = Math.max(50, Math.round(1000 / rate));\n    spawnBullet();\n    bulletTimer = setTimeout(bulletLoop, interval);\n  }\n  function startBullets() { if (!bulletTimer) bulletLoop(); }\n  function stopBullets()  { if (bulletTimer) { clearTimeout(bulletTimer); bulletTimer = null; } }\n  function spawnBullet() {\n    var w = dvCombat.clientWidth || 600;\n    var h = dvCombat.clientHeight || 230;\n    var startX = w * 0.13;\n    var startY = h * 0.30 + Math.random() * (h * 0.40);\n    var midX   = w * 0.50;\n    var endX   = w * 0.87;\n    var endY   = h * 0.45 + Math.random() * (h * 0.10);\n    var blocked = st.protection && Math.random() < 0.92;\n    var b = document.createElement('div');\n    b.className = 'bullet' + (blocked ? ' blocked' : '');\n    b.style.left = startX + 'px';\n    b.style.top  = startY + 'px';\n    b.style.transition = 'transform 900ms linear, opacity 200ms ease 700ms';\n    dvCombat.appendChild(b);\n    requestAnimationFrame(function() {\n      var dx, dy;\n      if (blocked) { dx = midX - startX - 18; dy = (h * 0.5) - startY; }\n      else         { dx = endX - startX;       dy = endY - startY; }\n      b.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';\n      b.style.opacity = '0';\n    });\n    setTimeout(function() { if (b.parentNode) b.parentNode.removeChild(b); }, 1150);\n  }\n\n  scope.$watch('msg', function(msg) {\n    if (!msg || !msg.payload) return;\n    var p = msg.payload;\n    if (!p.type) return;\n    if (p.type === 'health') {\n      var _ph = st.health; st.health = p.status; st.rt = p.responseMs; if (_ph !== 'ok' && st.health === 'ok') st.recoveredAt = Date.now();\n      refreshTarget(); refreshStats(); refreshBanner();\n    } else if (p.type === 'metrics') {\n      var prevProt = st.protection;\n      st.rps = p.rps || 0; st.running = !!p.running; st.protection = !!p.protection;\n      if (!prevProt && st.protection) st.protectStartedAt = Date.now();\n      refreshShield(); refreshStats(); refreshBanner();\n      if (st.running) startBullets(); else stopBullets();\n    } else if (p.type === 'press') {\n      st.pressCount = p.count || st.pressCount; refreshStats();\n    } else if (p.type === 'devices') {\n      st.devices = p.list || []; st.pressCount = p.total || st.pressCount;\n      renderDevices(); refreshStats();\n    } else if (p.type === 'reset') {\n      st.devices = []; st.pressCount = 0; st.rps = 0; st.rt = 0; st.health = 'ok';\n      st.running = false; st.protection = false; st.downLocked = false;\n      st.recoveredAt = 0; st.protectStartedAt = 0;\n      renderDevices(); refreshStats(); refreshTarget(); refreshShield(); refreshBanner(); stopBullets();\n    }\n  });\n\n  setInterval(refreshBanner, 1000);\n  refreshStats(); renderDevices();\n})(scope);\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1130,
+        "y": 1300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "esc3-inject-devices",
+        "type": "inject",
+        "z": "esc3-tab",
+        "name": "Cada 1 s: refrescar participantes",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 4,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 420,
+        "y": 1500,
+        "wires": [
+            [
+                "esc3-fn-devices-emit"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-fn-devices-emit",
+        "type": "function",
+        "z": "esc3-tab",
+        "name": "Armar lista de participantes",
+        "func": "var devices = flow.get('devices') || {};\nvar now = Date.now();\nvar arr = [];\nfor (var k in devices) {\n  if (!devices.hasOwnProperty(k)) continue;\n  var d = devices[k];\n  if ((now - (d.lastSeen||0)) < 60000) {\n    arr.push({ alias: d.alias, count: d.count, lastSeen: d.lastSeen });\n  }\n}\narr.sort(function(a,b){ return (b.lastSeen||0) - (a.lastSeen||0); });\nif (arr.length > 12) arr = arr.slice(0, 12);\nmsg.payload = { type: 'devices', list: arr, total: flow.get('pressCount') || 0 };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 1500,
+        "wires": [
+            [
+                "esc3-tmpl-viz"
+            ]
+        ]
+    },
+    {
+        "id": "metrics_survey_in",
+        "type": "http in",
+        "z": "esc3-tab",
+        "name": "POST /api/survey (recibir encuesta)",
+        "url": "/api/survey",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 2200,
+        "wires": [
+            [
+                "metrics_survey_fn"
+            ]
+        ]
+    },
+    {
+        "id": "metrics_survey_fn",
+        "type": "function",
+        "z": "esc3-tab",
+        "name": "Guardar encuesta (survey.csv)",
+        "func": "// fs and path are injected via the node's \"libs\" field\nconst OUT = env.get('METRICS_OUT_DIR') || '/data/metrics_out';\nconst FILE = path.join(OUT, 'survey.csv');\n\ntry { fs.mkdirSync(OUT, { recursive: true }); } catch(e) {}\n\nconst body = msg.payload || {};\nconst scenario = body.scenario || '';\nconst ts = Number(body.ts || Date.now()/1000).toFixed(3);\nconst answers = body.answers || {};\n\nconst keys = Object.keys(answers).sort();\nconst headerNeeded = !fs.existsSync(FILE);\n\nfunction esc(s) {\n    s = String(s == null ? '' : s);\n    if (s.includes(',') || s.includes('\"') || s.includes('\\n')) {\n        return '\"' + s.replace(/\"/g,'\"\"') + '\"';\n    }\n    return s;\n}\n\nif (headerNeeded) {\n    fs.writeFileSync(FILE, 'ts,scenario,respondent_uuid,' + keys.join(',') + '\\n');\n}\nconst uuid = (Date.now().toString(36) + Math.random().toString(36).slice(2,8));\nconst row = [ts, esc(scenario), uuid, ...keys.map(k => esc(answers[k]))].join(',');\nfs.appendFileSync(FILE, row + '\\n');\n\nmsg.payload = { ok: true, uuid: uuid };\nmsg.statusCode = 200;\nmsg.headers = { 'Content-Type': 'application/json' };\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "fs",
+                "module": "fs"
+            },
+            {
+                "var": "path",
+                "module": "path"
+            }
+        ],
+        "x": 380,
+        "y": 2200,
+        "wires": [
+            [
+                "metrics_survey_out"
+            ]
+        ]
+    },
+    {
+        "id": "metrics_survey_out",
+        "type": "http response",
+        "z": "esc3-tab",
+        "name": "Responder OK (200)",
+        "statusCode": "",
+        "headers": {},
+        "x": 620,
+        "y": 2200,
+        "wires": []
+    },
+    {
+        "id": "esc3-tpl-survey",
+        "type": "ui_template",
+        "z": "esc3-tab",
+        "group": "esc3-grp-survey",
+        "name": "QR de la encuesta",
+        "order": 1,
+        "width": 12,
+        "height": 18,
+        "format": "<script src=\"/qrcode.qrcodejs.min.js\"></script>\n\n<div class=\"qr-dos-container\">\n  <div class=\"qr-header\">\n    <div class=\"qr-icon-wrap\">\n      <svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" stroke=\"white\" stroke-width=\"2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n        <path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\"></path>\n        <polyline points=\"14 2 14 8 20 8\"></polyline>\n        <line x1=\"9\" y1=\"13\" x2=\"15\" y2=\"13\"></line>\n        <line x1=\"9\" y1=\"17\" x2=\"15\" y2=\"17\"></line>\n      </svg>\n    </div>\n    <h2>ANTES DE IRTE</h2>\n    <p>Escanea con tu celular y cuéntanos cómo te fue (1 minuto)</p>\n  </div>\n\n  <div class=\"qr-frame\">\n    <div id=\"survey-qr-target\"></div>\n    <div ng-if=\"!msg.payload\" class=\"qr-placeholder\">\n      GENERANDO ACCESO...\n    </div>\n  </div>\n\n  <div class=\"qr-footer\">\n    <span class=\"url-text\">URL: {{msg.payload}}</span><br>\n    <span class=\"step-text\">PASO FINAL // ENCUESTA DE SATISFACCIÓN</span>\n  </div>\n</div>\n\n<style>\n  :host { background: transparent !important; display: block; width: 100%; }\n\n  .qr-dos-container {\n    display: flex; flex-direction: column; align-items: center;\n    justify-content: center; background: transparent;\n    border: none; box-shadow: none; padding: 40px 0;\n    min-height: 65vh; font-family: 'Segoe UI', sans-serif;\n  }\n\n  .qr-header { text-align: center; margin-bottom: 40px; }\n\n  .qr-icon-wrap {\n    background: #cc2222;\n    width: 65px; height: 65px; border-radius: 50%;\n    display: flex; align-items: center; justify-content: center;\n    margin: 0 auto 20px;\n    box-shadow: 0 8px 20px rgba(204, 34, 34, 0.3);\n  }\n\n  .qr-header h2 {\n    color: #7f1d1d; font-weight: 900;\n    font-size: 2.2rem; letter-spacing: 2px; margin: 0;\n  }\n\n  .qr-header p { color: #64748b; font-size: 1.1rem; margin-top: 10px; }\n\n  .qr-frame {\n    background: #ffffff; padding: 30px; border-radius: 15px;\n    border: 1px solid rgba(0,0,0,0.03);\n    box-shadow: 0 10px 30px rgba(0,0,0,0.03);\n  }\n\n  #survey-qr-target img {\n    width: 450px !important; height: 450px !important;\n    border: 10px solid white; border-radius: 5px;\n  }\n\n  .qr-placeholder {\n    width: 450px; height: 450px;\n    display: flex; align-items: center; justify-content: center;\n    color: #cbd5e1; font-weight: bold;\n    letter-spacing: 2px; font-size: 1.5rem;\n    animation: pulse-qr 1.5s infinite;\n  }\n\n  .qr-footer { margin-top: 40px; text-align: center; font-family: monospace; line-height: 1.8; }\n  .url-text  { color: #0ea5e9; font-weight: bold; font-size: 1.0rem; }\n  .step-text { color: #94a3b8; font-size: 0.95rem; font-weight: bold; }\n\n  @keyframes pulse-qr {\n    0%, 100% { opacity: 0.5; } 50% { opacity: 1; }\n  }\n</style>\n\n<script>\n  (function(scope) {\n    scope.$watch('msg', function(msg) {\n      if (msg && msg.payload) {\n        var container = document.getElementById(\"survey-qr-target\");\n        if (!container) return;\n        container.innerHTML = \"\";\n        new QRCode(container, {\n          text: msg.payload,\n          width: 450, height: 450,\n          colorDark: \"#7f1d1d\",\n          colorLight: \"#ffffff\",\n          correctLevel: QRCode.CorrectLevel.H\n        });\n      }\n    });\n  })(scope);\n</script>\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1210,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "esc3-fn-qr-survey-url",
+        "type": "function",
+        "z": "esc3-tab",
+        "name": "Crear enlace y QR de la encuesta",
+        "func": "var base = (msg.payload || flow.get('dashUrl') || '').trim();\nif (!base) {\n    var ip = env.get('DASH_IP') || 'localhost';\n    var port = env.get('DASH_PORT') || '1883';\n    base = 'http://' + ip + ':' + port;\n}\nmsg.payload = base + '/survey.html?scenario=esc3';\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 180,
+        "wires": [
+            [
+                "esc3-tpl-survey"
+            ]
+        ]
+    },
+    {
+        "id": "exportstate_e3_in",
+        "type": "http in",
+        "z": "esc3-tab",
+        "name": "GET /api/export_state (entregar estado)",
+        "url": "/api/export_state",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 2130,
+        "wires": [
+            [
+                "exportstate_e3_fn"
+            ]
+        ]
+    },
+    {
+        "id": "exportstate_e3_fn",
+        "type": "function",
+        "z": "esc3-tab",
+        "name": "Construir estado de exportación",
+        "func": "const snaps = global.get('esc3_snapshots') || [];\nmsg.payload = { ts: Date.now()/1000, scenario: 'esc3', tables: { esc3_stats_snapshot: snaps } };\nmsg.headers = { 'Content-Type': 'application/json' };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 2130,
+        "wires": [
+            [
+                "exportstate_e3_out"
+            ]
+        ]
+    },
+    {
+        "id": "exportstate_e3_out",
+        "type": "http response",
+        "z": "esc3-tab",
+        "name": "Responder OK (200)",
+        "statusCode": "200",
+        "headers": {},
+        "x": 620,
+        "y": 2130,
+        "wires": []
+    },
+    {
+        "id": "exportstate_e3_snap_inject",
+        "type": "inject",
+        "z": "esc3-tab",
+        "name": "Cada 5 s: tomar instantánea",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 2060,
+        "wires": [
+            [
+                "exportstate_e3_snap_fn"
+            ]
+        ]
+    },
+    {
+        "id": "exportstate_e3_snap_fn",
+        "type": "function",
+        "z": "esc3-tab",
+        "name": "Acumular instantánea del estado",
+        "func": "const snaps = global.get('esc3_snapshots') || [];\nconst dev = flow.get('devices');\n// flow.devices is a dict keyed by ip|alias — count its size.\nconst devCount = (dev && typeof dev === 'object') ? Object.keys(dev).length : (dev || 0);\nsnaps.push({\n  ts: Date.now()/1000,\n  attacking: flow.get('attacking') || false,\n  protection: flow.get('protection') || false,\n  devices: devCount,\n  pressCount: flow.get('pressCount') || 0,\n  currentRps: flow.get('currentRps') || 0,\n  peakRps: flow.get('peakRps') || 0,\n  targetStatus: flow.get('targetStatus') || null,\n  targetRt: flow.get('targetRt') || null\n});\nglobal.set('esc3_snapshots', snaps);\nreturn null;\n",
+        "outputs": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 2060,
+        "wires": []
+    },
+    {
+        "id": "esc3-http-rq-press-start",
+        "type": "http request",
+        "z": "esc3-tab",
+        "name": "Lanzar inundación real (/start)",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://esc3-attacker:5001/start",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 870,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "esc3-fn-health-down",
+        "type": "function",
+        "z": "esc3-tab",
+        "name": "Registrar servidor caído (sin respuesta)",
+        "func": "// __RECOVERY__ catch sonda: target no responde -> rt alto (no engaña la recuperacion)\nflow.set('lastProbeRt', 9999);\nreturn null;\n",
+        "outputs": 3,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 960,
+        "wires": [
+            [],
+            [],
+            [
+                "esc3-lo-saluddown"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-catch-health",
+        "type": "catch",
+        "z": "esc3-tab",
+        "name": "Atrapar error de la consulta",
+        "scope": [
+            "esc3-http-rq-health"
+        ],
+        "uncaught": false,
+        "x": 180,
+        "y": 950,
+        "wires": [
+            [
+                "esc3-fn-health-down"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-http-rq-phase-stop",
+        "type": "http request",
+        "z": "esc3-tab",
+        "name": "Cortar inundación (/stop)",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://esc3-attacker:5001/stop",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 830,
+        "y": 1160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "esc3-fn-phase",
+        "type": "function",
+        "z": "esc3-tab",
+        "name": "Motor de fases (estado del servidor)",
+        "func": "// __RECOVERY__ motor de fases: latch en CAIDO hasta Proteger; recuperacion por salud real.\n// En ataque, la fase sube por pulsaciones del publico Y por la salud real del target\n// (asi LANZAR del operador, sin publico, tambien se ve caido).\nvar now = Date.now();\nvar order = { ok: 0, slow: 1, down: 2 };\nvar name  = ['ok', 'slow', 'down'];\nvar phase = flow.get('phase') || 'ok';\nvar enteredAt = flow.get('phaseEnteredAt') || now;\nvar count = flow.get('pressCount') || 0;\nvar DWELL = 8000, RECOVER_MS = 2500, SLOW_MS = 8000, RECOVER_TICKS = 3;\nvar ATTACK_DOWN = 1500, ATTACK_SLOW = 400;   // umbrales de salud real durante el ataque\nvar prot = flow.get('protection') || false;\nvar probeRt = flow.get('lastProbeRt');\nvar haveRt = (probeRt !== null && probeRt !== undefined);\nvar mStart = null, mStop = null;\nfunction lanzarFlood() {\n    if (!flow.get('attacking')) { flow.set('attacking', true); flow.set('attackStart', now); mStart = { payload: {} }; }\n}\nif (prot) {\n    var healthy = haveRt && probeRt < RECOVER_MS;\n    var rec = healthy ? ((flow.get('recoverTicks') || 0) + 1) : 0;\n    flow.set('recoverTicks', rec);\n    if (rec >= RECOVER_TICKS) { phase = 'ok'; }\n    else if (haveRt && probeRt < SLOW_MS) { phase = 'slow'; }\n    else { phase = 'down'; }\n    enteredAt = now;\n    flow.set('pressCount', 0); count = 0;\n} else {\n    flow.set('recoverTicks', 0);\n    var attacking = flow.get('attacking');\n    // salud real solo cuenta si ya hay flood activo\n    var realPhase = 'ok';\n    if (attacking && haveRt) realPhase = probeRt >= ATTACK_DOWN ? 'down' : probeRt >= ATTACK_SLOW ? 'slow' : 'ok';\n    if (phase === 'down') {\n        lanzarFlood();                         // LATCH: caido hasta Proteger\n    } else if (order[realPhase] > order[phase]) {\n        phase = realPhase; enteredAt = now;    // el flood real ya golpea: reflejarlo de inmediato\n        if (phase === 'down') lanzarFlood();\n    } else {\n        // build-up por pulsaciones del publico (permanencia minima + decaimiento)\n        var lastPress = flow.get('lastPressAt') || 0;\n        if (count > 0 && (now - lastPress) > 4000) { count = Math.max(0, count - 2); flow.set('pressCount', count); }\n        var desired = count >= 15 ? 'down' : count >= 8 ? 'slow' : 'ok';\n        if (order[desired] > order[phase]) {\n            if (now - enteredAt >= DWELL) { phase = name[order[phase] + 1]; enteredAt = now; }\n        } else if (order[desired] < order[phase]) {\n            phase = desired; enteredAt = now;\n        }\n        if (phase === 'down') lanzarFlood();\n    }\n}\nflow.set('phase', phase); flow.set('phaseEnteredAt', enteredAt); flow.set('targetStatus', phase);\nvar label = phase === 'down' ? 'CAIDO' : phase === 'slow' ? 'DEGRADADO' : (prot ? 'PROTEGIDO' : 'ONLINE');\nvar mLabel = { payload: label };\nvar rtShow = haveRt ? probeRt : (phase === 'down' ? 9999 : phase === 'slow' ? 3000 : 20);\nif (rtShow > 9999) rtShow = 9999;\nflow.set('targetRt', rtShow);\nvar mHealth = { payload: { type: 'health', status: phase, responseMs: rtShow } };\nreturn [mLabel, mHealth, mStart, mStop];",
+        "outputs": 4,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 1120,
+        "wires": [
+            [],
+            [
+                "esc3-lo-motor"
+            ],
+            [
+                "esc3-http-rq-press-start"
+            ],
+            [
+                "esc3-http-rq-phase-stop"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-inject-phase",
+        "type": "inject",
+        "z": "esc3-tab",
+        "name": "Cada 1 s: avanzar fase",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 1130,
+        "wires": [
+            [
+                "esc3-fn-phase"
+            ]
+        ]
+    },
+    {
+        "id": "cmt-esc3-r1",
+        "type": "comment",
+        "z": "esc3-tab",
+        "name": "Acceso del público y participación",
+        "info": "Genera los códigos QR que el público escanea\ncon el teléfono: uno abre la página del ataque\ncolectivo (la que tiene el botón para \"tumbar\"\nel servidor) y otro la encuesta final. Al\narrancar se detecta la dirección del servidor\n(hostname -I) y los enlaces se arman solos, sin\nteclear ninguna IP a mano.",
+        "x": 150,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "cmt-esc3-r3",
+        "type": "comment",
+        "z": "esc3-tab",
+        "name": " Sondeo de salud del objetivo",
+        "info": "Cada 500 ms pregunta al servidor objetivo si\nsigue vivo (/health) y mide cuánto tarda en\nresponder. Si responde lento o no responde, el\n\"Catch\" lo marca como caído por tiempo de espera.\nEsta señal de salud real es la prueba de que el\nataque funcionó: el banner del panel pasa a\nONLINE/CAÍDO según lo que de verdad ocurre, no\nuna animación.",
+        "x": 160,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "cmt-esc3-r4",
+        "type": "comment",
+        "z": "esc3-tab",
+        "name": "Métricas y paneles en vivo",
+        "info": "Cada 500 ms consulta al atacante sus propias\nmétricas (peticiones por segundo, pico, etc.) y\nlas prepara para el panel. Sirve para mostrar al\npúblico la intensidad del ataque en vivo, en\nparalelo con la salud del objetivo.",
+        "x": 150,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "cmt-esc3-r5",
+        "type": "comment",
+        "z": "esc3-tab",
+        "name": "Control del ataque (iniciar / detener)",
+        "info": "Órdenes para iniciar y detener el ataque.\nLa página del público y la consola del operador\nllaman a /api/attack/start y /api/attack/stop, y\naquí se reenvían al contenedor atacante. Al\niniciar se reapunta el atacante al objetivo\ndirecto para que el ciclo sea repetible.",
+        "x": 180,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "cmt-esc3-r6",
+        "type": "comment",
+        "z": "esc3-tab",
+        "name": " Protección por proxy (rate limiting)",
+        "info": "Activa la protección (POST /api/protect):\nreapunta el tráfico del atacante a través del\nproxy nginx, que limita la tasa de peticiones\n(rate limiting). Con eso el objetivo deja de\nsaturarse y se recupera de forma medible. Es el\n\"final feliz\" de la demostración: muestra la\nmitigación.",
+        "x": 180,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "cmt-esc3-r7",
+        "type": "comment",
+        "z": "esc3-tab",
+        "name": " Motor de fases (recuperación automática)",
+        "info": "Vigila la fase de la demo y la corrige sola.\nDevuelve el banner a ONLINE/PROTEGIDO cuando la\nsalud real confirma que el objetivo se recuperó,\ny deja decaer el contador de pulsaciones si el\npúblico deja de presionar. Evita que el panel se\nquede \"pegado\" en un estado que ya no es cierto.",
+        "x": 240,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "cmt-esc3-r12",
+        "type": "comment",
+        "z": "esc3-tab",
+        "name": "7. Entrega de datos al medidor y encuesta",
+        "info": "Endpoints de métricas para la tesis. Cada 5 s se\nguarda una foto del estado (atacando, protegido,\nparticipantes, RPS, salud) y /api/export_state las\nentrega en JSON para que el arnés de medición las\nvuelque a CSV al cerrar la sesión. /api/survey\nrecibe la encuesta del público y la anexa a un CSV.\nEs el puente entre el escenario y la medición.",
+        "x": 120,
+        "y": 2010,
+        "wires": []
+    },
+    {
+        "id": "esc3-li-viz",
+        "type": "link in",
+        "z": "esc3-tab",
+        "name": "Visualización del ataque (panel)",
+        "links": [
+            "esc3-lo-press",
+            "esc3-lo-prestop",
+            "esc3-lo-salud",
+            "esc3-lo-saluddown",
+            "esc3-lo-motor"
+        ],
+        "x": 805,
+        "y": 1300,
+        "wires": [
+            [
+                "esc3-tmpl-viz"
+            ]
+        ]
+    },
+    {
+        "id": "esc3-lo-press",
+        "type": "link out",
+        "z": "esc3-tab",
+        "name": "→ Visualización del ataque",
+        "mode": "link",
+        "links": [
+            "esc3-li-viz"
+        ],
+        "x": 805,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "esc3-lo-prestop",
+        "type": "link out",
+        "z": "esc3-tab",
+        "name": "→ Visualización del ataque",
+        "mode": "link",
+        "links": [
+            "esc3-li-viz"
+        ],
+        "x": 715,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "esc3-lo-salud",
+        "type": "link out",
+        "z": "esc3-tab",
+        "name": "→ Visualización del ataque",
+        "mode": "link",
+        "links": [
+            "esc3-li-viz"
+        ],
+        "x": 1115,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "esc3-lo-saluddown",
+        "type": "link out",
+        "z": "esc3-tab",
+        "name": "→ Visualización del ataque",
+        "mode": "link",
+        "links": [
+            "esc3-li-viz"
+        ],
+        "x": 755,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "esc3-lo-motor",
+        "type": "link out",
+        "z": "esc3-tab",
+        "name": "→ Visualización del ataque",
+        "mode": "link",
+        "links": [
+            "esc3-li-viz"
+        ],
+        "x": 835,
+        "y": 1060,
+        "wires": []
+    }
+]

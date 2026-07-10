@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mu1ticines - Consentimiento</title>
+    <script src="tailwind.js"></script>
+    <link rel="stylesheet" href="styles.css?v=2">
+    <style>
+        .top-accent {
+            height: 4px;
+            background: linear-gradient(90deg, #17243D 0%, #FFC600 100%);
+        }
+        .consent-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+            border: 1px solid #E5E7EB;
+        }
+        .shield-icon {
+            background: #17243D;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 24px rgba(23,36,61,0.25);
+        }
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .check-item:last-child { border-bottom: none; }
+        .check-dot {
+            width: 20px;
+            height: 20px;
+            background: #17243D;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .privacy-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            border-left: 4px solid #FFC600;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #FFC600;
+        }
+        .btn-accept {
+            background: #17243D;
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            padding: 16px 32px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-accept:hover {
+            background: #0f1929;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(23,36,61,0.3);
+        }
+        .btn-accept:active { transform: translateY(0); }
+        .btn-accent-line {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: #FFC600;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <nav class="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+        <div class="top-accent"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex items-center justify-center sm:justify-start gap-3">
+                <div class="h-10 flex items-center">
+                    <img src="mu1ticines-logo.png" alt="Mu1ticines" class="nav-escudo" loading="eager">
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight" style="color: var(--color-primary);">MU1TICINES</h1>
+                    <p class="text-xs text-gray-500">Sorteo de entradas gratuitas</p>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-md mx-auto px-4 py-12">
+        <div class="consent-card p-8">
+
+            <div class="text-center mb-7">
+                <div class="shield-icon">
+                    <svg viewBox="0 0 24 24" width="30" height="30" stroke="#FFC600" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        <polyline points="9 12 11 14 15 10"></polyline>
+                    </svg>
+                </div>
+                <h2 class="text-xl font-extrabold tracking-tight" style="color: var(--color-primary);">
+                    CONSENTIMIENTO INFORMADO
+                </h2>
+                <p class="text-gray-400 text-sm mt-1">Sorteo de entradas · Mu1ticines</p>
+            </div>
+
+            <div class="mb-6">
+                <div class="check-item">
+                    <div class="check-dot">
+                        <svg viewBox="0 0 12 12" width="11" height="11" stroke="#FFC600" stroke-width="2.5" fill="none"><polyline points="2 6 5 9 10 3"></polyline></svg>
+                    </div>
+                    <p class="text-sm text-gray-700">Acepto participar en esta demo interactiva</p>
+                </div>
+                <div class="check-item">
+                    <div class="check-dot">
+                        <svg viewBox="0 0 12 12" width="11" height="11" stroke="#FFC600" stroke-width="2.5" fill="none"><polyline points="2 6 5 9 10 3"></polyline></svg>
+                    </div>
+                    <p class="text-sm text-gray-700">Entiendo que es un escenario simulado con fines educativos</p>
+                </div>
+            </div>
+
+            <div class="privacy-card p-3 mb-7 flex items-start gap-3">
+                <svg viewBox="0 0 20 20" width="18" height="18" fill="#FFC600" class="flex-shrink-0 mt-0.5"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                    <strong class="text-gray-700">Privacidad Garantizada</strong> — Ningún dato generado será almacenado permanentemente.
+                </p>
+            </div>
+
+            <button class="btn-accept" onclick="aceptar()">
+                ACEPTO PARTICIPAR
+                <div class="btn-accent-line"></div>
+            </button>
+
+            <p class="text-xs text-gray-400 text-center mt-4">mu1ticines.com.ec</p>
+
+        </div>
+    </main>
+
+    <script>
+        function aceptar() {
+            sessionStorage.setItem('pc_consent', '1');
+            window.location.href = '/';
+        }
+    </script>
+</body>
+</html>

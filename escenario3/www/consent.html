@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPN — Consentimiento</title>
+  <script src="/tailwind.js"></script>
+  <style>
+    :root {
+      --color-primary: #0d1117;
+      --color-accent:  #cc2222;
+      --color-blue:    #0094CE;
+    }
+    .top-accent {
+      height: 4px;
+      background: linear-gradient(90deg, #0d1117 0%, #cc2222 100%);
+    }
+    .consent-card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+      border: 1px solid #E5E7EB;
+    }
+    .shield-icon {
+      background: #0d1117;
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 8px 24px rgba(13,17,23,0.25);
+    }
+    .check-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 10px 0; border-bottom: 1px solid #f1f5f9;
+    }
+    .check-item:last-child { border-bottom: none; }
+    .check-dot {
+      width: 20px; height: 20px; min-width: 20px;
+      background: #0d1117; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .privacy-card {
+      background: #f8fafc;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #cc2222;
+    }
+    .btn-accept {
+      background: #cc2222; color: #ffffff;
+      border: none; border-radius: 10px;
+      padding: 16px 32px; font-size: 1rem;
+      font-weight: 700; letter-spacing: 1px;
+      cursor: pointer; width: 100%;
+      transition: all 0.3s ease;
+      position: relative; overflow: hidden;
+    }
+    .btn-accept:hover {
+      background: #991111;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(204,34,34,0.35);
+    }
+    .btn-accept:active { transform: translateY(0); }
+    .btn-accent-line {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px; background: #0094CE;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <nav class="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+    <div class="top-accent"></div>
+    <div class="max-w-7xl mx-auto px-4 py-3">
+      <div class="flex items-center justify-center gap-3">
+        <span style="font-size: 28px;">🔐</span>
+        <div>
+          <h1 class="text-xl font-bold tracking-tight" style="color: var(--color-primary);">EPN</h1>
+          <p class="text-xs text-gray-500">Demostración de Ciberseguridad · Escenario 3</p>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-md mx-auto px-4 py-10">
+    <div class="consent-card p-8">
+
+      <div class="text-center mb-7">
+        <div class="shield-icon">
+          <svg viewBox="0 0 24 24" width="30" height="30" stroke="#cc2222" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <polyline points="9 12 11 14 15 10"></polyline>
+          </svg>
+        </div>
+        <h2 class="text-xl font-extrabold tracking-tight" style="color: var(--color-primary);">
+          CONSENTIMIENTO INFORMADO
+        </h2>
+        <p class="text-gray-400 text-sm mt-1">Simulación de Ataque DoS · Demo en Vivo</p>
+      </div>
+
+      <div class="mb-6">
+        <div class="check-item">
+          <div class="check-dot">
+            <svg viewBox="0 0 12 12" width="11" height="11" stroke="#cc2222" stroke-width="2.5" fill="none"><polyline points="2 6 5 9 10 3"></polyline></svg>
+          </div>
+          <p class="text-sm text-gray-700">Participo voluntariamente en la demostración</p>
+        </div>
+        <div class="check-item">
+          <div class="check-dot">
+            <svg viewBox="0 0 12 12" width="11" height="11" stroke="#cc2222" stroke-width="2.5" fill="none"><polyline points="2 6 5 9 10 3"></polyline></svg>
+          </div>
+          <p class="text-sm text-gray-700">Es un ataque simulado en entorno aislado, sin impacto en redes reales</p>
+        </div>
+        <div class="check-item">
+          <div class="check-dot">
+            <svg viewBox="0 0 12 12" width="11" height="11" stroke="#cc2222" stroke-width="2.5" fill="none"><polyline points="2 6 5 9 10 3"></polyline></svg>
+          </div>
+          <p class="text-sm text-gray-700">El fin es educativo: comprender un ataque de Denegación de Servicio</p>
+        </div>
+      </div>
+
+      <div class="privacy-card p-3 mb-7 flex items-start gap-3">
+        <svg viewBox="0 0 20 20" width="18" height="18" fill="#cc2222" class="flex-shrink-0 mt-0.5">
+          <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+        </svg>
+        <p class="text-xs text-gray-500 leading-relaxed">
+          <strong class="text-gray-700">Entorno Aislado</strong> — Tráfico contenido en red Docker privada. No se capturan datos personales.
+        </p>
+      </div>
+
+      <button class="btn-accept" onclick="aceptar()">
+        ACEPTO PARTICIPAR
+        <div class="btn-accent-line"></div>
+      </button>
+
+      <p class="text-xs text-gray-400 text-center mt-4">Escuela Politécnica Nacional · Tesis EPN 2026</p>
+    </div>
+  </main>
+
+  <script>
+    // Si ya aceptó y eligió alias, ir directo al ataque. Si solo aceptó, al alias.
+    if (sessionStorage.getItem('dos_consent') === '1') {
+      if (sessionStorage.getItem('dos_alias')) window.location.replace('/');
+      else window.location.replace('/alias.html');
+    }
+
+    function aceptar() {
+      sessionStorage.setItem('dos_consent', '1');
+      window.location.href = '/alias.html';
+    }
+  </script>
+</body>
+</html>

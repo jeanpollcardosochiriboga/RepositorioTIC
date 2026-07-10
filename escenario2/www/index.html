@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mu1ticines — ¡Gana tus Entradas!</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="tailwind.js"></script>
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body id="top" class="bg-white">
+    <!-- Navegación Superior -->
+    <nav class="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+        <div class="top-accent"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+                <!-- Logo -->
+                <div class="flex items-center justify-center sm:justify-start gap-3">
+                    <div id="navEscudo" class="h-10 flex items-center">
+                        <img src="mu1ticines-logo.png" alt="Mu1ticines" class="nav-escudo" loading="eager" decoding="async">
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <h1 class="nav-title text-2xl font-bold tracking-tight" style="color: var(--color-primary);">
+                            MU1TICINES
+                        </h1>
+                        <p class="text-xs text-gray-500">Sorteo de entradas gratuitas</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Principal -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Encabezado -->
+        <section class="mb-12 text-center">
+            <h2 class="text-4xl font-bold mb-4" style="color: var(--color-primary);">
+                Cartelera de Películas
+            </h2>
+            <p class="text-lg text-gray-600">
+                Sorteo de entradas gratuitas — regístrate y participa
+            </p>
+        </section>
+
+        <!-- Grid de Películas -->
+        <section id="moviesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <!-- Las películas se generarán aquí con JavaScript -->
+        </section>
+    </main>
+
+    <!-- Modal de Reserva -->
+    <div id="reservationModal" class="modal-overlay">
+        <div class="modal-content bg-white rounded-lg shadow-2xl p-4 sm:p-8 max-w-md w-full mx-2 sm:mx-4">
+
+            <!-- ETAPA 1: Selector de Función (Horario y Asientos) -->
+            <div id="modalFunctionSelector">
+                <!-- Información de la Película -->
+                <div id="movieInfoContainer" class="mb-6 pb-4 border-b border-gray-200">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span id="moviePoster" class="text-4xl">🎬</span>
+                        <div>
+                            <h3 id="movieTitle" class="text-xl font-bold" style="color: var(--color-primary);">
+                                PELÍCULA
+                            </h3>
+                            <p id="movieDuration" class="text-sm text-gray-500">
+                                Duración
+                            </p>
+                        </div>
+                    </div>
+                    <p id="movieSynopsis" class="text-sm text-gray-600 leading-relaxed">
+                        Sinopsis aquí...
+                    </p>
+                </div>
+
+                <!-- Selector de Horarios -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium mb-3" style="color: var(--color-primary);">
+                        Horarios Disponibles
+                    </label>
+                    <div id="timeSlotsContainer" class="grid grid-cols-2 gap-2">
+                        <!-- Los horarios se generarán aquí -->
+                    </div>
+                </div>
+
+                <!-- Selector de Asientos -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium mb-3" style="color: var(--color-primary);">
+                        Asientos (Selecciona máx. 2)
+                    </label>
+                    <div class="mb-3">
+                        <div class="screen-indicator">★ PANTALLA ★</div>
+                        <p class="screen-hint">La pantalla está en la parte superior</p>
+                    </div>
+                    <div id="seatsContainer" class="grid grid-cols-4 gap-1 p-3 bg-gray-50 rounded-lg">
+                        <!-- Los asientos se generarán aquí -->
+                    </div>
+                    <small id="seatsError" class="text-red-500 mt-2 hidden"></small>
+                </div>
+
+                <!-- Resumen de Selección -->
+                <div id="selectionSummary" class="hidden mb-4 p-3 rounded-lg" style="background-color: var(--color-accent); color: var(--color-primary);">
+                    <p class="text-sm font-medium">
+                        📅 <span id="summaryTime">--:--</span> | 💺 <span id="summarySeats">Sin asientos</span>
+                    </p>
+                </div>
+
+                <!-- Botones de Acción -->
+                <button
+                    id="continueToFormBtn"
+                    onclick="proceedToEmailForm()"
+                    class="w-full btn-primary py-2 px-4 rounded-lg font-medium mb-2"
+                    disabled
+                >
+                    Continuar
+                </button>
+                <button
+                    onclick="closeModal()"
+                    class="w-full text-gray-500 hover:text-gray-700 text-sm"
+                >
+                    Cancelar
+                </button>
+            </div>
+
+            <!-- ETAPA 2: Formulario de Email -->
+            <div id="modalFormContent" class="hidden">
+                <!-- Encabezado del Modal -->
+                <h3 class="text-2xl font-bold mb-2" style="color: var(--color-primary);">
+                    ¡Sorteo de Entradas!
+                </h3>
+                <p class="text-gray-600 mb-6 text-sm">
+                    Completa tus datos para participar en el sorteo
+                </p>
+
+                <!-- Formulario -->
+                <form id="emailForm" class="space-y-4" onsubmit="return false">
+                    <div>
+                        <label for="nombreInput" class="block text-sm font-medium mb-2" style="color: var(--color-primary);">
+                            Nombre completo
+                        </label>
+                        <input
+                            id="nombreInput"
+                            type="text"
+                            placeholder="Tu nombre completo"
+                            class="w-full px-4 py-2 input-field rounded-lg"
+                            maxlength="30"
+                            required
+                        >
+                        <small id="nombreError" class="text-red-500 mt-1 hidden"></small>
+                    </div>
+
+                    <div>
+                        <label for="emailInput" class="block text-sm font-medium mb-2" style="color: var(--color-primary);">
+                            Correo Electrónico
+                        </label>
+                        <input
+                            id="emailInput"
+                            type="email"
+                            placeholder="tu@email.com"
+                            class="w-full px-4 py-2 input-field rounded-lg"
+                            maxlength="35"
+                            required
+                        >
+                        <small id="emailError" class="text-red-500 mt-1 hidden"></small>
+                    </div>
+
+                    <div>
+                        <label for="telefonoInput" class="block text-sm font-medium mb-2" style="color: var(--color-primary);">
+                            Teléfono <span class="text-gray-400 font-normal">(opcional)</span>
+                        </label>
+                        <input
+                            id="telefonoInput"
+                            type="tel"
+                            placeholder="0987654321"
+                            class="w-full px-4 py-2 input-field rounded-lg"
+                            maxlength="10"
+                        >
+                        <small id="telefonoError" class="text-red-500 mt-1 hidden"></small>
+                    </div>
+
+                    <div>
+                        <label for="sectorInput" class="block text-sm font-medium mb-2" style="color: var(--color-primary);">
+                            Sede de preferencia
+                        </label>
+                        <select
+                            id="sectorInput"
+                            class="w-full px-4 py-2 input-field rounded-lg"
+                            required
+                        >
+                            <option value="" disabled selected>Selecciona una sede</option>
+                            <option value="CCI (Iñaquito)">CCI (Iñaquito)</option>
+                            <option value="El Condado">El Condado</option>
+                            <option value="San Luis">San Luis</option>
+                            <option value="La Esquina">La Esquina</option>
+                            <option value="Quicentro Sur">Quicentro Sur</option>
+                            <option value="Naciones Unidas">Naciones Unidas</option>
+                        </select>
+                        <small id="sectorError" class="text-red-500 mt-1 hidden"></small>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="w-full btn-primary py-2 px-4 rounded-lg font-medium"
+                    >
+                        Participar en el Sorteo
+                    </button>
+                </form>
+
+                <!-- Botón Volver -->
+                <button
+                    onclick="backToFunctionSelector()"
+                    class="mt-4 w-full text-gray-500 hover:text-gray-700 text-sm"
+                >
+                    Volver
+                </button>
+            </div>
+
+            <!-- ETAPA 3: Landing de Éxito -->
+            <div id="modalSuccessContent" class="hidden text-center success-animation">
+                <div class="mb-4">
+                    <span class="text-5xl">✓</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-2" style="color: var(--color-primary);">
+                    ¡Inscripción registrada!
+                </h3>
+                <p class="text-gray-600 mb-6">
+                    Tu participación en el sorteo de entradas fue registrada con éxito. Revisa tu correo en los próximos minutos para ver tu boleto digital.
+                </p>
+                <button
+                    onclick="closeModal()"
+                    class="w-full btn-primary py-2 px-4 rounded-lg font-medium"
+                >
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="text-base font-bold mb-2" style="color: var(--color-primary);">Mu1ticines</h4>
+                    <p class="text-sm text-gray-600">Sorteo de entradas de cine gratuitas. Participa y gana.</p>
+                </div>
+                <div class="text-left md:text-right">
+                    <h5 class="text-sm font-semibold mb-2" style="color: var(--color-primary);">Accesos rápidos</h5>
+                    <div class="flex flex-wrap gap-3 md:justify-end text-sm">
+                        <a href="#top" class="footer-link">Volver arriba</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-gray-200 text-xs sm:text-sm text-gray-600 flex flex-col sm:flex-row sm:justify-between gap-2">
+                <p>© 2026 Mu1ticines. Sorteo de Entradas.</p>
+                <p>Optimizado para navegación móvil.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // ==========================================
+        // CONFIGURACIÓN Y DATOS
+        // ==========================================
+
+        let movies = [];
+
+        /**
+         * Horarios disponibles para las funciones
+         */
+        const timeSlots = [
+            { id: 1, time: '14:00' },
+            { id: 2, time: '16:00' },
+            { id: 3, time: '18:00' },
+            { id: 4, time: '20:00' }
+        ];
+
+        /**
+         * Asientos disponibles (matriz 4 filas x 4 columnas)
+         */
+        const seats = [
+            'A1', 'A2', 'A3', 'A4',
+            'B1', 'B2', 'B3', 'B4',
+            'C1', 'C2', 'C3', 'C4',
+            'D1', 'D2', 'D3', 'D4'
+        ];
+
+        /**
+         * Estado global de la reserva actual
+         */
+        let currentReservation = {
+            movieId: null,
+            movieTitle: null,
+            timeSlot: null,
+            selectedSeats: []
+        };
+
+        // ==========================================
+        // FUNCIONES DEL DOM
+        // ==========================================
+
+        /**
+         * Inicializa la aplicación
+         * Genera el grid de películas al cargar la página
+         */
+        async function initializeApp() {
+            try {
+                const res = await fetch('/movies.json');
+                movies = await res.json();
+            } catch (e) {
+                movies = [];
+            }
+            renderMoviesGrid();
+            setupFormListener();
+            setupModalCloseListener();
+        }
+
+        /**
+         * Renderiza el grid de películas
+         */
+        function renderMoviesGrid() {
+            const grid = document.getElementById('moviesGrid');
+            grid.innerHTML = movies.map(movie => createMovieCard(movie)).join('');
+        }
+
+        /**
+         * Crea una tarjeta de película
+         * @param {Object} movie - Objeto de película
+         * @returns {string} HTML de la tarjeta
+         */
+        function createMovieCard(movie) {
+            const badgeClass = 'badge badge-estreno';
+            const badgeText = '★ Estreno';
+
+            let imageContent = `<span style="font-size: 6rem;">${movie.poster}</span>`;
+            if (movie.image) {
+                imageContent = `
+                    <picture class="poster-picture">
+                        <source media="(max-width: 767px)" srcset="${movie.image}">
+                        <source media="(min-width: 768px)" srcset="${movie.image}">
+                        <img
+                            src="${movie.image}"
+                            alt="${movie.title}"
+                            class="poster-image"
+                            loading="lazy"
+                            decoding="async"
+                            onerror="this.onerror=null; this.outerHTML='<span style=\"font-size:4rem; line-height:1;\">🎬</span>'"
+                        >
+                    </picture>
+                `;
+            }
+
+            return `
+                <div class="movie-card bg-white rounded-lg overflow-hidden">
+                    <div class="poster-slot flex items-center justify-center">
+                        ${imageContent}
+                    </div>
+                    <div class="p-4">
+                        <div class="mb-2">
+                            <span class="${badgeClass}">${badgeText}</span>
+                            <span class="ml-2 text-xs text-gray-500">${movie.rating}</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-1" style="color: var(--color-primary);">
+                            ${movie.title}
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-4">
+                            ${movie.description}
+                        </p>
+                        <button
+                            class="w-full btn-primary py-2 px-4 rounded-lg font-medium"
+                            onclick="openModal(${movie.id})"
+                        >
+                            Reservar
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ==========================================
+        // GESTIÓN DEL MODAL Y FLUJO DE RESERVA
+        // ==========================================
+
+        /**
+         * Abre el modal de reserva en la etapa 1 (Selector de Función)
+         * @param {number} movieId - ID de la película seleccionada
+         */
+        function openModal(movieId) {
+            const movie = movies.find(m => m.id === movieId);
+            if (!movie) return;
+
+            currentReservation.movieId = movieId;
+            currentReservation.movieTitle = movie.title;
+
+            let posterHTML = `<span style="font-size: 3rem;">${movie.poster}</span>`;
+            if (movie.image) {
+                posterHTML = `<img src="${movie.image}" alt="${movie.title}" style="width: 50px; height: 50px; border-radius: 8px; object-fit: cover;" loading="lazy" decoding="async">`;
+            }
+
+            // Actualiza la información de la película en el modal
+            document.getElementById('moviePoster').innerHTML = posterHTML;
+            document.getElementById('movieTitle').textContent = movie.title;
+            document.getElementById('movieDuration').textContent = `⏱️ ${movie.duration}`;
+            document.getElementById('movieSynopsis').textContent = movie.synopsis;
+
+            // Abre el modal y muestra la etapa 1
+            const modal = document.getElementById('reservationModal');
+            modal.classList.add('active');
+            showFunctionSelector();
+        }
+
+        /**
+         * Cierra el modal completamente
+         */
+        function closeModal() {
+            const modal = document.getElementById('reservationModal');
+            modal.classList.remove('active');
+            resetModalState();
+        }
+
+        /**
+         * Resetea el estado del modal
+         */
+        function resetModalState() {
+            currentReservation = {
+                movieId: null,
+                movieTitle: null,
+                timeSlot: null,
+                selectedSeats: []
+            };
+            document.getElementById('modalFunctionSelector').classList.remove('hidden');
+            document.getElementById('modalFormContent').classList.add('hidden');
+            document.getElementById('modalSuccessContent').classList.add('hidden');
+            document.getElementById('emailForm').reset();
+        }
+
+        /**
+         * Muestra la etapa 1: Selector de Función
+         */
+        function showFunctionSelector() {
+            document.getElementById('modalFunctionSelector').classList.remove('hidden');
+            document.getElementById('modalFormContent').classList.add('hidden');
+            document.getElementById('modalSuccessContent').classList.add('hidden');
+
+            renderTimeSlots();
+            renderSeats();
+            resetSelections();
+            updateContinueButtonState();
+        }
+
+        /**
+         * Renderiza los botones de horarios
+         */
+        function renderTimeSlots() {
+            const container = document.getElementById('timeSlotsContainer');
+            container.innerHTML = timeSlots.map(slot => `
+                <button
+                    type="button"
+                    class="time-slot px-3 py-2 rounded-lg border-2 transition font-medium"
+                    data-time="${slot.time}"
+                    style="border-color: var(--color-border)"
+                    onclick="selectTimeSlot('${slot.time}', this)"
+                >
+                    ${slot.time}
+                </button>
+            `).join('');
+        }
+
+        /**
+         * Renderiza los botones de asientos
+         */
+        function renderSeats() {
+            const container = document.getElementById('seatsContainer');
+            const rows = [];
+
+            // Agrupa asientos por fila (cada fila tiene 4 asientos)
+            for (let i = 0; i < seats.length; i += 4) {
+                rows.push(seats.slice(i, i + 4));
+            }
+
+            container.innerHTML = rows.map((row, rowIndex) => `
+                <div class="col-span-4 flex gap-1 justify-center mb-1">
+                    ${row.map(seat => `
+                        <button
+                            type="button"
+                            class="seat px-2 py-1 rounded-md border-2 transition font-bold text-xs"
+                            data-seat="${seat}"
+                            style="border-color: var(--color-border); min-width: 35px;"
+                            onclick="toggleSeat('${seat}', this)"
+                        >
+                            ${seat}
+                        </button>
+                    `).join('')}
+                </div>
+            `).join('');
+        }
+
+        /**
+         * Selecciona un horario
+         * @param {string} time - Horario seleccionado
+         * @param {HTMLElement} element - Elemento del botón
+         */
+        function selectTimeSlot(time, element) {
+            // Deselecciona todos los horarios
+            document.querySelectorAll('.time-slot').forEach(btn => {
+                btn.style.backgroundColor = 'transparent';
+                btn.style.borderColor = 'var(--color-border)';
+                btn.style.color = 'var(--color-text)';
+            });
+
+            // Selecciona el horario clickeado
+            element.style.backgroundColor = 'var(--color-accent)';
+            element.style.borderColor = 'var(--color-accent)';
+            element.style.color = 'var(--color-primary)';
+
+            currentReservation.timeSlot = time;
+            updateSummaryDisplay();
+            updateContinueButtonState();
+        }
+
+        /**
+         * Alterna la selección de un asiento (máximo 2)
+         * @param {string} seat - Asiento
+         * @param {HTMLElement} element - Elemento del botón
+         */
+        function toggleSeat(seat, element) {
+            const index = currentReservation.selectedSeats.indexOf(seat);
+
+            if (index > -1) {
+                // Deselecciona si ya está seleccionado
+                currentReservation.selectedSeats.splice(index, 1);
+                element.style.backgroundColor = 'transparent';
+                element.style.borderColor = 'var(--color-border)';
+                element.style.color = 'var(--color-text)';
+            } else {
+                // Selecciona si no hemos llegado al límite de 2 asientos
+                if (currentReservation.selectedSeats.length < 2) {
+                    currentReservation.selectedSeats.push(seat);
+                    element.style.backgroundColor = 'var(--color-accent)';
+                    element.style.borderColor = 'var(--color-accent)';
+                    element.style.color = 'var(--color-primary)';
+                } else {
+                    showSeatsError('Máximo 2 asientos por reserva');
+                    return;
+                }
+            }
+
+            hideSeatsError();
+            updateSummaryDisplay();
+            updateContinueButtonState();
+        }
+
+        /**
+         * Muestra error en selector de asientos
+         */
+        function showSeatsError(message) {
+            const errorElement = document.getElementById('seatsError');
+            errorElement.textContent = message;
+            errorElement.classList.remove('hidden');
+        }
+
+        /**
+         * Oculta error en selector de asientos
+         */
+        function hideSeatsError() {
+            document.getElementById('seatsError').classList.add('hidden');
+        }
+
+        /**
+         * Resetea las selecciones visuales
+         */
+        function resetSelections() {
+            document.querySelectorAll('.time-slot, .seat').forEach(btn => {
+                btn.style.backgroundColor = 'transparent';
+                btn.style.borderColor = 'var(--color-border)';
+                btn.style.color = 'var(--color-text)';
+            });
+        }
+
+        /**
+         * Actualiza el estado del botón "Continuar"
+         */
+        function updateContinueButtonState() {
+            const btn = document.getElementById('continueToFormBtn');
+            const isValid = currentReservation.timeSlot && currentReservation.selectedSeats.length > 0;
+
+            if (isValid) {
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                btn.style.cursor = 'pointer';
+            } else {
+                btn.disabled = true;
+                btn.style.opacity = '0.5';
+                btn.style.cursor = 'not-allowed';
+            }
+        }
+
+        /**
+         * Actualiza el resumen de selección visible
+         */
+        function updateSummaryDisplay() {
+            const summaryDiv = document.getElementById('selectionSummary');
+
+            if (currentReservation.timeSlot && currentReservation.selectedSeats.length > 0) {
+                document.getElementById('summaryTime').textContent = currentReservation.timeSlot;
+                document.getElementById('summarySeats').textContent = currentReservation.selectedSeats.join(', ');
+                summaryDiv.classList.remove('hidden');
+            } else {
+                summaryDiv.classList.add('hidden');
+            }
+        }
+
+        /**
+         * Avanza a la etapa 2: Formulario de Email
+         */
+        function proceedToEmailForm() {
+            if (!currentReservation.timeSlot || currentReservation.selectedSeats.length === 0) {
+                return;
+            }
+
+            document.getElementById('modalFunctionSelector').classList.add('hidden');
+            document.getElementById('modalFormContent').classList.remove('hidden');
+            document.getElementById('nombreInput').focus();
+        }
+
+        /**
+         * Vuelve a la etapa 1: Selector de Función
+         */
+        function backToFunctionSelector() {
+            showFunctionSelector();
+        }
+
+        function setupFormListener() {
+            const form = document.getElementById('emailForm');
+            form.addEventListener('submit', handleFormSubmit);
+
+            // Nombre: solo letras (con tildes) y espacios
+            document.getElementById('nombreInput').addEventListener('input', function () {
+                this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]/g, '');
+            });
+
+            // Teléfono: solo dígitos
+            document.getElementById('telefonoInput').addEventListener('input', function () {
+                this.value = this.value.replace(/\D/g, '');
+            });
+        }
+
+        /**
+         * Configura el listener para cerrar modal al hacer click en overlay
+         */
+        function setupModalCloseListener() {
+            const modal = document.getElementById('reservationModal');
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+        }
+
+        // ==========================================
+        // MANEJO DEL FORMULARIO
+        // ==========================================
+
+        /**
+         * Maneja el envío del formulario
+         * @param {Event} event - Evento del formulario
+         */
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const nombre = document.getElementById('nombreInput').value.trim();
+            const email = document.getElementById('emailInput').value.trim();
+            const telefono = document.getElementById('telefonoInput').value.trim();
+            const sector = document.getElementById('sectorInput').value;
+
+            const nombreRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/;
+            const nombreErr = document.getElementById('nombreError');
+            if (!nombre) {
+                nombreErr.textContent = 'Por favor, ingresa tu nombre completo';
+                nombreErr.classList.remove('hidden');
+                return;
+            } else if (!nombreRegex.test(nombre)) {
+                nombreErr.textContent = 'Solo se permiten letras y espacios';
+                nombreErr.classList.remove('hidden');
+                return;
+            }
+            nombreErr.classList.add('hidden');
+
+            if (email.length > 35 || !isValidEmail(email)) {
+                showEmailError(email.length > 35 ? 'El correo no puede superar 35 caracteres' : 'Por favor, ingresa un email válido');
+                return;
+            }
+            document.getElementById('emailError').classList.add('hidden');
+
+            if (telefono && !/^\d{10}$/.test(telefono)) {
+                const telErr = document.getElementById('telefonoError');
+                telErr.textContent = 'El teléfono debe tener exactamente 10 dígitos';
+                telErr.classList.remove('hidden');
+                return;
+            }
+            document.getElementById('telefonoError').classList.add('hidden');
+
+            if (!sector) {
+                const err = document.getElementById('sectorError');
+                err.textContent = 'Por favor, selecciona una sede';
+                err.classList.remove('hidden');
+                return;
+            }
+            document.getElementById('sectorError').classList.add('hidden');
+
+            const payload = {
+                nombre: nombre,
+                email: email,
+                telefono: telefono,
+                sector: sector,
+                movie: currentReservation.movieTitle,
+                movieId: currentReservation.movieId,
+                timeSlot: currentReservation.timeSlot,
+                seats: currentReservation.selectedSeats,
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                await callReserveApi(payload);
+                showSuccessMessage();
+            } catch (error) {
+                console.error('Error al procesar la reserva:', error);
+                showEmailError('Error al procesar tu solicitud. Intenta de nuevo.');
+            }
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function showEmailError(message) {
+            const errorElement = document.getElementById('emailError');
+            errorElement.textContent = message;
+            errorElement.classList.remove('hidden');
+        }
+
+        async function callReserveApi(payload) {
+            const response = await fetch('/api/reserve', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (!response.ok) throw new Error('Error del servidor');
+            return response.json();
+        }
+
+        /**
+         * Muestra la etapa 3: Landing de Éxito
+         */
+        function showSuccessMessage() {
+            document.getElementById('modalFormContent').classList.add('hidden');
+            document.getElementById('modalSuccessContent').classList.remove('hidden');
+        }
+
+        // ==========================================
+        // INICIALIZACIÓN
+        // ==========================================
+
+        // Inicia la aplicación cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', initializeApp);
+    </script>
+</body>
+</html>

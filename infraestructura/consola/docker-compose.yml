@@ -1,0 +1,35 @@
+# Operator console — corre EN EL PI (network_mode: host).
+#
+# Levantar en el Pi (desde el repositorio clonado):
+#   cd infraestructura/consola
+#   docker compose up -d --build
+#
+# Requisito previo: colocar la llave privada ed25519 del operador en data/ssh/
+#   (id_ed25519, id_ed25519.pub, known_hosts). No se versiona; su publica
+#   correspondiente debe estar autorizada para raspberry1 en el Pi.
+#
+# Dashboard: http://192.168.1.10:1880/ui/   (Node-RED escucha directo en 1880)
+#
+# network_mode: host  -> el contenedor comparte la red del Pi, alcanza el sshd del
+#   Pi en 192.168.1.10:22 (los botones se disparan al propio Pi) y publica el
+#   dashboard en la IP del Pi.
+# restart: unless-stopped (+ Docker habilitado al boot) -> la consola arranca sola
+#   al encender el Pi. El operador solo abre la URL desde el navegador.
+services:
+  ops-console:
+    build: .
+    container_name: tesis-ops-console
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      TZ: America/Guayaquil
+      PI_HOST: "192.168.1.10"
+      PI_USER: "raspberry1"
+      ROUTER_HOST: "192.168.1.1"
+      ROUTER_USER: "root"
+    volumes:
+      - ./data:/data
+      # La llave ed25519 (read-only) ya esta autorizada para raspberry1 en el Pi.
+      - ./data/ssh:/usr/src/node-red/.ssh:ro
+      # Acceso read-only a los scripts de la carpeta de metricas del monorepo.
+      - ../../metricas:/metrics:ro
