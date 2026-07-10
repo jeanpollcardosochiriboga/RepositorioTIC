@@ -17,7 +17,7 @@ Está pensado para clonarse en una Raspberry Pi y ponerse en marcha con Docker.
 ## Topología
 
 ```
-Internet (Wi-Fi del lugar o tethering)
+Internet (Wi-Fi del lugar o hotspot del teléfono)
       │
   Gateway Windows  ── uso compartido de Internet (ICS) ──▶ WAN del router
       │
