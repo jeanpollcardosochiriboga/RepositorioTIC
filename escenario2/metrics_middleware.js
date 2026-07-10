@@ -12,7 +12,7 @@
  *   /home/raspberry1/tesis_escenarioN/metrics_out/backend_latency.csv
  * because docker-compose bind-mounts ./:/data.
  *
- * The session.sh harness moves this file into sessions/<id>/ at end of session.
+ * session.sh moves this file into sessions/<id>/ at end of session.
  *
  * Install:
  *   1. Copy this file to the project root (alongside settings.js, flows.json).

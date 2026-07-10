@@ -1,9 +1,9 @@
-# Config del harness de métricas para Escenario 3 (DoS — Colapso Controlado).
+# Config de la recolección de métricas para Escenario 3 (DoS — Colapso Controlado).
 
 scenario: esc3
 
 pi:
-  host: 127.0.0.1   # harness corre EN el Pi (SSH a sí mismo); requiere self-authorized key
+  host: 127.0.0.1   # la recolección corre EN el Pi (SSH a sí mismo); requiere self-authorized key
   user: raspberry1
   # password se lee de PI_PASS
   containers:

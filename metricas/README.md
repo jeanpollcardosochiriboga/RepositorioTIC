@@ -1,11 +1,8 @@
-# tesis/metrics — Harness de medición (§4 del marco teórico)
+# metricas — Recolección de métricas (§4 del marco teórico)
 
 Recolecta las métricas del **§4** del marco teórico (satisfacción, desempeño
-funcional, consumo de recursos, tiempo de montaje/despliegue) para los tres
+funcional, consumo de recursos, tiempo de montaje y despliegue) para los tres
 escenarios, **uno a la vez**.
-
-> **Guía de uso rápido.** El documento conceptual y de auditoría —qué mide cada
-> métrica, por qué se eligió, su veredicto— está en [`METRICAS.md`](METRICAS.md).
 
 ## Arquitectura
 
@@ -22,14 +19,14 @@ los CSV para graficar — nunca recolecta (pedido del tutor). Un solo reloj (el 
 │  collectors/measure_deploy.py ──► deploy.csv                           │
 │  middleware Node-RED    ──► backend_latency.csv                        │
 │  /api/export_state      ──► tablas de dominio                          │
-│  session.sh ── orquesta (con guard: aborta si no corre en el Pi)       │
+│  session.sh ── coordina (con guard: aborta si no corre en el Pi)       │
 └────────────────────────────┬───────────────────────────────────────────┘
                              │ la laptop dispara por SSH y, al cerrar,
                              │ descarga la carpeta de sesión (scp)
                              ▼
                   ┌───────── Laptop (solo visualiza) ──────────┐
                   │  gateway/session.ps1  (SSH + scp, no mide)  │
-                  │  plot_scenario.py   ·   analyze.ipynb       │
+                  │  análisis y gráficas (fuera de este repo)   │
                   └─────────────────────────────────────────────┘
 ```
 
@@ -61,8 +58,8 @@ cerrar, descarga la carpeta de sesión. La laptop nunca recolecta:
 
 ```powershell
 # PowerShell en la laptop (gateway Windows)
-cd tesis_metrics\gateway
-.\session.ps1 start esc1     # arranca colectores EN EL PI (escenario aún abajo)
+cd metricas\gateway
+.\session.ps1 start esc1     # arranca los medidores EN EL PI (escenario aún abajo)
 .\session.ps1 deploy         # mide tiempo de despliegue en frío -> deploy.csv
 .\session.ps1 log montaje_fisico_s 95   # montaje físico (cronómetro del operador)
 # ... corre la demo ...
@@ -70,10 +67,10 @@ cd tesis_metrics\gateway
 .\session.ps1 end            # cierra en el Pi y descarga la carpeta a sessions\
 ```
 
-**Directo en el Pi** (equivalente; `PI_PASS`/`ROUTER_PASS` en `.env` del repo del Pi):
+**Directo en el Pi** (equivalente; `PI_PASS`/`ROUTER_PASS` en el `.env` de esta carpeta):
 
 ```bash
-# por SSH dentro del Pi, en ~/tesis_metrics_repo
+# por SSH dentro del Pi, en la carpeta metricas del repo clonado
 ./session.sh start esc1      # session.sh aborta si NO corre en el Pi (guard de host)
 ./session.sh deploy ; ./session.sh status ; ./session.sh end
 ```
@@ -84,27 +81,15 @@ Pruebas de carga sintética (**solo en laboratorio**, nunca en demo pública; co
 python3 collectors/loadgen.py --config config/esc1.yaml --output-dir sessions/<id>/
 ```
 
-## Análisis y gráficas
+## Análisis
 
-```bash
-# Gráfica de recursos por escenario (eje X = tiempo, eje Y = consumo):
-python3 plot_scenario.py sessions/2026-05-22_esc1
+Las gráficas y tablas del capítulo de Resultados se producen fuera de este repositorio, a partir de los
+CSV de cada sesión. Aquí vive la parte de recolección; el análisis se hace por separado con esos archivos.
 
-# Consolidado comparativo de los 3 escenarios:
-python3 plot_scenario.py --general sessions/2026-05-22_esc1 \
-    sessions/2026-05-22_esc2 sessions/2026-05-22_esc3 --out-dir sessions/
+## Alcance de `session.sh`
 
-# Análisis completo (tablas + gráficos del capítulo de Resultados):
-jupyter notebook analyze.ipynb
-```
-
-## Modos de sesión
-
-- **`session.sh`** (este flujo) — mide **un escenario a fondo**, incluidas las tablas
-  de dominio (auditoría Esc1, correos Esc2, atacantes Esc3). **Es el que produce datos
-  analizables.**
-- **`presentation.sh`** — monitor continuo de recursos para toda una jornada; **no**
-  captura tablas de dominio. Ver la comparación en [`METRICAS.md` §7](METRICAS.md).
+`session.sh` mide un escenario a fondo, incluidas las tablas de dominio (auditoría del Esc1, correos del
+Esc2, atacantes del Esc3). Es el flujo que produce los datos analizables.
 
 ## Filosofía
 
@@ -121,31 +106,31 @@ jupyter notebook analyze.ipynb
 ## Estructura
 
 ```
-metrics/
+metricas/
 ├── README.md                  # esta guía
-├── METRICAS.md                # documento conceptual + auditoría
-├── session.sh                 # orquestador EN EL PI (start/deploy/log/status/end)
-├── presentation.sh            # monitor continuo de jornada (en el Pi)
-├── plot_scenario.py           # gráficas por escenario + consolidado (en la laptop)
-├── executive_report.py        # informe ejecutivo PDF (modo presentación)
-├── analyze.ipynb              # análisis del §4 (en la laptop)
+├── session.sh                 # coordina la recolección EN EL PI (start/deploy/log/status/end)
+├── requirements.txt
 ├── gateway/
-│   └── session.ps1            # wrapper de la laptop: dispara por SSH + descarga (no mide)
+│   └── session.ps1            # disparador desde la laptop: SSH + descarga (no mide)
 ├── pi/
-│   ├── collect_resources.py   # corre en el Pi
-│   └── install.sh             # despliega agente + venv al Pi
-├── collectors/                # corren EN EL PI (los lanza session.sh)
-│   ├── collect_router.py      # tráfico + dispositivos + recursos del router (ssh al OpenWrt)
+│   ├── collect_resources.py   # medidor de recursos, corre en el Pi
+│   └── install.sh             # instala el agente + entorno en el Pi
+├── collectors/                # medidores que corren EN EL PI (los lanza session.sh)
+│   ├── collect_router.py      # tráfico, dispositivos y recursos del router (SSH al OpenWrt)
 │   ├── measure_deploy.py      # tiempo de despliegue (compose up -> HTTP 200)
-│   ├── target_health_probe.py # disponibilidad del target (Esc3)
+│   ├── target_health_probe.py # disponibilidad del objetivo (Esc3)
 │   ├── docker_events_collector.py
 │   ├── fetch_export_state.py  # tablas de dominio
-│   └── loadgen.py             # rampa de carga sintética (solo lab)
-├── flows_patch/
-│   └── metrics_middleware.js  # latencia backend en Node-RED
+│   ├── loadgen.py             # rampa de carga sintética (solo laboratorio)
+│   └── presentation_watcher.py
 ├── survey/
-│   ├── survey_template.json   # encuesta global (editable sin tocar código)
-│   └── form.html
+│   ├── survey_template.json   # encuesta (editable sin tocar código)
+│   ├── form.html
+│   └── INSTALL.md
+├── templates/
+│   └── eisvogel.latex         # plantilla de informe
 ├── config/{esc1,esc2,esc3}.yaml
-└── sessions/                  # outputs (gitignored)
+└── sessions/                  # salidas por sesión (no versionadas)
 ```
+
+El medidor de latencia del backend (`metrics_middleware.js`) vive dentro de cada escenario, no aquí.

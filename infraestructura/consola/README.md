@@ -1,4 +1,4 @@
-# Operator Console (Node-RED en el Pi)
+# Consola del operador (Node-RED en el Pi)
 
 Wizard de operación de una sola página para encender / apagar los 3 escenarios y
 manejar la sesión de métricas, sin abrir terminal. **Corre en el Pi**: con solo
@@ -21,7 +21,7 @@ sí mismo y `session.sh` corre en el Pi.
 ## Levantar (en el Pi)
 
 ```bash
-cd /home/raspberry1/tesis_metrics_repo/ops-console
+cd infraestructura/consola
 docker compose up -d --build
 ```
 

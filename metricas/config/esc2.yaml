@@ -1,9 +1,9 @@
-# Config del harness de métricas para Escenario 2 (phishing simulado Mu1ticines).
+# Config de la recolección de métricas para Escenario 2 (phishing simulado Mu1ticines).
 
 scenario: esc2
 
 pi:
-  host: 127.0.0.1   # harness corre EN el Pi (SSH a sí mismo); requiere self-authorized key
+  host: 127.0.0.1   # la recolección corre EN el Pi (SSH a sí mismo); requiere self-authorized key
   user: raspberry1
   # password se lee de la variable de entorno PI_PASS
   containers:

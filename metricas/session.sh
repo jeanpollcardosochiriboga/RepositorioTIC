@@ -21,21 +21,21 @@ STATE_FILE="$HERE/.session_state"
 [ -f "$HERE/.env" ] && set -a && . "$HERE/.env" && set +a
 
 # --- host guard ---------------------------------------------------------------
-# Este harness DEBE recolectar en el Pi, nunca en la laptop. Si se ejecuta en
+# La recolección DEBE hacerse en el Pi, nunca en la laptop. Si se ejecuta en
 # otra máquina (p. ej. el gateway Windows/Linux por error), abortamos antes de
-# arrancar ningún colector. Se puede saltar con HARNESS_ALLOW_NON_PI=1 (solo
+# arrancar ningún medidor. Se puede saltar con ALLOW_NON_PI=1 (solo
 # para pruebas en seco). El Pi se identifica por su IP de LAN 192.168.1.10.
 assert_running_on_pi() {
-    [ "${HARNESS_ALLOW_NON_PI:-0}" = "1" ] && return 0
+    [ "${ALLOW_NON_PI:-0}" = "1" ] && return 0
     local ips
     ips="$( (hostname -I 2>/dev/null || ip -4 -o addr show 2>/dev/null | awk '{print $4}') | tr ' ' '\n' )"
     if printf '%s\n' "$ips" | grep -q '^192\.168\.1\.10\(/.*\)\?$'; then
         return 0
     fi
-    echo "ABORT: este harness solo recolecta EN EL PI (192.168.1.10)." >&2
+    echo "ABORT: la recoleccion solo corre EN EL PI (192.168.1.10)." >&2
     echo "       Host actual: $(hostname) [${ips//$'\n'/ }]" >&2
     echo "       La laptop solo debe disparar la sesion por SSH (gateway/session.ps1)" >&2
-    echo "       y descargar los CSV. Para una prueba en seco: HARNESS_ALLOW_NON_PI=1." >&2
+    echo "       y descargar los CSV. Para una prueba en seco: ALLOW_NON_PI=1." >&2
     exit 4
 }
 

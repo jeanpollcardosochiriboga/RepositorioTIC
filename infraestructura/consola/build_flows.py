@@ -26,7 +26,7 @@ COMPOSE = {
     "esc2": "/home/raspberry1/tesis_escenario2/docker-compose.yml",
     "esc3": "/home/raspberry1/tesis_escenario3/docker-compose.yml",
 }
-# Repo del harness de metricas en el Pi. Los botones de metricas disparan
+# Repo de la recoleccion de metricas en el Pi. Los botones de metricas disparan
 # session.sh aqui por SSH; la medicion corre 100% en el Pi (la consola solo dispara).
 REPO = "/home/raspberry1/tesis_metrics_repo"
 

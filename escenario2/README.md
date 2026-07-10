@@ -27,21 +27,18 @@ El indicador de phishing clave: la URL usa `mu1ticines` (con el número `1`) en 
 ## Setup rápido
 
 ```bash
-# 1. Clonar y entrar al directorio
-git clone https://github.com/jeanpollcardosochiriboga/IMPLEMENTACION-ESCENARIO-2.git
-cd IMPLEMENTACION-ESCENARIO-2
+# 1. Clonar el monorepo y entrar en la carpeta del escenario
+git clone https://github.com/jeanpollcardosochiriboga/RepositorioTIC.git
+cd RepositorioTIC/escenario2
 
-# 2. Crear archivo de configuración
+# 2. Crear el archivo de configuración y completarlo con los valores reales
 cp .env.example .env
 
-# 3. Editar .env con tus valores reales
-nano .env
+# 3. Arrancar
+docker compose up -d
 
-# 4. Arrancar
-docker-compose up -d
-
-# Ver logs en tiempo real
-docker-compose logs -f
+# Ver los logs en tiempo real
+docker compose logs -f
 ```
 
 El servicio queda disponible en `http://localhost:1882`.
@@ -109,8 +106,8 @@ Si TMDB no responde el script falla *sin tocar* `www/movies.json`. El frontend s
 Caso normal — solo encender:
 
 ```bash
-ssh pi@192.168.1.10
-cd ~/tesis_escenario2
+ssh raspberry1@192.168.1.10
+cd ~/RepositorioTIC/escenario2
 docker compose up -d
 docker compose logs -f          # esperar el mensaje "OK: movies.json refrescado"
 ```
@@ -150,30 +147,24 @@ También se puede abrir el panel de debug de Node-RED en `http://<IP>:1882/admin
 
 ## Cómo modificar el flujo (Node-RED)
 
-1. Asegúrate de que el contenedor esté corriendo (`docker-compose up -d`)
-2. Abre el editor en `http://localhost:1882/admin`
-3. Realiza los cambios en el editor visual
-4. **Menú (≡) → Export → Download** para obtener el `flows.json` actualizado
-5. Reemplaza el `flows.json` del proyecto con el descargado
-6. Haz commit del nuevo `flows.json`
+Con el contenedor en marcha (`docker compose up -d`), los cambios se hacen en el editor visual
+(`http://localhost:1882/admin`) y se exportan con **Menú (≡) → Export → Download**, que reemplaza el
+`flows.json` del proyecto. El archivo es sensible al orden, así que no conviene editarlo a mano.
 
 ## Código QR del dashboard
 
 El QR del dashboard se genera automáticamente usando `BASE_URL` del archivo `.env`. No requiere ningún paso adicional — con configurar `BASE_URL` correctamente el QR apunta a la instalación correcta.
 
-## Dependencia de internet — Contingencia offline
+## Dependencia de Internet
 
-El paso de envío de correo usa SMTP sobre TLS (puerto 465, `smtp.gmail.com`). **Sin conexión a internet, el envío falla silenciosamente** — el usuario no ve ningún error en el frontend, pero el correo nunca llega.
+El envío de correo usa SMTP sobre TLS (puerto 465, `smtp.gmail.com`). Sin conexión a Internet el envío
+falla en silencio: el usuario no ve ningún error en el sitio, pero el correo nunca llega. La cartelera y
+los pósters también dependen de Internet; sin él, el sitio sigue sirviendo la última cartelera conocida.
 
-**Cuándo ocurre:** en venues sin red cableada y sin conectividad configurada en el router antes de iniciar el escenario.
-
-**Contingencias disponibles:**
-
-1. **Tener USB tethering listo antes de iniciar** — conectar el celular al laptop via USB, el laptop al puerto WAN del router via Ethernet, y verificar `ping 8.8.8.8` desde un dispositivo en la red del laboratorio antes de la demostración.
-
-2. **Preparar capturas de pantalla del correo con antelación** — si no habrá internet con seguridad, capturar el correo de "confirmación" de Mu1ticines en una presentación anterior y proyectarlo en el momento indicado del flujo.
-
-> Ver la sección "Conectividad de campo" en el README de Escenario 1 para el procedimiento completo de USB tethering.
+Para evitarlo conviene asegurar la salida a Internet del gateway antes de la demostración (ver
+[`../infraestructura/README.md`](../infraestructura/README.md)) y comprobar `ping 8.8.8.8` desde un
+dispositivo de la red. Como respaldo, tener a la mano una captura del correo de confirmación de una
+presentación anterior para mostrarla en el momento del flujo.
 
 ## Detener el servicio
 
