@@ -61,8 +61,8 @@ Los CSV de la sesión quedan en el Pi en
 
 ## Los escenarios NO sobreviven a un reinicio del Pi
 
-Por pedido del tutor, si el Pi se apaga por un corte de luz y vuelve, **ningún
-escenario debe quedar levantado solo** — solo la consola. Esto se controla con la
+Si el Pi se apaga por un corte de luz y vuelve, **ningún escenario debe quedar
+levantado solo** — solo la consola. Esto se controla con la
 política `restart` de Docker, que al arrancar el daemon solo relevanta los
 contenedores `always`/`unless-stopped`:
 
