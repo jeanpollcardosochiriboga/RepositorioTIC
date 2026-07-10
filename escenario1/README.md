@@ -1,4 +1,4 @@
-# Escenario 1 — Detección de red y clasificación de dominios
+# Escenario 1. Detección de red y clasificación de dominios
 
 Prototipo de ciberseguridad. Panel en tiempo real que detecta los dispositivos de la red local,
 observa las consultas DNS que hacen y clasifica los dominios que visitan, todo sobre Node-RED con una

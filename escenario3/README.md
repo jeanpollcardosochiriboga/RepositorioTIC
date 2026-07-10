@@ -1,4 +1,4 @@
-# Escenario 3 — Denegación de servicio controlada («Colapso Controlado»)
+# Escenario 3. Denegación de servicio controlada («Colapso Controlado»)
 
 Prototipo de ciberseguridad.
 
@@ -78,9 +78,9 @@ infraestructura común; ver [`../infraestructura/README.md`](../infraestructura/
 
 Se accede por el código QR o directamente en `http://<IP>:1883/`:
 
-1. `consent.html` — consentimiento informado (primera visita).
-2. `alias.html` — el participante elige un apodo, que aparece en el panel.
-3. `index.html` — botón de ataque y estado del servidor en tiempo real.
+1. `consent.html`, consentimiento informado (primera visita).
+2. `alias.html`, el participante elige un apodo, que aparece en el panel.
+3. `index.html`, botón de ataque y estado del servidor en tiempo real.
 
 Para participar, el celular debe estar en la misma red WiFi que difunde el prototipo en esa sede; sin
 eso, el QR no alcanza al servidor local. El nombre de la red se define al montar la demostración, no es

@@ -2,20 +2,20 @@
 
 Componentes que sostienen la red del laboratorio, comunes a los tres escenarios.
 
-## `ics/` — Uso compartido de Internet en el gateway Windows
+## `ics/`, Uso compartido de Internet en el gateway Windows
 
 El gateway del laboratorio es una laptop con Windows que comparte su conexión Wi-Fi hacia el puerto
 Ethernet mediante el uso compartido de Internet (Internet Connection Sharing, ICS). Así el router
 OpenWrt recibe salida a Internet por su WAN.
 
-- `reapply-ics.ps1` — vuelve a enlazar el adaptador público con el privado. Como ICS no se re-comparte
+- `reapply-ics.ps1`, vuelve a enlazar el adaptador público con el privado. Como ICS no se re-comparte
   solo tras reiniciar, se ejecuta al arranque desde una tarea programada (SYSTEM). Deja registro en
   `C:\gateway\ics.log`.
-- `setup-gateway.ps1` — instalador de una sola vez: deja el adaptador Wi-Fi en autoconexión, crea la
+- `setup-gateway.ps1`, instalador de una sola vez: deja el adaptador Wi-Fi en autoconexión, crea la
   tarea programada `ReapplyICS` y deshabilita adaptadores virtuales que confunden a ICS.
-- `fix-wifi.ps1` — reinicia el adaptador Wi-Fi cuando queda asociado pero sin dirección IPv4 (APIPA).
+- `fix-wifi.ps1`, reinicia el adaptador Wi-Fi cuando queda asociado pero sin dirección IPv4 (APIPA).
 
-## `consola/` — Consola del operador
+## `consola/`, Consola del operador
 
 Panel de Node-RED que se levanta en el propio Pi (`network_mode: host`) y desde el que el operador
 dispara acciones por SSH al Pi y al router. Se despliega con Docker:

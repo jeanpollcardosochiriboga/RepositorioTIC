@@ -12,7 +12,7 @@ Pi 192.168.1.10  (network_mode: host)
   └── Docker: ops-console (Node-RED) :1880
         │ exec → ssh → 192.168.1.10 (el propio Pi)
         ├── docker compose up/down esc{1,2,3}
-        └── session.sh start/end   (colectores de métricas, todo en el Pi)
+        └── session.sh start/end   (medidores de métricas, todo en el Pi)
 ```
 
 Como los comandos SSH apuntan a `192.168.1.10`, desde el propio Pi se disparan a
@@ -47,22 +47,18 @@ sola vez: `sudo systemctl enable docker`.
 | Botón | Acción |
 |---|---|
 | **INICIAR METRICAS** (verde) | Autodetecta el escenario que esté arriba (`docker ps`) y corre `session.sh start <esc>` en el Pi |
-| **TERMINAR METRICAS** (rojo) | `session.sh end`: cierra colectores y corre `export_state` en el Pi |
+| **TERMINAR METRICAS** (rojo) | `session.sh end`, cierra medidores y corre `export_state` en el Pi |
 
-El operador no elige escenario: primero pulsa **INICIAR DEMO EscN**, luego
+El operador no elige escenario, primero pulsa **INICIAR DEMO EscN**, luego
 **INICIAR METRICAS** (toma el que esté corriendo) y al final **TERMINAR METRICAS**.
 
 Los CSV de la sesión quedan en el Pi en
 `tesis_metrics_repo/sessions/<fecha>_<escenario>/`.
 
-> **Despliegue ya no se mide aquí.** No hay botón DEPLOY: el tiempo de montaje y
-> despliegue se mide **a mano** (cronómetro + pruebas de ping + confirmación de que
-> el dashboard carga en el PC de visualización).
-
 ## Los escenarios NO sobreviven a un reinicio del Pi
 
 Si el Pi se apaga por un corte de luz y vuelve, **ningún escenario debe quedar
-levantado solo** — solo la consola. Esto se controla con la
+levantado por sí solo**, únicamente la consola. Esto se controla con la
 política `restart` de Docker, que al arrancar el daemon solo relevanta los
 contenedores `always`/`unless-stopped`:
 
@@ -83,7 +79,7 @@ python3 build_flows.py
 docker compose restart
 ```
 
-No editar `data/flows.json` a mano — se sobrescribe en cada build.
+No editar `data/flows.json` a mano, se sobrescribe en cada build.
 
 ## Cómo se autentica al Pi
 

@@ -1,32 +1,32 @@
-# metricas — Recolección de métricas (§4 del marco teórico)
+# Recolección de métricas
 
-Recolecta las cuatro métricas del §4 del marco teórico —satisfacción de la audiencia, desempeño
-funcional, consumo de recursos y tiempos de montaje y despliegue— para los tres escenarios, uno a la
-vez. Toda la recolección corre en el Pi, sobre un mismo reloj, para que los datos de cada capa se
-crucen en la misma línea de tiempo. La laptop no mide: solo descarga los archivos al terminar.
+Recolecta las cuatro métricas del marco teórico, que son la satisfacción de la audiencia, el desempeño
+funcional, el consumo de recursos y los tiempos de montaje y despliegue, para los tres escenarios, uno a
+la vez. Toda la recolección corre en el Pi, sobre un mismo reloj, para que los datos de cada capa se
+crucen en la misma línea de tiempo. La laptop no mide, solo descarga los archivos al terminar.
 
-## Cómo se usa: desde la consola del operador
+## Cómo se usa desde la consola del operador
 
-La medición se maneja con botones, sin escribir comandos, desde la consola del operador (ver
-[`../infraestructura/consola`](../infraestructura/consola)):
+La medición se maneja con botones, sin escribir comandos, desde la consola del operador
+(ver [`../infraestructura/consola`](../infraestructura/consola)).
 
-1. Se levanta el escenario a mostrar con su botón; la consola apaga los otros dos.
-2. Se pulsa **INICIAR MÉTRICAS**: la consola detecta el escenario activo y arranca los medidores en el Pi.
+1. Se levanta el escenario a mostrar con su botón y la consola apaga los otros dos.
+2. Se pulsa **INICIAR MÉTRICAS** y la consola detecta el escenario activo y arranca los medidores en el Pi.
 3. Se corre la demostración.
-4. Se pulsa **TERMINAR MÉTRICAS**: la consola cierra los medidores, reúne los archivos de la sesión en el
+4. Se pulsa **TERMINAR MÉTRICAS** y la consola cierra los medidores, reúne los archivos de la sesión en el
    Pi y exporta las tablas del escenario.
 
 Los archivos quedan en el Pi, en `sessions/<fecha>_<escenario>/` (por ejemplo `2026-06-24_esc1/`), y se
 descargan a la laptop para analizarlos.
 
-Los **tiempos de montaje físico y de despliegue no los toma un programa**: los cronometra el operador y
-se anotan junto a los datos de la sesión. El montaje físico va desde que se conectan los cables y la
-alimentación hasta que el equipo queda listo para encender; el despliegue, desde que se enciende hasta
-que el primer escenario atiende la primera petición.
+El operador mide con cronómetro los tiempos de montaje físico y de despliegue, y los anota junto a los
+datos de la sesión. El montaje físico es el tiempo que toma conectar los cables y la alimentación hasta
+dejar el equipo listo para encender. El despliegue es el tiempo desde que se enciende hasta que el primer
+escenario responde a la primera petición.
 
 ## Qué se recolecta
 
-Cada sesión produce una carpeta con estos archivos:
+Cada sesión produce una carpeta con estos archivos.
 
 | Archivo | Qué guarda | Origen | Cadencia |
 |---|---|---|---|
@@ -37,20 +37,20 @@ Cada sesión produce una carpeta con estos archivos:
 | `backend_latency.csv` | latencia del servidor por petición | `metrics_middleware.js` (en cada escenario) | 1/petición |
 | `target_health.csv` | disponibilidad del servidor víctima (solo Esc3) | `collectors/target_health_probe.py` | 1/s |
 | `docker_events.csv` | reinicios o caídas de contenedores | `collectors/docker_events_collector.py` | por evento |
-| `survey.csv` | respuestas de la encuesta final | `form.html` → `/api/survey` | 1/encuestado |
-| tablas del escenario | dispositivos y dominios (Esc1), capturas y clics (Esc2), ataque (Esc3) | `fetch_export_state.py` ← `/api/export_state` | al cerrar |
+| `survey.csv` | respuestas de la encuesta final | `form.html` y `/api/survey` | 1/encuestado |
+| tablas del escenario | dispositivos y dominios (Esc1), capturas y clics (Esc2), ataque (Esc3) | `fetch_export_state.py` y `/api/export_state` | al cerrar |
 | `events.csv` | anotaciones del operador, incluidos los tiempos cronometrados | `session.sh` | discreto |
 
 La concurrencia se lee del router, es decir, de los equipos reales conectados, no con carga sintética.
 
-## Por debajo: `session.sh`
+## Qué hace `session.sh`
 
 Los botones de la consola ejecutan `session.sh` en el Pi por SSH. `session.sh` arranca y detiene todos
 los medidores, que corren en el Pi y comparten su reloj, y al cerrar reúne la carpeta de la sesión. Trae
-una comprobación que aborta si se ejecuta fuera del Pi, porque la recolección debe hacerse en el
-servidor, no en la laptop.
+una comprobación que aborta si se ejecuta fuera del Pi, porque la recolección debe hacerse en el servidor
+y no en la laptop.
 
-Quien prefiera la línea de comandos puede usarlo directo en el Pi, con el escenario ya levantado:
+Quien prefiera la línea de comandos puede usarlo directo en el Pi, con el escenario ya levantado.
 
 ```bash
 ./session.sh start esc1     # arranca los medidores
@@ -58,7 +58,7 @@ Quien prefiera la línea de comandos puede usarlo directo en el Pi, con el escen
 ./session.sh end            # cierra la sesión y exporta las tablas
 ```
 
-O dispararlo desde la laptop, que además descarga la carpeta al terminar:
+O dispararlo desde la laptop, que además descarga la carpeta al terminar.
 
 ```powershell
 cd metricas\gateway
@@ -71,7 +71,7 @@ cd metricas\gateway
 ## Análisis
 
 Las gráficas y tablas del capítulo de Resultados se producen fuera de este repositorio, a partir de los
-CSV de cada sesión. Aquí vive la parte de recolección; el análisis se hace por separado con esos archivos.
+CSV de cada sesión. Aquí vive la parte de recolección, y el análisis se hace por separado con esos archivos.
 
 ## Estructura
 

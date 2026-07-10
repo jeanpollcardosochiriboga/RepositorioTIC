@@ -1,4 +1,4 @@
-# Escenario 2 — Simulación de Phishing Educativo (Mu1ticines)
+# Escenario 2. Simulación de phishing educativo (Mu1ticines)
 
 Prototipo de ciberseguridad. Simula un sitio web de cine falso ("Mu1ticines", typosquat de multicines.com.ec) para capturar datos personales y redirigir al usuario a una página de concientización sobre phishing.
 
@@ -64,11 +64,11 @@ El servicio queda disponible en `http://localhost:1882`.
 ```
 docker-compose.yml
 ├── Dockerfile          → Node.js 18 Alpine + Node-RED
-├── flows.json          → Lógica backend (Node-RED) — no editar a mano
+├── flows.json          → Lógica backend (Node-RED), no editar a mano
 ├── settings.js         → Configuración de Node-RED
 ├── www/                → Frontend estático servido por Node-RED
 │   ├── index.html      → Carrusel de películas + selector de asientos + formulario
-│   ├── movies.json     → Cartelera (autogenerada por refresh_movies.py — no editar a mano)
+│   ├── movies.json     → Cartelera (autogenerada por refresh_movies.py, no editar a mano)
 │   ├── consent.html    → Formulario de consentimiento / captura de datos
 │   └── educativo.html  → Página de concientización sobre phishing
 └── scripts/
@@ -91,9 +91,9 @@ La cartelera se actualiza **automáticamente** desde la API de TMDB. Una vez que
 
 Orden de prioridad (cae al siguiente si devuelve menos de 4 películas):
 
-1. `/movie/now_playing?region=EC` — estrenos en cines del Ecuador
-2. `/movie/now_playing` — estrenos globales (suele ser la fuente real, ~20 películas)
-3. `/movie/popular` — populares del mes (último recurso)
+1. `/movie/now_playing?region=EC`, estrenos en cines del Ecuador
+2. `/movie/now_playing`, estrenos globales (suele ser la fuente real, ~20 películas)
+3. `/movie/popular`, populares del mes (último recurso)
 
 Los posters se sirven desde el CDN de TMDB (`image.tmdb.org`); no se descargan localmente. La frecuencia de cambio en TMDB es: **se renueva varias veces por semana**. En 6 meses la cartelera será 100 % distinta a la actual sin que tengas que hacer nada.
 
@@ -103,7 +103,7 @@ Si TMDB no responde el script falla *sin tocar* `www/movies.json`. El frontend s
 
 ### Runbook del operador (6 meses después, sin saber nada del proyecto)
 
-Caso normal — solo encender:
+Caso normal, solo encender.
 
 ```bash
 ssh raspberry1@192.168.1.10
@@ -153,7 +153,7 @@ Con el contenedor en marcha (`docker compose up -d`), los cambios se hacen en el
 
 ## Código QR del dashboard
 
-El QR del dashboard se genera automáticamente usando `BASE_URL` del archivo `.env`. No requiere ningún paso adicional — con configurar `BASE_URL` correctamente el QR apunta a la instalación correcta.
+El QR del dashboard se genera automáticamente usando `BASE_URL` del archivo `.env`. No requiere ningún paso adicional, con configurar `BASE_URL` correctamente el QR apunta a la instalación correcta.
 
 ## Dependencia de Internet
 
